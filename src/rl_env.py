@@ -43,6 +43,32 @@ class StatesGenerator(object):
             items_len_mask,
         )
 
+def get_active_bins(heuristic, items_order, items_size, bin_size):
+    bins = [0]
+    bin_status = [[]]
+    for item_idx in items_order:
+        if item_idx == -1: # sequence is shorter than max_num_items 
+            continue
+        item_size = items_size[item_idx]
+        if heuristic == "NF":
+            if bins[-1] + item_size <= bin_size:
+                bins[-1] += item_size
+                bin_status[-1].append(item_idx)
+            else:
+                bin_status.append([item_idx])
+                bins.append(item_size)
+        elif heuristic == "FF":
+            for bin_idx, bin_occupancy in enumerate(bins):
+                if bin_occupancy + item_size <= bin_size:
+                    bins[bin_idx] += item_size
+                    bin_status[bin_idx].append(item_idx)
+                    break
+            else:
+                bins.append(item_size)
+                bin_status.append([item_idx])
+        
+    return bins, bin_status
+
 def avg_occupancy(
     bin_size: int, items_size: tuple[float], items_order: tuple[int], heuristic: str
 ) -> float:
@@ -58,24 +84,9 @@ def avg_occupancy(
     """
     if heuristic not in ("NF", "FF"):
         raise ValueError(f"Unknown heuristic: {heuristic}")
-    bins = [0]
-    for item_idx in items_order:
-        if item_idx == -1: # sequence is shorter than max_num_items 
-            continue
-        item_size = items_size[item_idx]
-        if heuristic == "NF":
-            if bins[-1] + item_size <= bin_size:
-                bins[-1] += item_size
-            else:
-                bins.append(item_size)
-        elif heuristic == "FF":
-            for bin_idx, bin_occupancy in enumerate(bins):
-                if bin_occupancy + item_size <= bin_size:
-                    bins[bin_idx] += item_size
-                    break
-            else:
-                bins.append(item_size)
-
+    bins, bin_status = get_active_bins(heuristic, items_order, items_size, bin_size)
+    print('Bins',bins)
+    print('Bin status',bin_status)
     return np.mean(np.array(bins) / bin_size)
 
 def compute_reward(config, states_batch, len_mask, actions_batch):
