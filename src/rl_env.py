@@ -6,7 +6,6 @@ import numpy as np
 from torch import dtype
 import random
 
-
 class StatesGenerator(object):
     """
     Helper class used to randomly generate batches of states given a set
@@ -124,16 +123,28 @@ def avg_occupancy(
     return np.mean(np.array(bins) / bin_size)
 
 
-def critical_task_reward(config, critical_items, ci_copy_mask, allocation_order, ci_pairs):
+def critical_task_reward(num_copies, critical_items, ci_copy_mask, bin_status, ci_pairs):
     # 'get active bin' method should be called here and get the bin status from there
     # But for now the allocation order is not returned the expected result, thus the bin status will be mocked
-    print(critical_items)
-    ci_pairs_mock = [[[7, 9, 2], [5, 1, 12]], [[7, 8, 1], [0, 6, 4]]]
-    bin_status_mock = [[[13], [10], [4], [0], [7, 1], [3, 2], [12, 8]], [[13], [10], [4], [0], [7, 1], [3, 2], [12, 8]]]
+
     ci_reward_avg = []
-    for states, ci_groups, bin_status in zip(critical_items, ci_pairs, bin_status_mock):
-        pass
-    pass
+    reward=0
+    for pair in (ci_pairs):
+        bins_occupied=0
+        for i in range(len(bin_status)):
+            res=np.intersect1d(np.array(bin_status[i]),list(pair))
+            if len(res):
+                bins_occupied=bins_occupied+1
+        reward=reward+bins_occupied/num_copies
+    reward=reward/len(ci_pairs)
+    ci_reward_avg.append(reward)
+    return ci_reward_avg
+
+ci_pairs_mock = [(1, 6, 7), (3, 8, 9)]
+bin_status_mock = [[0,2],[4,5],[1,6,7,8],[3,9]]
+r=critical_task_reward(3,None,None,bin_status_mock,ci_pairs_mock)
+print(r)
+
 
 def compute_reward(config, states_batch, len_mask, actions_batch):
     """
