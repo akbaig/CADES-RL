@@ -43,11 +43,16 @@ def inference(config):
         ci_copy_mask
     )
 
-    
+    alpha = 0.5
 
-    ci_reward = critical_task_reward(config, critical_items, allocation_order, ci_groups)
+    ci_reward = critical_task_reward(config, critical_items, allocation_order, ci_groups).mean()
     avg_occ_ratio = compute_reward(config, critical_items, ci_copy_mask, allocation_order).mean()
+    total_reward = avg_occ_ratio*alpha + ci_reward*(1-alpha)
+    print(f'Total reward with RL agent: {total_reward:.1%}')
+    print(f'Critical reward: {ci_reward:.1%}')
+
     benchmark_rewards = get_benchmark_rewards(config, states_batch=states_batch)
     print(f"Average occupancy ratio with RL agent: {avg_occ_ratio:.1%}")
     for reward, heuristic in zip(benchmark_rewards, ("NF", "FF", "FFD")):
         print(f"Average occupancy ratio with {heuristic} heuristic: {reward:.1%}")
+

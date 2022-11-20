@@ -124,8 +124,6 @@ def critical_task_reward(config, critical_items, allocation_order, batch_ci_pair
     ci_reward_batch_avg = []
     for states, actions, ci_pairs in zip(critical_items, allocation_order, batch_ci_pairs):
         _, bin_status = get_active_bins(config.agent_heuristic, actions, states, bin_size)
-        
-        ci_reward_avg = []
         reward=0
         for pair in (ci_pairs):
             bins_occupied=0
@@ -135,11 +133,10 @@ def critical_task_reward(config, critical_items, allocation_order, batch_ci_pair
                     bins_occupied=bins_occupied+1
             reward=reward+bins_occupied/num_copies
         reward=reward/len(ci_pairs)
-        ci_reward_avg.append(reward)
         
-        ci_reward_batch_avg.append(ci_reward_avg)
-    
-    return ci_reward_batch_avg
+        ci_reward_batch_avg.append(reward)
+
+    return np.array(ci_reward_batch_avg)
     
 
 
