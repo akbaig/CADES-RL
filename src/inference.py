@@ -35,9 +35,6 @@ def inference(config):
     critical_items, ci_copy_mask, ci_groups = states_generator.generate_critical_items(
             states_batch, len_mask, states_lens
     )
-    print(critical_items)
-    print(ci_copy_mask)
-    print(states_lens)
 
     # Get agent reward
     allocation_order = actor.apply_policy(
@@ -48,9 +45,7 @@ def inference(config):
 
     
 
-    # New allocation order should be calculated for the states with critical items, for now we pass the previous allocation order
-    
-    # ci_reward = critical_task_reward(config, critical_items, ci_copy_mask, allocation_order, ci_groups)
+    ci_reward = critical_task_reward(config, critical_items, allocation_order, ci_groups)
     avg_occ_ratio = compute_reward(config, critical_items, ci_copy_mask, allocation_order).mean()
     benchmark_rewards = get_benchmark_rewards(config, states_batch=states_batch)
     print(f"Average occupancy ratio with RL agent: {avg_occ_ratio:.1%}")

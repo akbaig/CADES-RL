@@ -74,7 +74,7 @@ class Actor:
     def apply_policy(self, states_batch, states_len, len_mask):
         
         states_batch_dev = torch.tensor(states_batch, dtype=torch.float32).unsqueeze(-1).to(self.device)
-        len_mask = torch.as_tensor(len_mask)
+        len_mask = torch.as_tensor(np.array(len_mask))
         len_mask_device = len_mask.to(self.device) # Keep one in device and other in cpu 
         # to minimize cpu-gpu exchanges (since len_mask is used in cpu-only functions as well) 
 

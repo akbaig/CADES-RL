@@ -170,5 +170,4 @@ class ActorPointerNetwork(nn.Module):
         temp_mask=np.zeros(len_mask.shape)
         temp_mask[len_mask>0]=1        
         actions_seq = actions_seq*temp_mask - (1 - temp_mask)
-        print(actions_seq)
         return actions_seq

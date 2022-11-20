@@ -41,9 +41,6 @@ class StatesGenerator(object):
                 ci_groups.append([ci]+critical_item_copies)
             critical_copy_mask.append(critical_mask)
             batch_ci_groups.append(ci_groups)
-        print('Items', items_with_critical)
-        print('Items Mask', critical_copy_mask)
-        print('Batch Ci Groups', batch_ci_groups)
         return (items_with_critical, critical_copy_mask, batch_ci_groups)            
 
     
@@ -79,7 +76,6 @@ def get_active_bins(heuristic, items_order, items_size, bin_size):
     bins = [0]
     bin_status = [[]]
     for item_idx in items_order:
-        #print(items_order)
         if item_idx == -1: # sequence is shorter than max_num_items 
             continue
         item_size = items_size[item_idx]
@@ -117,33 +113,36 @@ def avg_occupancy(
     """
     if heuristic not in ("NF", "FF"):
         raise ValueError(f"Unknown heuristic: {heuristic}")
-    bins, bin_status = get_active_bins(heuristic, items_order, items_size, bin_size)
-    # print('Bins',bins)
-    # print('Bin status',bin_status)
+    bins,_ = get_active_bins(heuristic, items_order, items_size, bin_size)
     return np.mean(np.array(bins) / bin_size)
 
 
-def critical_task_reward(num_copies, critical_items, ci_copy_mask, bin_status, ci_pairs):
-    # 'get active bin' method should be called here and get the bin status from there
-    # But for now the allocation order is not returned the expected result, thus the bin status will be mocked
+def critical_task_reward(config, critical_items, allocation_order, batch_ci_pairs):
+    bin_size = config.bin_size
+    num_copies = config.number_of_copies + 1
+    allocation_order = allocation_order.numpy().astype(int)
+    ci_reward_batch_avg = []
+    for states, actions, ci_pairs in zip(critical_items, allocation_order, batch_ci_pairs):
+        _, bin_status = get_active_bins(config.agent_heuristic, actions, states, bin_size)
+        
+        ci_reward_avg = []
+        reward=0
+        for pair in (ci_pairs):
+            bins_occupied=0
+            for i in range(len(bin_status)):
+                res=np.intersect1d(np.array(bin_status[i]),list(pair))
+                if len(res):
+                    bins_occupied=bins_occupied+1
+            reward=reward+bins_occupied/num_copies
+        reward=reward/len(ci_pairs)
+        ci_reward_avg.append(reward)
+        
+        ci_reward_batch_avg.append(ci_reward_avg)
+    
+    return ci_reward_batch_avg
+    
 
-    ci_reward_avg = []
-    reward=0
-    for pair in (ci_pairs):
-        bins_occupied=0
-        for i in range(len(bin_status)):
-            res=np.intersect1d(np.array(bin_status[i]),list(pair))
-            if len(res):
-                bins_occupied=bins_occupied+1
-        reward=reward+bins_occupied/num_copies
-    reward=reward/len(ci_pairs)
-    ci_reward_avg.append(reward)
-    return ci_reward_avg
 
-ci_pairs_mock = [(1, 6, 7), (3, 8, 9)]
-bin_status_mock = [[0,2],[4,5],[1,6,7,8],[3,9]]
-r=critical_task_reward(3,None,None,bin_status_mock,ci_pairs_mock)
-print(r)
 
 
 def compute_reward(config, states_batch, len_mask, actions_batch):
