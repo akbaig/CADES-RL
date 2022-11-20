@@ -4,6 +4,8 @@ Logic to generate new states and compute the reward for each state-action pair.
 
 import numpy as np
 from torch import dtype
+import random
+
 
 class StatesGenerator(object):
     """
@@ -17,6 +19,32 @@ class StatesGenerator(object):
         self.max_num_items = config.max_num_items
         self.min_item_size = config.min_item_size
         self.max_item_size = config.max_item_size
+        self.num_critical_items = config.number_of_critical_items
+        self.num_critical_copies = config.number_of_copies
+
+    def generate_critical_items(self, items_seqs_batch, items_len_mask, items_seq_lens):
+        batch_critical_items = []
+        critical_copy_mask = []
+        items_with_critical = items_seqs_batch.copy()
+        batch_ci_groups = []
+        for items_seq, len_mask, seq_len in zip(items_with_critical, items_len_mask, items_seq_lens):
+            critical_items = [sample[0] for sample in random.sample(list(enumerate(items_seq[:seq_len])), k=self.num_critical_items)]
+            batch_critical_items.append(critical_items)
+            critical_mask = len_mask.copy()
+            ci_groups = []
+            for idx, ci in enumerate(critical_items):
+                critical_mask[ci] = 2+idx # First Change the mask of the original critical items
+            for idx, ci in enumerate(critical_items): # Create copies for the critical items and change their value and mask
+                critical_item_copies = random.sample(list(np.where(critical_mask==1.)[0]), k=2)
+                critical_mask[critical_item_copies] = 2 + idx
+                items_seq[critical_item_copies] = items_seq[ci]
+                ci_groups.append([ci]+critical_item_copies)
+            critical_copy_mask.append(critical_mask)
+            batch_ci_groups.append(ci_groups)
+
+        return (items_with_critical, critical_copy_mask, batch_ci_groups)            
+
+
 
     def generate_states_batch(self, batch_size=None):
         """Generate new batch of initial states"""
@@ -36,7 +64,11 @@ class StatesGenerator(object):
         ):
             items_seq[seq_len:] = 0
             len_mask[seq_len:] = 0
-
+        
+        critical_items, ci_copy_mask, ci_groups = self.generate_critical_items(
+            items_seqs_batch, items_len_mask, items_seq_lens
+        )
+        
         return (
             items_seqs_batch,
             items_seq_lens,
@@ -99,7 +131,6 @@ def compute_reward(config, states_batch, len_mask, actions_batch):
     avg_occupancy_ratios = []
     for states, actions in zip(states_batch, actions_batch):
         avg_occupancy_ratios.append(avg_occupancy(bin_size, states, actions, heuristic=config.agent_heuristic))
-
     return np.array(avg_occupancy_ratios)
 
 def get_benchmark_rewards(config, states_generator: StatesGenerator=None, states_batch=None):
