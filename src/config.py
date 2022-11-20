@@ -11,8 +11,8 @@ parameters_definition = {
     # PROBLEM CONDITIONS #
     "min_item_size": { "value": 100, "type": int, "desc": "Minimum item size"},
     "max_item_size": { "value": 800, "type": int, "desc": "Maximum item size"},
-    "min_num_items": { "value": 10, "type": int, "desc": "Minimum number of items"},
-    "max_num_items": { "value": 15, "type": int, "desc": "Maximum number of items"},
+    "min_num_items": { "value": 5, "type": int, "desc": "Minimum number of items"},
+    "max_num_items": { "value": 10, "type": int, "desc": "Maximum number of items"},
     "bin_size": { "value": 1000, "type": int, "desc": "Bin size"},
     "agent_heuristic": {
         "value": "FF", 
@@ -20,12 +20,12 @@ parameters_definition = {
         "desc": "HeuriStic used by the agent to allocate the sequence output"
     },
     "number_of_copies": {"value": 2, "type": int, "desc": "Number of critical item copies"},
-    "number_of_critical_items": {"value": 2, "type": int, "desc": "Number of critical item"},
+    "number_of_critical_items": {"value": 1, "type": int, "desc": "Number of critical item"},
 
     # TRAINING PARAMETERS #
     "seed": { "value": 3, "type": int, "desc": "Random seed"},
     "n_episodes": { "value": 1000, "type": int, "desc": "Number of episodes"},
-    "batch_size": { "value": 2, "type": int, "desc": "Batch size"},
+    "batch_size": { "value": 1, "type": int, "desc": "Batch size"},
     "lr": { "value": 1.0e-3, "type": float, "desc": "Initial learning rate"},
 
     # NETWORK PARAMETERS #

@@ -21,6 +21,7 @@ class StatesGenerator(object):
         self.max_item_size = config.max_item_size
         self.num_critical_items = config.number_of_critical_items
         self.num_critical_copies = config.number_of_copies
+        self.ci_groups = []
 
     def generate_critical_items(self, items_seqs_batch, items_len_mask, items_seq_lens):
         batch_critical_items = []
@@ -41,10 +42,12 @@ class StatesGenerator(object):
                 ci_groups.append([ci]+critical_item_copies)
             critical_copy_mask.append(critical_mask)
             batch_ci_groups.append(ci_groups)
-
+        print('Items', items_with_critical)
+        print('Items Mask', critical_copy_mask)
+        print('Batch Ci Groups', batch_ci_groups)
         return (items_with_critical, critical_copy_mask, batch_ci_groups)            
 
-
+    
 
     def generate_states_batch(self, batch_size=None):
         """Generate new batch of initial states"""
@@ -65,20 +68,19 @@ class StatesGenerator(object):
             items_seq[seq_len:] = 0
             len_mask[seq_len:] = 0
         
-        critical_items, ci_copy_mask, ci_groups = self.generate_critical_items(
-            items_seqs_batch, items_len_mask, items_seq_lens
-        )
-        
         return (
             items_seqs_batch,
             items_seq_lens,
             items_len_mask,
         )
+        
+
 
 def get_active_bins(heuristic, items_order, items_size, bin_size):
     bins = [0]
     bin_status = [[]]
     for item_idx in items_order:
+        #print(items_order)
         if item_idx == -1: # sequence is shorter than max_num_items 
             continue
         item_size = items_size[item_idx]
@@ -117,9 +119,21 @@ def avg_occupancy(
     if heuristic not in ("NF", "FF"):
         raise ValueError(f"Unknown heuristic: {heuristic}")
     bins, bin_status = get_active_bins(heuristic, items_order, items_size, bin_size)
-    print('Bins',bins)
-    print('Bin status',bin_status)
+    # print('Bins',bins)
+    # print('Bin status',bin_status)
     return np.mean(np.array(bins) / bin_size)
+
+
+def critical_task_reward(config, critical_items, ci_copy_mask, allocation_order, ci_pairs):
+    # 'get active bin' method should be called here and get the bin status from there
+    # But for now the allocation order is not returned the expected result, thus the bin status will be mocked
+    print(critical_items)
+    ci_pairs_mock = [[[7, 9, 2], [5, 1, 12]], [[7, 8, 1], [0, 6, 4]]]
+    bin_status_mock = [[[13], [10], [4], [0], [7, 1], [3, 2], [12, 8]], [[13], [10], [4], [0], [7, 1], [3, 2], [12, 8]]]
+    ci_reward_avg = []
+    for states, ci_groups, bin_status in zip(critical_items, ci_pairs, bin_status_mock):
+        pass
+    pass
 
 def compute_reward(config, states_batch, len_mask, actions_batch):
     """
@@ -129,6 +143,7 @@ def compute_reward(config, states_batch, len_mask, actions_batch):
     # states_batch = states_batch.squeeze(-1).numpy()
     actions_batch = actions_batch.numpy().astype(int)
     avg_occupancy_ratios = []
+
     for states, actions in zip(states_batch, actions_batch):
         avg_occupancy_ratios.append(avg_occupancy(bin_size, states, actions, heuristic=config.agent_heuristic))
     return np.array(avg_occupancy_ratios)

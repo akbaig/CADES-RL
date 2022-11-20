@@ -1,6 +1,6 @@
 import torch
 from actor_critic import Actor
-from rl_env import StatesGenerator, get_benchmark_rewards, compute_reward
+from rl_env import StatesGenerator, get_benchmark_rewards, compute_reward, critical_task_reward
 import ast
 import numpy as np
 
@@ -32,13 +32,26 @@ def inference(config):
     actor.policy_dnn = torch.load(config.model_path, map_location=torch.device(device))
     actor.policy_dnn.dec_input = actor.policy_dnn.dec_input[:config.batch_size]    
 
+    critical_items, ci_copy_mask, ci_groups = states_generator.generate_critical_items(
+            states_batch, len_mask, states_lens
+    )
+    print(critical_items)
+    print(ci_copy_mask)
+    print(states_lens)
+
     # Get agent reward
     allocation_order = actor.apply_policy(
-        states_batch,
+        critical_items,
         states_lens,
-        len_mask
+        ci_copy_mask
     )
-    avg_occ_ratio = compute_reward(config, states_batch, len_mask, allocation_order).mean()
+
+    
+
+    # New allocation order should be calculated for the states with critical items, for now we pass the previous allocation order
+    
+    # ci_reward = critical_task_reward(config, critical_items, ci_copy_mask, allocation_order, ci_groups)
+    avg_occ_ratio = compute_reward(config, critical_items, ci_copy_mask, allocation_order).mean()
     benchmark_rewards = get_benchmark_rewards(config, states_batch=states_batch)
     print(f"Average occupancy ratio with RL agent: {avg_occ_ratio:.1%}")
     for reward, heuristic in zip(benchmark_rewards, ("NF", "FF", "FFD")):
