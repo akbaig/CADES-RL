@@ -23,6 +23,12 @@ class StatesGenerator(object):
         self.ci_groups = []
 
     def generate_critical_items(self, items_seqs_batch, items_len_mask, items_seq_lens):
+        '''
+            Generate critical items and their replicas:
+            - `items_seqs_batch`: batch of only normal items
+            - `items_len_mask`: mask of normal items, list of 1 and 0
+            -  `items_seq_lens`: indicates the length of the items in each batch
+        '''
         batch_critical_items = []
         critical_copy_mask = []
         items_with_critical = items_seqs_batch.copy()
