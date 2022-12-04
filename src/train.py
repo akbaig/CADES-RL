@@ -33,10 +33,15 @@ def train(config):
     pbar = tqdm(range(config.n_episodes))
     for i in pbar:
         states, states_lens, len_mask = states_generator.generate_states_batch()
+        items_with_critical, critical_copy_mask, _ = states_generator.generate_critical_items(
+            states, len_mask, states_lens
+        )
+        
         agent_reward, predicted_reward = agent.reinforce_step(
             states,
             states_lens,
-            len_mask
+            len_mask,
+            (items_with_critical, critical_copy_mask)
         )
         agent_rewards.append(agent_reward)
         

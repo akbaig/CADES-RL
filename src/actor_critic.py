@@ -35,7 +35,14 @@ class Actor:
         self.critic_dnn.to(self.device)
 
     
-    def reinforce_step(self, states_batch, states_len, len_mask):
+    def reinforce_step(self, states_batch, states_len, len_mask, critical_params=None):
+        if critical_params:
+            critical_items, critical_items_mask = critical_params
+            critical_items_dev = torch.tensor(critical_items, dtype=torch.float32).unsqueeze(-1).to(self.device)
+            critical_items_mask = torch.as_tensor(critical_items_mask)
+            critical_items_mask_device = critical_items_mask.to(self.device)
+            self.optimizer_actor.zero_grad()
+
 
         states_batch_dev = torch.tensor(states_batch, dtype=torch.float32).unsqueeze(-1).to(self.device)
         len_mask = torch.as_tensor(len_mask)
@@ -44,7 +51,10 @@ class Actor:
 
         # Compute actions (i.e. sequence in which items are allocated to bins)
         self.optimizer_actor.zero_grad()
-        log_probs_actions, actions = self.policy_dnn(states_batch_dev, states_len, len_mask, len_mask_device)
+        log_probs_actions, actions = self.policy_dnn(
+            states_batch_dev, states_len, len_mask, len_mask_device, 
+            (critical_items_dev, critical_items_mask, critical_items_mask_device)
+        )
         log_prob_seq = torch.sum(
             log_probs_actions, dim=1
         )  # Summing log_probs is equivalent to multiplying probs

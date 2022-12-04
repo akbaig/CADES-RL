@@ -24,7 +24,7 @@ class BahdanauAttention(nn.Module):
         tanh_output_g = torch.tanh(w1_e_g + w2_d_g)  # (B, L, H)
         v_dot_tanh_g = self.V_g(tanh_output_g).squeeze(-1)  # (B, L)
         v_dot_tanh_g = v_dot_tanh_g - 1e10 * (1 - pointer_mask)  # (B, L)
-
+        
         if self.softmax:
             attention_weights = nn.functional.softmax(v_dot_tanh_g, dim=1)  # (B, L)
         else:
@@ -109,10 +109,9 @@ class ActorPointerNetwork(nn.Module):
         self.dec_input = -1 * torch.ones(config.batch_size, 1, 1).to(config.device)
         self.device = config.device         
 
-    def forward(self, states_batch, states_lens, len_mask, len_mask_device):
-
+    def forward(self, states_batch, states_lens, len_mask, len_mask_device, critical_params=None):
         enc_output, dec_input, h_state, c_state, pointer_mask, actions_seq, actions_log_probs = self.encode_inputs(
-            states_batch, states_lens, len_mask, len_mask_device
+            states_batch, states_lens, len_mask, len_mask_device, critical_params
         )
 
         for i in range(self.max_len):
@@ -131,9 +130,15 @@ class ActorPointerNetwork(nn.Module):
         return actions_log_probs, actions_seq
 
 
-    def encode_inputs(self, states_batch, states_lens, len_mask, len_mask_device):
-        
-        input_embedded = self.embedding(states_batch)  # (batch_size, max_seq_len, hid_dim)
+    def encode_inputs(self, states_batch, states_lens, len_mask, len_mask_device, critical_params=None):
+        if critical_params:
+            critical_items_dev, critical_items_mask, _ = critical_params
+            critical_input_embedded = self.embedding(critical_items_dev)
+            critical_items_mask_embedded = self.embedding(critical_items_mask.unsqueeze(-1))
+            merged_embedded_input = critical_input_embedded + critical_items_mask_embedded
+            
+
+        input_embedded = merged_embedded_input if critical_params else self.embedding(states_batch)  # (batch_size, max_seq_len, hid_dim)
         input_embedded_norm = self.batch_norm(torch.swapaxes(input_embedded, 1, 2))
         input_embedded_norm = torch.swapaxes(input_embedded_norm, 1, 2)  # (B, L, H)
         input_embedded_masked = pack_padded_sequence(
@@ -146,7 +151,7 @@ class ActorPointerNetwork(nn.Module):
         dec_input = self.dec_input
         pointer_mask = len_mask_device.clone()
         actions_seq = -1 * torch.ones_like(len_mask)
-        actions_log_probs = torch.zeros_like(len_mask_device, dtype=torch.float32)        
+        actions_log_probs = torch.zeros_like(len_mask_device, dtype=torch.float32)
         return  enc_output, dec_input, h_state, c_state, pointer_mask, actions_seq, actions_log_probs
 
 
