@@ -16,8 +16,10 @@ class BahdanauAttention(nn.Module):
         self.V = nn.Linear(hidden_size, 1, bias=True)
         self.softmax = softmax
 
-    def forward(self, enc_hid_states, dec_last_hid_state, pointer_mask):
-
+    def forward(self, enc_hid_states, dec_last_hid_state, pointer_mask, critical_item_mask=None):
+        if critical_item_mask is not None:
+            pointer_mask = critical_item_mask
+            
         # Glimpse
         w1_e_g = self.W1_g(enc_hid_states)  # (B, S, H)
         w2_d_g = torch.swapaxes(self.W2_g(dec_last_hid_state), 0, 1)  # (B, 1, H)
@@ -70,9 +72,12 @@ class CriticNetwork(nn.Module):
         torch.nn.init.uniform_(self.dense2.weight, -0.08, 0.08)
         torch.nn.init.uniform_(self.dense2.bias, -0.08, 0.08)
 
-    def forward(self, states_batch, states_lens, len_mask):
+    def forward(self, states_batch, states_lens, len_mask, critical_params=None):
+        if critical_params:
+            critical_items_dev, critical_items_mask= critical_params
+            critical_items_embed = self.embedding(critical_items_dev)
 
-        input_embed = self.embedding(states_batch)
+        input_embed = critical_items_embed if critical_params else self.embedding(states_batch)
         input_embedded_norm = self.batch_norm(torch.swapaxes(input_embed, 1, 2))
         input_embedded_norm = torch.swapaxes(input_embedded_norm, 1, 2)
         input_embedded_masked = pack_padded_sequence(
@@ -83,8 +88,8 @@ class CriticNetwork(nn.Module):
             enc_output, batch_first=True, total_length=len_mask.shape[-1]
         )[0]
         enc_last_state = h_state
-        att_weights, _ = self.attention(enc_output, enc_last_state, len_mask)
-        att_weights = att_weights*len_mask
+        att_weights, _ = self.attention(enc_output, enc_last_state, len_mask, critical_items_mask)
+        att_weights = att_weights*critical_items_mask if critical_params else att_weights*len_mask
         x = self.dense1(att_weights)
         pred_reward = self.dense2(x)
         return pred_reward.squeeze(-1)

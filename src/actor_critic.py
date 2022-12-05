@@ -62,7 +62,10 @@ class Actor:
         
         # Compute predicted reward and backpropagate loss
         self.optimizer_critic.zero_grad()
-        pred_reward = self.critic_dnn(states_batch_dev, states_len, len_mask_device)
+        pred_reward = self.critic_dnn(
+            states_batch_dev, states_len, len_mask_device,
+            (critical_items_dev, critical_items_mask_device)
+        )
         real_reward = compute_reward(self.config, states_batch, len_mask, actions)
         real_reward = torch.tensor(real_reward, dtype=torch.float32, requires_grad=False).to(self.device)
         critic_loss = self.critic_loss_fn(
