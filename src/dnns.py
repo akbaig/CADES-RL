@@ -146,8 +146,7 @@ class ActorPointerNetwork(nn.Module):
         dec_input = self.dec_input
         pointer_mask = len_mask_device.clone()
         actions_seq = -1 * torch.ones_like(len_mask)
-        actions_log_probs = torch.zeros_like(len_mask_device, dtype=torch.float32)
-        
+        actions_log_probs = torch.zeros_like(len_mask_device, dtype=torch.float32)        
         return  enc_output, dec_input, h_state, c_state, pointer_mask, actions_seq, actions_log_probs
 
 
@@ -157,13 +156,18 @@ class ActorPointerNetwork(nn.Module):
         enc_output, dec_input, h_state, c_state, pointer_mask, actions_seq, _ = self.encode_inputs(
             states_batch, states_lens, len_mask, len_mask_device
         )
+
+       
         for i in range(self.max_len):
             _, (h_state, c_state) = self.decoder(dec_input, (h_state, c_state))
+            
             probs, _ = self.attention(enc_output, h_state, pointer_mask)  # (B, L)
+
             selected_item = torch.argmax(probs, axis=1)  # (batch_size)
             pointer_mask = pointer_mask.scatter_(1, selected_item.unsqueeze(-1), 0)
             actions_seq[:, i] = selected_item
             dec_input = selected_item.unsqueeze(-1).unsqueeze(-1).to(torch.float32)            
-        
-        actions_seq = actions_seq*len_mask - (1 - len_mask)
+        temp_mask=np.zeros(len_mask.shape)
+        temp_mask[len_mask>0]=1        
+        actions_seq = actions_seq*temp_mask - (1 - temp_mask)
         return actions_seq
