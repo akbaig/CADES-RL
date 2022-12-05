@@ -17,9 +17,6 @@ class BahdanauAttention(nn.Module):
         self.softmax = softmax
 
     def forward(self, enc_hid_states, dec_last_hid_state, pointer_mask, critical_item_mask=None):
-        if critical_item_mask is not None:
-            pointer_mask = critical_item_mask
-            
         # Glimpse
         w1_e_g = self.W1_g(enc_hid_states)  # (B, S, H)
         w2_d_g = torch.swapaxes(self.W2_g(dec_last_hid_state), 0, 1)  # (B, 1, H)
