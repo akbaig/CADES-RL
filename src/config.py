@@ -35,8 +35,7 @@ parameters_definition = {
     "device": { "value": "cpu", "type": str, "desc": "Device to use (if no GPU available, value should be 'cpu')"},
     "inference": {"value": True, "type": str2bool, "desc": "Do not train the model"},
     "model_path": {
-        # "value": "./experiments/models/policy_dnn_100_800_5_10_1000_FF.pkl", 
-        "value": "./experiments/models/policy_dnn_100_800_5_10_1000_FF.pkl", 
+        "value": "./experiments/models/policy_dnn_100_800_5_10_1000_FF_2.pkl",
         "type": str, 
         "desc": "Path to the model checkpoint to save if in training mode, or to load if in inference mode"
     },

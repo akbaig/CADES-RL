@@ -38,10 +38,9 @@ def train(config):
         )
         
         agent_reward, predicted_reward = agent.reinforce_step(
-            states,
+            items_with_critical,
             states_lens,
-            len_mask,
-            (items_with_critical, critical_copy_mask)
+            critical_copy_mask
         )
         agent_rewards.append(agent_reward)
         

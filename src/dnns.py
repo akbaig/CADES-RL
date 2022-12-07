@@ -70,14 +70,8 @@ class CriticNetwork(nn.Module):
         torch.nn.init.uniform_(self.dense2.weight, -0.08, 0.08)
         torch.nn.init.uniform_(self.dense2.bias, -0.08, 0.08)
 
-    def forward(self, states_batch, states_lens, len_mask, critical_params=None):
-        if critical_params:
-            critical_items_dev, critical_items_mask= critical_params
-            critical_items_embed = self.embedding(critical_items_dev)
-            critical_items_mask_embedded = self.embedding_2(critical_items_mask.unsqueeze(-1))
-            merged_embedded_input = critical_items_embed + critical_items_mask_embedded
-
-        input_embed = merged_embedded_input if critical_params else self.embedding(states_batch)
+    def forward(self, states_batch, states_lens, len_mask):
+        input_embed = self.embedding(states_batch) + self.embedding_2(len_mask.unsqueeze(-1))
         input_embedded_norm = self.batch_norm(torch.swapaxes(input_embed, 1, 2))
         input_embedded_norm = torch.swapaxes(input_embedded_norm, 1, 2)
         input_embedded_masked = pack_padded_sequence(
@@ -88,8 +82,9 @@ class CriticNetwork(nn.Module):
             enc_output, batch_first=True, total_length=len_mask.shape[-1]
         )[0]
         enc_last_state = h_state
-        att_weights, _ = self.attention(enc_output, enc_last_state, len_mask)
-        att_weights = att_weights*critical_items_mask if critical_params else att_weights*len_mask
+        temp_mask = get_original_mask(len_mask)
+        att_weights, _ = self.attention(enc_output, enc_last_state, temp_mask)
+        att_weights = att_weights*temp_mask
         x = self.dense1(att_weights)
         pred_reward = self.dense2(x)
         return pred_reward.squeeze(-1)
@@ -115,14 +110,15 @@ class ActorPointerNetwork(nn.Module):
         self.dec_input = -1 * torch.ones(config.batch_size, 1, 1).to(config.device)
         self.device = config.device         
 
-    def forward(self, states_batch, states_lens, len_mask, len_mask_device, critical_params=None):
+    def forward(self, states_batch, states_lens, len_mask, len_mask_device):
         enc_output, dec_input, h_state, c_state, pointer_mask, actions_seq, actions_log_probs = self.encode_inputs(
-            states_batch, states_lens, len_mask, len_mask_device, critical_params
+            states_batch, states_lens, len_mask, len_mask_device
         )
+
 
         for i in range(self.max_len):
             _, (h_state, c_state) = self.decoder(dec_input, (h_state, c_state))
-            probs, log_probs = self.attention(enc_output, h_state, pointer_mask)  # (B, L)
+            probs, log_probs = self.attention(enc_output, h_state, get_original_mask(pointer_mask))  # (B, L)
             selected_item = torch.multinomial(probs, 1).squeeze(1)  # (batch_size)
             pointer_mask = pointer_mask.scatter_(1, selected_item.unsqueeze(-1), 0)
             log_prob_selected_item = torch.gather(log_probs, 1, selected_item.unsqueeze(-1)).squeeze(1)
@@ -130,21 +126,15 @@ class ActorPointerNetwork(nn.Module):
             actions_log_probs[:, i] = log_prob_selected_item
             dec_input = selected_item.unsqueeze(-1).unsqueeze(-1).to(torch.float32)
             
-        
-        actions_log_probs = actions_log_probs*len_mask_device
-        actions_seq = actions_seq*len_mask - (1 - len_mask)
+        temp_mask = get_original_mask(len_mask)
+        actions_log_probs = actions_log_probs*temp_mask
+        actions_seq = actions_seq*temp_mask - (1 - temp_mask)
         return actions_log_probs, actions_seq
 
 
-    def encode_inputs(self, states_batch, states_lens, len_mask, len_mask_device, critical_params=None):
-        if critical_params:
-            critical_items_dev, critical_items_mask, _ = critical_params
-            critical_input_embedded = self.embedding(critical_items_dev)
-            critical_items_mask_embedded = self.embedding_2(critical_items_mask.unsqueeze(-1))
-            merged_embedded_input = critical_input_embedded + critical_items_mask_embedded
-            
+    def encode_inputs(self, states_batch, states_lens, len_mask, len_mask_device):
 
-        input_embedded = merged_embedded_input if critical_params else self.embedding(states_batch)  # (batch_size, max_seq_len, hid_dim)
+        input_embedded = self.embedding(states_batch) + self.embedding_2(len_mask.unsqueeze(-1)) # (batch_size, max_seq_len, hid_dim)
         input_embedded_norm = self.batch_norm(torch.swapaxes(input_embedded, 1, 2))
         input_embedded_norm = torch.swapaxes(input_embedded_norm, 1, 2)  # (B, L, H)
         input_embedded_masked = pack_padded_sequence(
@@ -160,6 +150,8 @@ class ActorPointerNetwork(nn.Module):
         actions_log_probs = torch.zeros_like(len_mask_device, dtype=torch.float32)
         return  enc_output, dec_input, h_state, c_state, pointer_mask, actions_seq, actions_log_probs
 
+
+    
 
     @torch.inference_mode()
     def inference(self, states_batch, states_lens, len_mask, len_mask_device):
@@ -178,7 +170,12 @@ class ActorPointerNetwork(nn.Module):
             pointer_mask = pointer_mask.scatter_(1, selected_item.unsqueeze(-1), 0)
             actions_seq[:, i] = selected_item
             dec_input = selected_item.unsqueeze(-1).unsqueeze(-1).to(torch.float32)            
-        temp_mask=np.zeros(len_mask.shape)
-        temp_mask[len_mask>0]=1        
+        temp_mask=get_original_mask(len_mask)        
         actions_seq = actions_seq*temp_mask - (1 - temp_mask)
         return actions_seq
+
+
+def get_original_mask(len_mask):
+        temp_mask=torch.zeros(len_mask.shape)
+        temp_mask[len_mask>0]=1
+        return temp_mask

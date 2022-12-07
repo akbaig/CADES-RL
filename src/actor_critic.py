@@ -35,15 +35,7 @@ class Actor:
         self.critic_dnn.to(self.device)
 
     
-    def reinforce_step(self, states_batch, states_len, len_mask, critical_params=None):
-        if critical_params:
-            critical_items, critical_items_mask = critical_params
-            critical_items_dev = torch.tensor(critical_items, dtype=torch.float32).unsqueeze(-1).to(self.device)
-            critical_items_mask = torch.as_tensor(critical_items_mask)
-            critical_items_mask_device = critical_items_mask.to(self.device)
-            self.optimizer_actor.zero_grad()
-
-
+    def reinforce_step(self, states_batch, states_len, len_mask):
         states_batch_dev = torch.tensor(states_batch, dtype=torch.float32).unsqueeze(-1).to(self.device)
         len_mask = torch.as_tensor(len_mask)
         len_mask_device = len_mask.to(self.device) # Keep one in device and other in cpu 
@@ -53,7 +45,6 @@ class Actor:
         self.optimizer_actor.zero_grad()
         log_probs_actions, actions = self.policy_dnn(
             states_batch_dev, states_len, len_mask, len_mask_device, 
-            (critical_items_dev, critical_items_mask, critical_items_mask_device)
         )
         log_prob_seq = torch.sum(
             log_probs_actions, dim=1
@@ -64,7 +55,6 @@ class Actor:
         self.optimizer_critic.zero_grad()
         pred_reward = self.critic_dnn(
             states_batch_dev, states_len, len_mask_device,
-            (critical_items_dev, critical_items_mask_device)
         )
         real_reward = compute_reward(self.config, states_batch, len_mask, actions)
         real_reward = torch.tensor(real_reward, dtype=torch.float32, requires_grad=False).to(self.device)
