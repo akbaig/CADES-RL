@@ -16,7 +16,7 @@ class BahdanauAttention(nn.Module):
         self.V = nn.Linear(hidden_size, 1, bias=True)
         self.softmax = softmax
 
-    def forward(self, enc_hid_states, dec_last_hid_state, pointer_mask, critical_item_mask=None):
+    def forward(self, enc_hid_states, dec_last_hid_state, pointer_mask):
         # Glimpse
         w1_e_g = self.W1_g(enc_hid_states)  # (B, S, H)
         w2_d_g = torch.swapaxes(self.W2_g(dec_last_hid_state), 0, 1)  # (B, 1, H)
@@ -56,6 +56,7 @@ class CriticNetwork(nn.Module):
     def __init__(self, config):
         super(CriticNetwork, self).__init__()
         self.embedding = nn.Linear(1, config.hid_dim, bias=False)
+        self.embedding_2 = nn.Linear(1, config.hid_dim, bias=False)
         self.batch_norm = nn.BatchNorm1d(config.hid_dim)
         self.encoder = nn.LSTM(
             input_size=config.hid_dim, hidden_size=config.hid_dim, batch_first=True
@@ -73,8 +74,10 @@ class CriticNetwork(nn.Module):
         if critical_params:
             critical_items_dev, critical_items_mask= critical_params
             critical_items_embed = self.embedding(critical_items_dev)
+            critical_items_mask_embedded = self.embedding_2(critical_items_mask.unsqueeze(-1))
+            merged_embedded_input = critical_items_embed + critical_items_mask_embedded
 
-        input_embed = critical_items_embed if critical_params else self.embedding(states_batch)
+        input_embed = merged_embedded_input if critical_params else self.embedding(states_batch)
         input_embedded_norm = self.batch_norm(torch.swapaxes(input_embed, 1, 2))
         input_embedded_norm = torch.swapaxes(input_embedded_norm, 1, 2)
         input_embedded_masked = pack_padded_sequence(
@@ -85,7 +88,7 @@ class CriticNetwork(nn.Module):
             enc_output, batch_first=True, total_length=len_mask.shape[-1]
         )[0]
         enc_last_state = h_state
-        att_weights, _ = self.attention(enc_output, enc_last_state, len_mask, critical_items_mask)
+        att_weights, _ = self.attention(enc_output, enc_last_state, len_mask)
         att_weights = att_weights*critical_items_mask if critical_params else att_weights*len_mask
         x = self.dense1(att_weights)
         pred_reward = self.dense2(x)
@@ -97,6 +100,7 @@ class ActorPointerNetwork(nn.Module):
         super(ActorPointerNetwork, self).__init__()
 
         self.embedding = nn.Linear(1, config.hid_dim, bias=False)
+        self.embedding_2 = nn.Linear(1, config.hid_dim, bias=False)
         self.encoder = nn.LSTM(
             input_size=config.hid_dim, hidden_size=config.hid_dim, batch_first=True
         )
@@ -136,7 +140,7 @@ class ActorPointerNetwork(nn.Module):
         if critical_params:
             critical_items_dev, critical_items_mask, _ = critical_params
             critical_input_embedded = self.embedding(critical_items_dev)
-            critical_items_mask_embedded = self.embedding(critical_items_mask.unsqueeze(-1))
+            critical_items_mask_embedded = self.embedding_2(critical_items_mask.unsqueeze(-1))
             merged_embedded_input = critical_input_embedded + critical_items_mask_embedded
             
 
