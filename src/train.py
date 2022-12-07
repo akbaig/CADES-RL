@@ -12,10 +12,12 @@ import os.path
 from tqdm import tqdm
 
 # Module imports
+
+
 from config import get_config
 from utils import plot_training_history
 from actor_critic import Actor
-from rl_env import StatesGenerator, get_benchmark_rewards
+from rl_env import StatesGenerator, get_benchmark_rewards,compute_reward, critical_task_reward
 
 
 def train(config):    
@@ -33,14 +35,15 @@ def train(config):
     pbar = tqdm(range(config.n_episodes))
     for i in pbar:
         states, states_lens, len_mask = states_generator.generate_states_batch()
-        items_with_critical, critical_copy_mask, _ = states_generator.generate_critical_items(
+        items_with_critical, critical_copy_mask, ci_groups = states_generator.generate_critical_items(
             states, len_mask, states_lens
         )
         
         agent_reward, predicted_reward = agent.reinforce_step(
             items_with_critical,
             states_lens,
-            critical_copy_mask
+            critical_copy_mask,
+            ci_groups
         )
         agent_rewards.append(agent_reward)
         

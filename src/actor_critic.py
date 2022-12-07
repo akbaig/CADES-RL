@@ -2,7 +2,7 @@ import torch
 import torch.optim as optim
 import torch.nn as nn
 import numpy as np
-from rl_env import  compute_reward
+from rl_env import  compute_reward, critical_task_reward
 from dnns import ActorPointerNetwork, CriticNetwork
 from argparse import Namespace
 
@@ -35,7 +35,7 @@ class Actor:
         self.critic_dnn.to(self.device)
 
     
-    def reinforce_step(self, states_batch, states_len, len_mask):
+    def reinforce_step(self, states_batch, states_len, len_mask,ci_groups=None):
         states_batch_dev = torch.tensor(states_batch, dtype=torch.float32).unsqueeze(-1).to(self.device)
         len_mask = torch.as_tensor(len_mask)
         len_mask_device = len_mask.to(self.device) # Keep one in device and other in cpu 
@@ -43,7 +43,7 @@ class Actor:
 
         # Compute actions (i.e. sequence in which items are allocated to bins)
         self.optimizer_actor.zero_grad()
-        log_probs_actions, actions = self.policy_dnn(
+        log_probs_actions, allocation_order = self.policy_dnn(
             states_batch_dev, states_len, len_mask, len_mask_device, 
         )
         log_prob_seq = torch.sum(
@@ -56,7 +56,14 @@ class Actor:
         pred_reward = self.critic_dnn(
             states_batch_dev, states_len, len_mask_device,
         )
-        real_reward = compute_reward(self.config, states_batch, len_mask, actions)
+
+        # Computing total_real_reward by adding critical reward and occupancy ratio
+        alpha=0.7
+        ci_reward = critical_task_reward(self.config, states_batch, allocation_order, ci_groups).mean()
+        avg_occ_ratio = compute_reward(self.config, states_batch, len_mask, allocation_order).mean()
+        real_reward = avg_occ_ratio * alpha + ci_reward * (1 - alpha)
+
+        # real_reward = compute_reward(self.config, states_batch, len_mask, actions)
         real_reward = torch.tensor(real_reward, dtype=torch.float32, requires_grad=False).to(self.device)
         critic_loss = self.critic_loss_fn(
             real_reward, pred_reward
