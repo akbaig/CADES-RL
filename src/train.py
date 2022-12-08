@@ -18,7 +18,7 @@ from config import get_config
 from utils import plot_training_history
 from actor_critic import Actor
 from rl_env import StatesGenerator, get_benchmark_rewards,compute_reward, critical_task_reward
-
+from inference import get_total_reward
 
 def train(config):    
     
@@ -27,8 +27,12 @@ def train(config):
     states_generator = StatesGenerator(config)
     agent = Actor(config)
     
+    alpha = 0.5
     # Calculate average reward of benchmark heuristics
     nf_reward, ff_reward, ffd_reward = get_benchmark_rewards(config, states_generator)
+    total_nf_reward = get_total_reward(alpha, nf_reward['avg_occ'], nf_reward['ci'])
+    total_ff_reward = get_total_reward(alpha, ff_reward['avg_occ'], ff_reward['ci'])
+    total_ffd_reward = get_total_reward(alpha, ffd_reward['avg_occ'], ffd_reward['ci'])
 
     # Training loop
     agent_rewards = []
@@ -63,9 +67,9 @@ def train(config):
                 config,
                 [
                     agent_rewards,
-                    [nf_reward] * config.n_episodes,
-                    [ff_reward] * config.n_episodes,
-                    [ffd_reward] * config.n_episodes,
+                    [total_nf_reward] * config.n_episodes,
+                    [total_ff_reward] * config.n_episodes,
+                    [total_ffd_reward] * config.n_episodes,
                 ],
                 [f"DRL Agent + {config.agent_heuristic}", "NF", "FF", "FFD"],
                 outfilepath="./experiments/train_hist.png",
@@ -84,7 +88,7 @@ def train(config):
     with open("./experiments/experiments.csv", "a") as f:
         writer = csv.writer(f)
         row_values = list(vars(config).values())
-        row_values.extend([np.mean(agent_rewards[-100:]), nf_reward, ff_reward, ffd_reward])
+        row_values.extend([np.mean(agent_rewards[-100:]), total_nf_reward, total_ff_reward, total_ffd_reward])
         writer.writerow(row_values)
 
     # Save trained actor model

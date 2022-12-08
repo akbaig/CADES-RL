@@ -5,6 +5,7 @@ Logic to generate new states and compute the reward for each state-action pair.
 import numpy as np
 from torch import dtype
 import random
+import torch
 
 class StatesGenerator(object):
     """
@@ -122,31 +123,32 @@ def avg_occupancy(
     bins,_ = get_active_bins(heuristic, items_order, items_size, bin_size)
     return np.mean(np.array(bins) / bin_size)
 
-
-def critical_task_reward(config, critical_items, allocation_order, batch_ci_pairs):
+def compute_ci_reward(config, state, item_order, ci_pairs, heuristic):
     bin_size = config.bin_size
     num_copies = config.number_of_copies + 1
-    allocation_order = allocation_order.numpy().astype(int)
+    _, bin_status = get_active_bins(heuristic, item_order, state, bin_size)
+    reward=0
+    for pair in (ci_pairs):
+        bins_occupied=0
+        for i in range(len(bin_status)):
+            res=np.intersect1d(np.array(bin_status[i]),list(pair))
+            if len(res):
+                bins_occupied=bins_occupied+1
+        reward=reward+bins_occupied/num_copies
+    reward=reward/len(ci_pairs)
+    
+    return reward
+
+def critical_task_reward(config, critical_items, allocation_order, batch_ci_pairs, heuristic):
+    
+    allocation_order = allocation_order.numpy().astype(int) if torch.is_tensor(allocation_order) else allocation_order
     ci_reward_batch_avg = []
     for states, actions, ci_pairs in zip(critical_items, allocation_order, batch_ci_pairs):
-        _, bin_status = get_active_bins(config.agent_heuristic, actions, states, bin_size)
-        reward=0
-        for pair in (ci_pairs):
-            bins_occupied=0
-            for i in range(len(bin_status)):
-                res=np.intersect1d(np.array(bin_status[i]),list(pair))
-                if len(res):
-                    bins_occupied=bins_occupied+1
-            reward=reward+bins_occupied/num_copies
-        reward=reward/len(ci_pairs)
-        
+        reward = compute_ci_reward(config, states, actions, ci_pairs, heuristic)
         ci_reward_batch_avg.append(reward)
 
     return np.array(ci_reward_batch_avg)
     
-
-
-
 
 def compute_reward(config, states_batch, len_mask, actions_batch):
     """
@@ -161,7 +163,7 @@ def compute_reward(config, states_batch, len_mask, actions_batch):
         avg_occupancy_ratios.append(avg_occupancy(bin_size, states, actions, heuristic=config.agent_heuristic))
     return np.array(avg_occupancy_ratios)
 
-def get_benchmark_rewards(config, states_generator: StatesGenerator=None, states_batch=None):
+def get_benchmark_rewards(config, states_generator: StatesGenerator=None, states_batch=None, ci_groups=None):
     """
     Compute the average occupancy ratio following the NF, FF and FFD heuristics. 
     
@@ -174,25 +176,40 @@ def get_benchmark_rewards(config, states_generator: StatesGenerator=None, states
     a NF, FF and FFD heuristic respectively.
     """
     nf_reward, ff_reward, ffd_reward = [], [], []
+    nf_ci_reward, ff_ci_reward, ffd_ci_reward = [], [], []
     if states_generator is not None:
-        states, states_lens, len_mask = states_generator.generate_states_batch(
+        regular_items, states_lens, len_mask = states_generator.generate_states_batch(
             batch_size=10000
+        )
+        states, ci_copy_mask, ci_groups = states_generator.generate_critical_items(
+            regular_items, len_mask, states_lens
         )
     else:
         states = states_batch
 
     items_order_default = np.arange(config.max_num_items)
-    for state in states:
+    for state, ci_group in zip(states, ci_groups):
 
         nf_reward.append(
             avg_occupancy(config.bin_size, state, items_order_default, heuristic="NF")
         )
+        nf_ci_reward.append(
+           compute_ci_reward(config, state, items_order_default, ci_group, heuristic="NF") 
+        )
         ff_reward.append(
             avg_occupancy(config.bin_size, state, items_order_default, heuristic="FF")
+        )
+        ff_ci_reward.append(
+           compute_ci_reward(config, state, items_order_default, ci_group, heuristic="FF") 
         )
         items_order_decreasing = np.flip(np.argsort(state))
         ffd_reward.append(
             avg_occupancy(config.bin_size, state, items_order_decreasing, heuristic="FF")
         )
-
-    return np.mean(nf_reward), np.mean(ff_reward), np.mean(ffd_reward)
+        ffd_ci_reward.append(
+            compute_ci_reward(config, state, items_order_decreasing, ci_group, heuristic="FF")
+        )
+    nf = {"avg_occ": np.mean(nf_reward), "ci": np.mean(nf_ci_reward)}
+    ff = {"avg_occ": np.mean(ff_reward), "ci": np.mean(ff_ci_reward)}
+    ffd = {"avg_occ": np.mean(ffd_reward), "ci": np.mean(ffd_ci_reward)}
+    return nf, ff, ffd
