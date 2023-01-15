@@ -35,6 +35,8 @@ def inference(config):
     critical_items, ci_copy_mask, ci_groups = states_generator.generate_critical_items(
             states_batch, len_mask, states_lens
     )
+    print(critical_items)
+    print(ci_copy_mask,ci_groups)
 
     # Get agent reward
     allocation_order = actor.apply_policy(
@@ -43,19 +45,19 @@ def inference(config):
         ci_copy_mask
     )
 
-    alpha = 0.5
+    alpha = config.alpha
 
     ci_reward = critical_task_reward(config, critical_items, allocation_order, ci_groups, config.agent_heuristic).mean()
     avg_occ_ratio = compute_reward(config, critical_items, ci_copy_mask, allocation_order).mean()
     total_reward = get_total_reward(alpha, avg_occ_ratio, ci_reward)
-    print(f'Total reward with RL agent: {total_reward:.1%}')
     print(f'Critical reward: {ci_reward:.1%}')
 
     benchmark_rewards = get_benchmark_rewards(config, states_batch=states_batch, ci_groups=ci_groups)
     print(f"Average occupancy ratio with RL agent: {avg_occ_ratio:.1%}")
+    print(f'Total reward with RL agent: {total_reward:.1%}')
     for reward, heuristic in zip(benchmark_rewards, ("NF", "FF", "FFD")):
         total_reward = get_total_reward(alpha, reward['avg_occ'], reward['ci'])
-        print(f"Average occupancy ratio with {heuristic} heuristic: {total_reward:.1%}")
+        print(f"Total reward with {heuristic} heuristic: {total_reward:.1%}")
 
 def get_total_reward(alpha, avg_occ, ci):
     return avg_occ*alpha + ci*(1-alpha)

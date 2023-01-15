@@ -1,0 +1,13 @@
+min_item_size,max_item_size,min_num_items,max_num_items,bin_size,agent_heuristic,number_of_copies,number_of_critical_items,seed,n_episodes,batch_size,lr,alpha,hid_dim,device,inference,model_path,inference_data_path,agent_reward,nf_reward,ff_reward,ffd_reward
+,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,
+100,800,20,30,1000,FF,2,6,3,500,1,0.001,0.3,128,cpu,FALSE,../experiments/models/policy_dnn_20_30_FF_6.pkl,,0.83830863,0.833337011,0.828625882,0.765047931
+,,,,,,,,,,,,,,,,,,,,,
+100,800,20,30,1000,NF,2,6,3,500,1,0.001,0.3,128,cpu,FALSE,../experiments/models/policy_dnn_20_30_NF_6.pkl,,0.82516634,0.834086112,0.818695632,0.763714635
+,,,,,,,,,,,,,,,,,,,,,
+100,800,10,20,1000,FF,2,3,3,500,64,0.001,0.3,256,cpu,FALSE,../experiments/models/policy_dnn_10_20_FF_3.pkl,,0.7417814,0.78321533,0.75393743,0.721953869
+,,,,,,,,,,,,,,,,,,,,,
+100,800,10,20,1000,NF,2,3,3,1000,64,0.001,0.3,128,cpu,FALSE,../experiments/models/policy_dnn_10_20_NF_3.pkl,,0.782129,0.78381812,0.752384385,0.713953543
+100,600,30,50,1000,FF,2,10,3,500,64,0.001,0.3,128,cpu,False,../experiments/models/test.pkl,,0.8641798,0.8521284848718066,0.8585451427113088,0.610047137172393
+100,800,10,20,1000,NF,2,3,3,500,64,0.001,0.3,128,cpu,False,../experiments/models/test.pkl,,0.7773577,0.7888652345851697,0.7535011132263814,0.7212550935044366
+100,600,30,50,1000,NF,2,10,3,500,64,0.001,0.3,128,cpu,False,../experiments/models/test.pkl,,0.8477939,0.8593306035535002,0.8632878675931897,0.6071750448777968

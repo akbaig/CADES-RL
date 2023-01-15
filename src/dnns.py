@@ -58,6 +58,8 @@ class CriticNetwork(nn.Module):
         self.embedding = nn.Linear(1, config.hid_dim, bias=False)
         self.embedding_2 = nn.Linear(1, config.hid_dim, bias=False)
         self.batch_norm = nn.BatchNorm1d(config.hid_dim)
+        self.batch_norm_2= nn.BatchNorm1d(config.hid_dim)
+
         self.encoder = nn.LSTM(
             input_size=config.hid_dim, hidden_size=config.hid_dim, batch_first=True
         )
@@ -71,9 +73,14 @@ class CriticNetwork(nn.Module):
         torch.nn.init.uniform_(self.dense2.bias, -0.08, 0.08)
 
     def forward(self, states_batch, states_lens, len_mask):
-        input_embed = self.embedding(states_batch) + self.embedding_2(len_mask.unsqueeze(-1))
-        input_embedded_norm = self.batch_norm(torch.swapaxes(input_embed, 1, 2))
-        input_embedded_norm = torch.swapaxes(input_embedded_norm, 1, 2)
+        input_embedded = self.embedding(states_batch)  # (batch_size, max_seq_len, hid_dim)
+        input_embedded_norm = self.batch_norm(torch.swapaxes(input_embedded, 1, 2))
+        mask_embedded = self.embedding_2(len_mask.unsqueeze(-1))
+        mask_embedded_norm = self.batch_norm_2(torch.swapaxes(mask_embedded, 1, 2))
+
+        input_embedded_norm = input_embedded_norm + mask_embedded_norm
+        input_embedded_norm = torch.swapaxes(input_embedded_norm, 1, 2)  # (B, L, H)
+
         input_embedded_masked = pack_padded_sequence(
             input_embedded_norm, states_lens, batch_first=True, enforce_sorted=False
         )
@@ -100,6 +107,8 @@ class ActorPointerNetwork(nn.Module):
             input_size=config.hid_dim, hidden_size=config.hid_dim, batch_first=True
         )
         self.batch_norm = nn.BatchNorm1d(config.hid_dim)
+        self.batch_norm_2 = nn.BatchNorm1d(config.hid_dim)
+
         self.decoder = nn.LSTM(
             input_size=1, hidden_size=config.hid_dim, batch_first=True
         )
@@ -134,9 +143,15 @@ class ActorPointerNetwork(nn.Module):
 
     def encode_inputs(self, states_batch, states_lens, len_mask, len_mask_device):
 
-        input_embedded = self.embedding(states_batch) + self.embedding_2(len_mask.unsqueeze(-1)) # (batch_size, max_seq_len, hid_dim)
+        input_embedded = self.embedding(states_batch)  # (batch_size, max_seq_len, hid_dim)
         input_embedded_norm = self.batch_norm(torch.swapaxes(input_embedded, 1, 2))
+        mask_embedded= self.embedding_2(len_mask.unsqueeze(-1))
+        mask_embedded_norm = self.batch_norm_2(torch.swapaxes(mask_embedded, 1, 2))
+
+        input_embedded_norm=input_embedded_norm+mask_embedded_norm
         input_embedded_norm = torch.swapaxes(input_embedded_norm, 1, 2)  # (B, L, H)
+
+
         input_embedded_masked = pack_padded_sequence(
             input_embedded_norm, states_lens, batch_first=True, enforce_sorted=False
         )

@@ -12,8 +12,7 @@ import os.path
 from tqdm import tqdm
 
 # Module imports
-
-
+from collections import defaultdict
 from config import get_config
 from utils import plot_training_history
 from actor_critic import Actor
@@ -27,15 +26,20 @@ def train(config):
     states_generator = StatesGenerator(config)
     agent = Actor(config)
     
-    alpha = 0.5
+    alpha = config.alpha
     # Calculate average reward of benchmark heuristics
+    print("Calculating average benchmark heuristics")
     nf_reward, ff_reward, ffd_reward = get_benchmark_rewards(config, states_generator)
     total_nf_reward = get_total_reward(alpha, nf_reward['avg_occ'], nf_reward['ci'])
     total_ff_reward = get_total_reward(alpha, ff_reward['avg_occ'], ff_reward['ci'])
     total_ffd_reward = get_total_reward(alpha, ffd_reward['avg_occ'], ffd_reward['ci'])
 
+    print(nf_reward,ff_reward,ffd_reward)
+
+    print(total_nf_reward,total_ff_reward,total_ffd_reward)
+
     # Training loop
-    agent_rewards = []
+    agent_rewards = defaultdict(list)
     pbar = tqdm(range(config.n_episodes))
     for i in pbar:
         states, states_lens, len_mask = states_generator.generate_states_batch()
@@ -43,17 +47,20 @@ def train(config):
             states, len_mask, states_lens
         )
         
-        agent_reward, predicted_reward = agent.reinforce_step(
+        agent_reward, predicted_reward,agent_ci_reward,agent_avg_occ = agent.reinforce_step(
             items_with_critical,
             states_lens,
             critical_copy_mask,
             ci_groups
         )
-        agent_rewards.append(agent_reward)
+        agent_rewards['total_reward'].append(agent_reward)
+        agent_rewards['critical_reward'].append(agent_ci_reward)
+        agent_rewards['avg_occupancy'].append(agent_avg_occ)
+
         
         # Update progress bar
         pbar.set_description(
-            f"Agent reward: {agent_reward:.1%} | "
+            f"Agent Total reward: {agent_reward:.1%} | "
             f"Critic pred. reward: {predicted_reward:.1%}"
         )
         
@@ -66,29 +73,30 @@ def train(config):
             plot_training_history(
                 config,
                 [
-                    agent_rewards,
+                    agent_rewards['total_reward'],
+                    agent_rewards['critical_reward'],
                     [total_nf_reward] * config.n_episodes,
                     [total_ff_reward] * config.n_episodes,
                     [total_ffd_reward] * config.n_episodes,
                 ],
-                [f"DRL Agent + {config.agent_heuristic}", "NF", "FF", "FFD"],
-                outfilepath="./experiments/train_hist.png",
+                ["DRL Agent total_reward ","DRL Agent critical_reward ", "NF", "FF", "FFD"],
+                outfilepath="../experiments/train_hist.png",
                 moving_avg_window=100,
             )
 
 
     # Save key training metrics
-    if not os.path.isfile("./experiments/experiments.csv"):
+    if not os.path.isfile("../experiments/experiments.csv"):
         col_headers = list(vars(config).keys())
         col_headers.extend(["agent_reward", "nf_reward", "ff_reward", "ffd_reward"])
-        with open(".experiments/experiments.csv", "w") as f:
+        with open("../experiments/experiments.csv", "w") as f:
             writer = csv.writer(f)
             writer.writerow(col_headers) 
     
-    with open("./experiments/experiments.csv", "a") as f:
+    with open("../experiments/experiments.csv", "a") as f:
         writer = csv.writer(f)
         row_values = list(vars(config).values())
-        row_values.extend([np.mean(agent_rewards[-100:]), total_nf_reward, total_ff_reward, total_ffd_reward])
+        row_values.extend([np.mean(agent_rewards['total_reward'][-100:]), total_nf_reward, total_ff_reward, total_ffd_reward])
         writer.writerow(row_values)
 
     # Save trained actor model

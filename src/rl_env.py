@@ -134,10 +134,15 @@ def compute_ci_reward(config, state, item_order, ci_pairs, heuristic):
             res=np.intersect1d(np.array(bin_status[i]),list(pair))
             if len(res):
                 bins_occupied=bins_occupied+1
-        reward=reward+bins_occupied/num_copies
+        # reward=reward+bins_occupied/num_copies
+
+    #     Changing reward function a little bit
+        if bins_occupied==num_copies:
+            reward=reward+1
     reward=reward/len(ci_pairs)
-    
+    # print(bin_status,reward)
     return reward
+
 
 def critical_task_reward(config, critical_items, allocation_order, batch_ci_pairs, heuristic):
     
@@ -179,7 +184,7 @@ def get_benchmark_rewards(config, states_generator: StatesGenerator=None, states
     nf_ci_reward, ff_ci_reward, ffd_ci_reward = [], [], []
     if states_generator is not None:
         regular_items, states_lens, len_mask = states_generator.generate_states_batch(
-            batch_size=10000
+            batch_size=1000
         )
         states, ci_copy_mask, ci_groups = states_generator.generate_critical_items(
             regular_items, len_mask, states_lens

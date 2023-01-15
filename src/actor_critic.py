@@ -58,7 +58,7 @@ class Actor:
         )
 
         # Computing total_real_reward by adding critical reward and occupancy ratio
-        alpha=0.7
+        alpha=self.config.alpha
         ci_reward = critical_task_reward(self.config, states_batch, allocation_order, ci_groups, self.config.agent_heuristic).mean()
         avg_occ_ratio = compute_reward(self.config, states_batch, len_mask, allocation_order).mean()
         real_reward = avg_occ_ratio * alpha + ci_reward * (1 - alpha)
@@ -78,7 +78,8 @@ class Actor:
         agent_loss.backward()
         self.optimizer_actor.step()
 
-        return real_reward.mean().cpu(), pred_reward.cpu().numpy().mean()
+        return real_reward.mean().cpu(), pred_reward.cpu().numpy().mean(),\
+               ci_reward,avg_occ_ratio
 
     
     def apply_policy(self, states_batch, states_len, len_mask):
