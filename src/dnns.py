@@ -110,13 +110,13 @@ class ActorPointerNetwork(nn.Module):
         self.batch_norm_2 = nn.BatchNorm1d(config.hid_dim)
 
         self.decoder = nn.LSTM(
-            input_size=1, hidden_size=config.hid_dim, batch_first=True
+            input_size=2, hidden_size=config.hid_dim, batch_first=True
         )
         self.attention = BahdanauAttention(config.hid_dim)
         self.max_len = config.max_num_items
 
         # Initial input to pass to the decoder:
-        self.dec_input = -1 * torch.ones(config.batch_size, 1, 1).to(config.device)
+        self.dec_input = -1 * torch.ones(config.batch_size, 1, 2).to(config.device)
         self.device = config.device         
 
     def forward(self, states_batch, states_lens, len_mask, len_mask_device):
@@ -132,9 +132,17 @@ class ActorPointerNetwork(nn.Module):
             pointer_mask = pointer_mask.scatter_(1, selected_item.unsqueeze(-1), 0)
             log_prob_selected_item = torch.gather(log_probs, 1, selected_item.unsqueeze(-1)).squeeze(1)
             actions_seq[:, i] = selected_item
-            actions_log_probs[:, i] = log_prob_selected_item
-            dec_input = selected_item.unsqueeze(-1).unsqueeze(-1).to(torch.float32)
+            selected_item_mask = torch.ones_like(selected_item)
+            # If it is possible refactor and remove this loop
+            for idx, _ in enumerate(len_mask):
+                selected_item_mask[idx] = len_mask[idx, selected_item[idx]]
             
+            actions_log_probs[:, i] = log_prob_selected_item
+            dec_input_one = selected_item.unsqueeze(-1).unsqueeze(-1).to(torch.float32)
+            dec_input_two = selected_item_mask.unsqueeze(-1).unsqueeze(-1).to(torch.int32)
+            dec_input = torch.cat((dec_input_one, dec_input_two), 2)
+
+
         temp_mask = get_original_mask(len_mask)
         actions_log_probs = actions_log_probs*temp_mask
         actions_seq = actions_seq*temp_mask - (1 - temp_mask)
