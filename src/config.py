@@ -10,9 +10,9 @@ parameters_definition = {
 
     # PROBLEM CONDITIONS #
     "min_item_size": { "value": 100, "type": int, "desc": "Minimum item size"},
-    "max_item_size": { "value": 600, "type": int, "desc": "Maximum item size"},
-    "min_num_items": { "value": 30, "type": int, "desc": "Minimum number of items"},
-    "max_num_items": { "value": 50, "type": int, "desc": "Maximum number of items"},
+    "max_item_size": { "value": 800, "type": int, "desc": "Maximum item size"},
+    "min_num_items": { "value": 10, "type": int, "desc": "Minimum number of items"},
+    "max_num_items": { "value": 20, "type": int, "desc": "Maximum number of items"},
     "bin_size": { "value": 1000, "type": int, "desc": "Bin size"},
     "agent_heuristic": {
         "value": "NF",
@@ -20,7 +20,7 @@ parameters_definition = {
         "desc": "HeuriStic used by the agent to allocate the sequence output"
     },
     "number_of_copies": {"value": 2, "type": int, "desc": "Number of critical item copies"},
-    "number_of_critical_items": {"value": 10, "type": int, "desc": "Number of critical item"},
+    "number_of_critical_items": {"value": 3, "type": int, "desc": "Number of critical item"},
 
     # TRAINING PARAMETERS #
     "seed": { "value": 3, "type": int, "desc": "Random seed"},
@@ -37,7 +37,7 @@ parameters_definition = {
     "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
     "model_path": {
         # "value": "./experiments/models/policy_dnn_100_800_10_20_100_FF.pkl",
-        "value": "../experiments/models/test.pkl",
+        "value": "../experiments/models/policy_dnn_10_20_NF_3_Decoder.pkl",
         "type": str, 
         "desc": "Path to the model checkpoint to save if in training mode, or to load if in inference mode"
     },

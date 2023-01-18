@@ -80,7 +80,7 @@ def train(config):
                     [total_ffd_reward] * config.n_episodes,
                 ],
                 ["DRL Agent total_reward ","DRL Agent critical_reward ", "NF", "FF", "FFD"],
-                outfilepath="../experiments/train_hist.png",
+                outfilepath="../experiments/policy_dnn_10_20_NF_3_Decoder.png",
                 moving_avg_window=100,
             )
 
