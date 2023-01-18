@@ -189,7 +189,11 @@ class ActorPointerNetwork(nn.Module):
             selected_item = torch.argmax(probs, axis=1)  # (batch_size)
             pointer_mask = pointer_mask.scatter_(1, selected_item.unsqueeze(-1), 0)
             actions_seq[:, i] = selected_item
-            dec_input = selected_item.unsqueeze(-1).unsqueeze(-1).to(torch.float32)            
+            selected_item_mask = torch.ones_like(selected_item)
+            selected_item_mask=len_mask[np.arange(len(selected_item)),selected_item]
+            dec_input_one = selected_item.unsqueeze(-1).unsqueeze(-1).to(torch.float32)
+            dec_input_two = selected_item_mask.unsqueeze(-1).unsqueeze(-1).to(torch.float32)
+            dec_input = torch.cat((dec_input_one, dec_input_two), 2)            
         temp_mask=get_original_mask(len_mask)        
         actions_seq = actions_seq*temp_mask - (1 - temp_mask)
         return actions_seq
