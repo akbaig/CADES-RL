@@ -133,13 +133,10 @@ class ActorPointerNetwork(nn.Module):
             log_prob_selected_item = torch.gather(log_probs, 1, selected_item.unsqueeze(-1)).squeeze(1)
             actions_seq[:, i] = selected_item
             selected_item_mask = torch.ones_like(selected_item)
-            # If it is possible refactor and remove this loop
-            for idx, _ in enumerate(len_mask):
-                selected_item_mask[idx] = len_mask[idx, selected_item[idx]]
-            
+            selected_item_mask=len_mask[np.arange(len(selected_item)),selected_item]
             actions_log_probs[:, i] = log_prob_selected_item
             dec_input_one = selected_item.unsqueeze(-1).unsqueeze(-1).to(torch.float32)
-            dec_input_two = selected_item_mask.unsqueeze(-1).unsqueeze(-1).to(torch.int32)
+            dec_input_two = selected_item_mask.unsqueeze(-1).unsqueeze(-1).to(torch.float32)
             dec_input = torch.cat((dec_input_one, dec_input_two), 2)
 
 

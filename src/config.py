@@ -20,12 +20,12 @@ parameters_definition = {
         "desc": "HeuriStic used by the agent to allocate the sequence output"
     },
     "number_of_copies": {"value": 2, "type": int, "desc": "Number of critical item copies"},
-    "number_of_critical_items": {"value": 3, "type": int, "desc": "Number of critical item"},
+    "number_of_critical_items": {"value": 1, "type": int, "desc": "Number of critical item"},
 
     # TRAINING PARAMETERS #
     "seed": { "value": 3, "type": int, "desc": "Random seed"},
     "n_episodes": { "value": 500, "type": int, "desc": "Number of episodes"},
-    "batch_size": { "value": 64, "type": int, "desc": "Batch size"},
+    "batch_size": { "value": 8, "type": int, "desc": "Batch size"},
     "lr": { "value": 1.0e-3, "type": float, "desc": "Initial learning rate"},
     "alpha": {"value": 0.3, "type": float, "desc": "Alpha Value to compute reward"},
 
