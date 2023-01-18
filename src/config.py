@@ -20,11 +20,11 @@ parameters_definition = {
         "desc": "HeuriStic used by the agent to allocate the sequence output"
     },
     "number_of_copies": {"value": 2, "type": int, "desc": "Number of critical item copies"},
-    "number_of_critical_items": {"value": 1, "type": int, "desc": "Number of critical item"},
+    "number_of_critical_items": {"value": 3, "type": int, "desc": "Number of critical item"},
 
     # TRAINING PARAMETERS #
     "seed": { "value": 3, "type": int, "desc": "Random seed"},
-    "n_episodes": { "value": 500, "type": int, "desc": "Number of episodes"},
+    "n_episodes": { "value": 1000, "type": int, "desc": "Number of episodes"},
     "batch_size": { "value": 8, "type": int, "desc": "Batch size"},
     "lr": { "value": 1.0e-3, "type": float, "desc": "Initial learning rate"},
     "alpha": {"value": 0.3, "type": float, "desc": "Alpha Value to compute reward"},
@@ -37,7 +37,7 @@ parameters_definition = {
     "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
     "model_path": {
         # "value": "./experiments/models/policy_dnn_100_800_10_20_100_FF.pkl",
-        "value": "../experiments/models/policy_dnn_10_20_NF_3_Decoder.pkl",
+        "value": "/bin-packing-drl/experiments/models/policy_dnn_10_20_NF_3_Decoder.pkl",
         "type": str, 
         "desc": "Path to the model checkpoint to save if in training mode, or to load if in inference mode"
     },
