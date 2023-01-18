@@ -8,17 +8,17 @@ def plot_training_history(
     data: list[list[float]],
     labels: list[str],
     moving_avg_window: int = 0,
-    outfilepath: str = "./experiments/train_hist.png",
+    outfilepath: str = "../experiments/train_hist.png",
 ):
-    plt.style.use("./src/tseries.mplstyle")
+    plt.style.use("./tseries.mplstyle")
     fig, line_ax = plt.subplots(1, 1)
 
     # Set titles and subtitles
-    line_ax.set_title(f"Average Occupancy Ratio (%) (moving average n={moving_avg_window})")
+    line_ax.set_title(f"DRL agent + {config.agent_heuristic} (moving average n={moving_avg_window})")
     subtitle = (
         f"Problem conditions: {config.min_num_items} <= # of items "
         f"<= {config.max_num_items} | {config.min_item_size} <= item size <= {config.max_item_size} | "
-        f"bin size = {config.bin_size}"
+        f"bin size = {config.bin_size} | alpha={config.alpha} | critical tasks= {config.number_of_critical_items}"
     )
 
     line_ax.text(x=0, y=1.03, s=subtitle, transform=line_ax.transAxes)

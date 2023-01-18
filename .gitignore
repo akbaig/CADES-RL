@@ -1,5 +1,4 @@
 *.pyc
-*.png
 !imgs/*.png
 *.csv
 .venv/
