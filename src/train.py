@@ -56,32 +56,32 @@ def train(config):
         agent_rewards['total_reward'].append(agent_reward)
         agent_rewards['critical_reward'].append(agent_ci_reward)
         agent_rewards['avg_occupancy'].append(agent_avg_occ)
-
         
         # Update progress bar
         pbar.set_description(
             f"Agent Total reward: {agent_reward:.1%} | "
             f"Critic pred. reward: {predicted_reward:.1%}"
+            f"Avg occup. reward: {agent_avg_occ:.1%}"
         )
         
         if (i % 1000 == 0 and i > 0) or i == config.n_episodes - 1:
             # Decay learning rate
             agent.lr_scheduler_actor.step()
             agent.lr_scheduler_critic.step()
-
             # Plot training history
             plot_training_history(
                 config,
                 [
                     agent_rewards['total_reward'],
                     agent_rewards['critical_reward'],
+                    agent_rewards['avg_occupancy'],
                     [total_nf_reward] * config.n_episodes,
                     [total_ff_reward] * config.n_episodes,
                     [total_ffd_reward] * config.n_episodes,
                 ],
-                ["DRL Agent total_reward ","DRL Agent critical_reward ", "NF", "FF", "FFD"],
+                ["DRL Agent total_reward ","DRL Agent Critical Reward", "DRL Agent Avg Occupancy Reward",  "NF", "FF", "FFD"],
                 outfilepath="../experiments/policy_dnn_10_20_NF_3_Decoder.png",
-                moving_avg_window=100,
+                moving_avg_window=200,
             )
 
 

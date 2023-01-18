@@ -1,3 +1,4 @@
+import time
 import torch
 from actor_critic import Actor
 from rl_env import StatesGenerator, get_benchmark_rewards, compute_reward, critical_task_reward
@@ -38,12 +39,15 @@ def inference(config):
     print(critical_items)
     print(ci_copy_mask,ci_groups)
 
+    start = time.time()
     # Get agent reward
     allocation_order = actor.apply_policy(
         critical_items,
         states_lens,
         ci_copy_mask
     )
+    end = (time.time() - start )*1000
+    print("Mean Inference Time", end)
 
     alpha = config.alpha
 
