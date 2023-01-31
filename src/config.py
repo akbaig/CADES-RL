@@ -12,8 +12,13 @@ parameters_definition = {
     "min_item_size": { "value": 100, "type": int, "desc": "Minimum item size"},
     "max_item_size": { "value": 800, "type": int, "desc": "Maximum item size"},
     "min_num_items": { "value": 10, "type": int, "desc": "Minimum number of items"},
-    "max_num_items": { "value": 20, "type": int, "desc": "Maximum number of items"},
-    "bin_size": { "value": 1000, "type": int, "desc": "Bin size"},
+    "max_num_items": { "value": 10, "type": int, "desc": "Maximum number of items"},
+
+
+    "min_bin_size": { "value": 800, "type": int, "desc": "Minimum bin size"},
+    "max_bin_size": { "value": 1400, "type": int, "desc": "Maximum bin size"},
+    "total_bins":{ "value": 4, "type": int, "desc": "Total number of bins"},
+
     "agent_heuristic": {
         "value": "NF",
         "type": str, 
@@ -25,7 +30,7 @@ parameters_definition = {
     # TRAINING PARAMETERS #
     "seed": { "value": 3, "type": int, "desc": "Random seed"},
     "n_episodes": { "value": 1000, "type": int, "desc": "Number of episodes"},
-    "batch_size": { "value": 8, "type": int, "desc": "Batch size"},
+    "batch_size": { "value": 1, "type": int, "desc": "Batch size"},
     "lr": { "value": 1.0e-3, "type": float, "desc": "Initial learning rate"},
     "alpha": {"value": 0.3, "type": float, "desc": "Alpha Value to compute reward"},
 

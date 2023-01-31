@@ -19,6 +19,11 @@ class StatesGenerator(object):
         self.max_num_items = config.max_num_items
         self.min_item_size = config.min_item_size
         self.max_item_size = config.max_item_size
+
+        self.min_bin_size=config.min_bin_size
+        self.max_bin_size=config.max_bin_size
+        self.total_bins=config.total_bins
+
         self.num_critical_items = config.number_of_critical_items
         self.num_critical_copies = config.number_of_copies
         self.ci_groups = []
@@ -48,9 +53,9 @@ class StatesGenerator(object):
                 ci_groups.append([ci]+critical_item_copies)
             critical_copy_mask.append(critical_mask)
             batch_ci_groups.append(ci_groups)
-        return (items_with_critical, critical_copy_mask, batch_ci_groups)            
+        return (items_with_critical, critical_copy_mask, batch_ci_groups)
 
-    
+
 
     def generate_states_batch(self, batch_size=None):
         """Generate new batch of initial states"""
@@ -61,22 +66,36 @@ class StatesGenerator(object):
             high=self.max_item_size + 1,
             size=(batch_size, self.max_num_items),
         )
+
         items_len_mask = np.ones_like(items_seqs_batch, dtype="float32")
         items_seq_lens = np.random.randint(
             low=self.min_num_items, high=self.max_num_items + 1, size=batch_size
         )
+
+        bins_available=[]
+        for i in range(self.total_bins):
+            bins_available.append(self.min_bin_size+ i*200)
+        bins_available=np.array(bins_available)
+        bins_available=np.repeat(bins_available[np.newaxis, ...], batch_size, axis=0)
+
+        # bins_available = np.random.randint(
+        #     low=self.min_bin_size, high=self.max_bin_size + 1,
+        #     size=(batch_size,self.total_bins)
+        # )
+
         for items_seq, len_mask, seq_len in zip(
             items_seqs_batch, items_len_mask, items_seq_lens
         ):
             items_seq[seq_len:] = 0
             len_mask[seq_len:] = 0
-        
+
         return (
             items_seqs_batch,
             items_seq_lens,
             items_len_mask,
+            bins_available
         )
-        
+
 
 
 def get_active_bins(heuristic, items_order, items_size, bin_size):
@@ -218,3 +237,106 @@ def get_benchmark_rewards(config, states_generator: StatesGenerator=None, states
     ff = {"avg_occ": np.mean(ff_reward), "ci": np.mean(ff_ci_reward)}
     ffd = {"avg_occ": np.mean(ffd_reward), "ci": np.mean(ffd_ci_reward)}
     return nf, ff, ffd
+
+
+import gym
+import numpy as np
+from gym import spaces
+from enum import Enum
+
+class TerminationCause(Enum):
+    SUCCESS = 1
+    DUBLICATE_PICK = 2
+    BIN_OVERFLOW = 3
+
+
+class CustomEnv(gym.Env):
+    """Custom Environment that follows gym interface."""
+
+    metadata = {"render.modes": ["human"]}
+
+    def __init__(self, config):
+        super().__init__()
+        # Define action and observation space
+        # They must be gym.spaces objects
+        # Example when using discrete actions:
+        self.config=config
+        self.states_generator = StatesGenerator(config)
+
+
+        self.action_space=spaces.MultiDiscrete([config.max_num_items,config.total_bins])
+        self.observation_space = spaces.Box(low=-1, high=1, shape=(config.total_bins+config.max_num_items,), dtype=np.float)
+
+        # self.observation_space = spaces.Dict(
+        #     {
+        #         "tasks": spaces.Discrete(2 ** n_bits),
+        #         "bins": spaces.Discrete(2 ** n_bits),
+        #         "masks": spaces.Discrete(2 ** n_bits),
+        #     }
+        # )
+        self.assignment_status=[]
+        for i in range(config.total_bins):
+            self.assignment_status.append([])
+        self.current_state=[]
+        self.total_reward=0
+        self.done=False
+
+    def step(self, action):
+        # observation = self.observation_space
+        observation = self.current_state
+        done=False
+
+        selected_item_idx = action[0]
+        selected_bin_idx = action[1]+ self.config.max_num_items
+        selected_item_cost=self.current_state[selected_item_idx]
+
+        # Agent picked the item which is already used
+        if selected_item_cost == 0:
+            reward = -20
+            done = True
+            self.info['termination_cause']=TerminationCause.DUBLICATE_PICK.name
+        else:
+            # Placing the item in bin
+            if selected_item_cost<=self.current_state[selected_bin_idx]:
+                # Mark the selected item as zero
+                reward=1
+                self.current_state[selected_item_idx] = 0
+                self.current_state[selected_bin_idx]-=selected_item_cost
+                self.assignment_status[selected_bin_idx%self.config.max_num_items].append(selected_item_idx)
+                self.info['episode_len']=self.info['episode_len']+1
+                if sum(self.current_state[0:self.config.max_num_items])==0:
+                    reward=20
+                    self.info['termination_cause'] = TerminationCause.SUCCESS.name
+                    self.info['is_success']=True
+                    done=True
+            else:
+                reward= -10
+                done = True
+                self.info['termination_cause'] =  TerminationCause.BIN_OVERFLOW.name
+
+        self.info['assignment_status']=self.assignment_status
+        self.total_reward=self.total_reward+reward
+        return observation, reward, done, self.info
+
+    def reset(self):
+
+        self.assignment_status = []
+        for i in range(self.config.total_bins):
+            self.assignment_status.append([])
+
+        self.info={
+                "is_success":False,
+                "episode_len":0,
+                "termination_cause":None
+              }
+        self.done=False
+        self.total_reward=0
+        states, states_lens, states_mask, bins_available = self.states_generator.generate_states_batch()
+        observation= np.array(list(states[0])+ list(bins_available[0]))/max(list(bins_available[0]))
+        self.current_state=observation
+        return observation
+    def render(self, mode="human"):
+        pass
+
+    def close(self):
+        pass
