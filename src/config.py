@@ -9,8 +9,8 @@ def str2bool(v):
 parameters_definition = {
 
     # PROBLEM CONDITIONS #
-    "min_item_size": { "value": 100, "type": int, "desc": "Minimum item size"},
-    "max_item_size": { "value": 800, "type": int, "desc": "Maximum item size"},
+    "min_item_size": { "value": 300, "type": int, "desc": "Minimum item size"},
+    "max_item_size": { "value": 700, "type": int, "desc": "Maximum item size"},
     "min_num_items": { "value": 10, "type": int, "desc": "Minimum number of items"},
     "max_num_items": { "value": 20, "type": int, "desc": "Maximum number of items"},
     "bin_size": { "value": 1000, "type": int, "desc": "Bin size"},
@@ -25,7 +25,7 @@ parameters_definition = {
     # TRAINING PARAMETERS #
     "seed": { "value": 3, "type": int, "desc": "Random seed"},
     "n_episodes": { "value": 1000, "type": int, "desc": "Number of episodes"},
-    "batch_size": { "value": 8, "type": int, "desc": "Batch size"},
+    "batch_size": { "value": 1, "type": int, "desc": "Batch size"},
     "lr": { "value": 1.0e-3, "type": float, "desc": "Initial learning rate"},
     "alpha": {"value": 0.3, "type": float, "desc": "Alpha Value to compute reward"},
 
@@ -34,10 +34,10 @@ parameters_definition = {
 
     # RUN OPTIONS #
     "device": { "value": "cpu", "type": str, "desc": "Device to use (if no GPU available, value should be 'cpu')"},
-    "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
+    "inference": {"value": True, "type": str2bool, "desc": "Do not train the model"},
     "model_path": {
         # "value": "./experiments/models/policy_dnn_100_800_10_20_100_FF.pkl",
-        "value": "/bin-packing-drl/experiments/models/policy_dnn_10_20_NF_3_Decoder.pkl",
+        "value": "../experiments/models/policy_dnn_10_20_NF_3_Decoder.pkl",
         "type": str, 
         "desc": "Path to the model checkpoint to save if in training mode, or to load if in inference mode"
     },

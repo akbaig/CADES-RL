@@ -1,7 +1,7 @@
 import time
 import torch
 from actor_critic import Actor
-from rl_env import StatesGenerator, get_benchmark_rewards, compute_reward, critical_task_reward
+from rl_env import StatesGenerator, get_benchmark_rewards, compute_reward, critical_task_reward,get_active_bins
 import ast
 import numpy as np
 
@@ -37,7 +37,7 @@ def inference(config):
             states_batch, len_mask, states_lens
     )
     print(critical_items)
-    print(ci_copy_mask,ci_groups)
+    print(ci_copy_mask)
 
     start = time.time()
     # Get agent reward
@@ -53,7 +53,15 @@ def inference(config):
 
     ci_reward = critical_task_reward(config, critical_items, allocation_order, ci_groups, config.agent_heuristic).mean()
     avg_occ_ratio = compute_reward(config, critical_items, ci_copy_mask, allocation_order).mean()
+
+    allocation_order = allocation_order.numpy().astype(int) if torch.is_tensor(allocation_order) else allocation_order
+    _,agent_allocation=get_active_bins(config.agent_heuristic,allocation_order[0],critical_items[0],config.bin_size)
     total_reward = get_total_reward(alpha, avg_occ_ratio, ci_reward)
+    agent_stats={
+        "avg_occ_ratio":avg_occ_ratio,
+        "ci_reward":ci_reward,
+        "total_reward":total_reward
+    }
     print(f'Critical reward: {ci_reward:.1%}')
 
     benchmark_rewards = get_benchmark_rewards(config, states_batch=states_batch, ci_groups=ci_groups)
@@ -62,6 +70,8 @@ def inference(config):
     for reward, heuristic in zip(benchmark_rewards, ("NF", "FF", "FFD")):
         total_reward = get_total_reward(alpha, reward['avg_occ'], reward['ci'])
         print(f"Total reward with {heuristic} heuristic: {total_reward:.1%}")
+
+    return critical_items[0], ci_copy_mask[0],agent_allocation,agent_stats
 
 def get_total_reward(alpha, avg_occ, ci):
     return avg_occ*alpha + ci*(1-alpha)
