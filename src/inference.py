@@ -67,11 +67,18 @@ def inference(config):
     benchmark_rewards = get_benchmark_rewards(config, states_batch=states_batch, ci_groups=ci_groups)
     print(f"Average occupancy ratio with RL agent: {avg_occ_ratio:.1%}")
     print(f'Total reward with RL agent: {total_reward:.1%}')
+    heuristics_stats=[]
     for reward, heuristic in zip(benchmark_rewards, ("NF", "FF", "FFD")):
         total_reward = get_total_reward(alpha, reward['avg_occ'], reward['ci'])
+        heuristics_stats.append({heuristic:{
+            'avg_occ_ratio':reward['avg_occ'],
+            'ci_reward':reward['ci'],
+            'total_reward':total_reward
+        }})
+
         print(f"Total reward with {heuristic} heuristic: {total_reward:.1%}")
 
-    return critical_items[0], ci_copy_mask[0],agent_allocation,agent_stats
+    return critical_items[0], ci_copy_mask[0].astype('int'),agent_allocation,agent_stats,heuristics_stats
 
 def get_total_reward(alpha, avg_occ, ci):
     return avg_occ*alpha + ci*(1-alpha)

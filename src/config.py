@@ -9,8 +9,8 @@ def str2bool(v):
 parameters_definition = {
 
     # PROBLEM CONDITIONS #
-    "min_item_size": { "value": 300, "type": int, "desc": "Minimum item size"},
-    "max_item_size": { "value": 700, "type": int, "desc": "Maximum item size"},
+    "min_item_size": { "value": 100, "type": int, "desc": "Minimum item size"},
+    "max_item_size": { "value": 800, "type": int, "desc": "Maximum item size"},
     "min_num_items": { "value": 10, "type": int, "desc": "Minimum number of items"},
     "max_num_items": { "value": 20, "type": int, "desc": "Maximum number of items"},
     "bin_size": { "value": 1000, "type": int, "desc": "Bin size"},
