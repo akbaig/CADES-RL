@@ -15,7 +15,7 @@ parameters_definition = {
     "max_num_items": { "value": 20, "type": int, "desc": "Maximum number of items"},
     "bin_size": { "value": 1000, "type": int, "desc": "Bin size"},
     "agent_heuristic": {
-        "value": "NF",
+        "value": "FF",
         "type": str, 
         "desc": "HeuriStic used by the agent to allocate the sequence output"
     },
