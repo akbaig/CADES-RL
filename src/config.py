@@ -8,22 +8,15 @@ def str2bool(v):
 
 parameters_definition = {
 
-    # PROBLEM CONDITIONS #
-    "min_item_size": { "value": 100, "type": int, "desc": "Minimum item size"},
+    "min_item_size": { "value": 200, "type": int, "desc": "Minimum item size"},
     "max_item_size": { "value": 800, "type": int, "desc": "Maximum item size"},
     "min_num_items": { "value": 10, "type": int, "desc": "Minimum number of items"},
     "max_num_items": { "value": 10, "type": int, "desc": "Maximum number of items"},
 
-
-    "min_bin_size": { "value": 800, "type": int, "desc": "Minimum bin size"},
-    "max_bin_size": { "value": 1400, "type": int, "desc": "Maximum bin size"},
+    "min_bin_size": { "value": 1000, "type": int, "desc": "Minimum bin size"},
+    "max_bin_size": { "value": 2000, "type": int, "desc": "Maximum bin size"},
     "total_bins":{ "value": 4, "type": int, "desc": "Total number of bins"},
 
-    "agent_heuristic": {
-        "value": "NF",
-        "type": str, 
-        "desc": "HeuriStic used by the agent to allocate the sequence output"
-    },
     "number_of_copies": {"value": 2, "type": int, "desc": "Number of critical item copies"},
     "number_of_critical_items": {"value": 3, "type": int, "desc": "Number of critical item"},
 
@@ -34,24 +27,14 @@ parameters_definition = {
     "lr": { "value": 1.0e-3, "type": float, "desc": "Initial learning rate"},
     "alpha": {"value": 0.3, "type": float, "desc": "Alpha Value to compute reward"},
 
-    # NETWORK PARAMETERS #
-    "hid_dim": { "value": 128, "type": int, "desc": "Hidden dimension"},
 
     # RUN OPTIONS #
     "device": { "value": "cpu", "type": str, "desc": "Device to use (if no GPU available, value should be 'cpu')"},
     "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
-    "model_path": {
-        # "value": "./experiments/models/policy_dnn_100_800_10_20_100_FF.pkl",
-        "value": "/bin-packing-drl/experiments/models/policy_dnn_10_20_NF_3_Decoder.pkl",
-        "type": str, 
-        "desc": "Path to the model checkpoint to save if in training mode, or to load if in inference mode"
-    },
-    "inference_data_path": {
-        # "value": "./experiments/inference_data/input_states.txt",
-        "value": "",
-        "type": str,
-        "desc": "Path to the inference data. If None, a random batch of states will be generated according to the config parameters"
-    }
+
+
+    # REWARD SHAPING
+
 }
 
 def get_config():
