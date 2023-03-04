@@ -12,23 +12,24 @@ def get_active_bins(heuristic, items_order, items_size, bin_size):
         if item_idx == -1: # sequence is shorter than max_num_items 
             continue
         item_size = items_size[item_idx]
+        if item_size<=0:
+            continue
         if heuristic == "NF":
             if bins[-1] + item_size <= bin_size:
                 bins[-1] += item_size
-                bin_status[-1].append(item_idx)
+                bin_status[-1].append(item_idx.item())
             else:
-                bin_status.append([item_idx])
+                bin_status.append([item_idx.item()])
                 bins.append(item_size)
         elif heuristic == "FF":
             for bin_idx, bin_occupancy in enumerate(bins):
                 if bin_occupancy + item_size <= bin_size:
                     bins[bin_idx] += item_size
-                    bin_status[bin_idx].append(item_idx)
+                    bin_status[bin_idx].append(item_idx.item())
                     break
             else:
                 bins.append(item_size)
-                bin_status.append([item_idx])
-        
+                bin_status.append([item_idx.item()])
     return bins, bin_status
 
 def avg_occupancy(
