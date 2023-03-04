@@ -1,7 +1,8 @@
 *.pyc
 !imgs/*.png
 *.csv
-.venv/
 .vscode
 /logs/
 /models/
+/venv/
+/src/.ipynb_checkpoints/
