@@ -1,5 +1,30 @@
 import numpy as np
 from collections import defaultdict
+
+import mlflow
+
+def create_experiment(experiment_name, run_name, run_metrics, model, train_graph_path=None, run_params=None,
+                      reward=None):
+    mlflow.set_experiment(experiment_name)
+
+    with mlflow.start_run(run_name=run_name):
+
+        if not run_params == None:
+            for param in run_params:
+                mlflow.log_param(param, run_params[param])
+
+        for metric in run_metrics:
+            mlflow.log_metric(metric, run_metrics[metric])
+
+        # mlflow.log_model(model, "model")
+
+        if not train_graph_path == None:
+            mlflow.log_artifact(train_graph_path, 'training graph')
+
+    print('Run - %s is logged to Experiment - %s' % (run_name, experiment_name))
+
+
+
 def evaluate(model, env, num_episodes=100):
     """
     Evaluate a RL agent
