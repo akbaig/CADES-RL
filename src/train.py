@@ -35,7 +35,7 @@ if __name__ == "__main__":
     # Experiment Project Name for mlflow
     mlflow.set_experiment(config.experiment_name)
     # Run Name for mlflow
-    mlflow.start_run(run_name="Test3")
+    mlflow.start_run(run_name="Test 2 - Bonus reward")
 
     # Logging config params
     config_dict = vars(config)
@@ -69,7 +69,6 @@ if __name__ == "__main__":
     )
     is_train = config.train = True
     EPOCHS = config.epochs
-    print(EPOCHS)
 
     if is_train:
         TIMESTEPS = 10000
@@ -85,6 +84,7 @@ if __name__ == "__main__":
                 callback=eval_callback,
             )
             model.save(f"{models_dir}/{iters}")
+
 
     t1 = time.time()
     (
@@ -106,5 +106,6 @@ if __name__ == "__main__":
     for key in termination_cause.keys():
         mlflow.log_metric(key, termination_cause[key])
 
+    mlflow.log_artifacts(models_dir,"models")
     # End mlflow run session
     mlflow.end_run()

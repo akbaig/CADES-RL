@@ -47,13 +47,9 @@ class CadesEnv(gym.Env):
         self.current_state = {}
         self.total_reward = 0
         self.done = False
-
-    def step(self, action):
-        # observation = self.observation_space
-        observation = self.current_state
+    def _reward(self,action):
 
         done = False
-
         selected_item_idx = action[0]
         selected_bin_idx = action[1]
         selected_item_cost = self.current_state["tasks"][selected_item_idx]
@@ -66,8 +62,9 @@ class CadesEnv(gym.Env):
         else:
             # Placing the item in bin
             if selected_item_cost <= self.current_state["nodes"][selected_bin_idx]:
-                # Give the step reward
-                reward = self.config.STEP_reward
+                reward = self.config.STEP_reward / self.config.max_num_items
+                bonus = self.config.BONUS_reward * self.info['episode_len']
+                reward=reward+bonus
                 # Mark the selected item as zero
                 self.current_state["tasks"][selected_item_idx] = 0
                 # Consume the space in selected bin
@@ -85,7 +82,10 @@ class CadesEnv(gym.Env):
                 reward = self.config.BIN_OVERFLOW_reward
                 done = True
                 self.info["termination_cause"] = TerminationCause.BIN_OVERFLOW.name
-
+        return reward,done
+    def step(self, action):
+        observation = self.current_state
+        reward,done = self._reward(action)
         self.info["assignment_status"] = self.assignment_status
         self.total_reward = self.total_reward + reward
         return observation, reward, done, self.info
