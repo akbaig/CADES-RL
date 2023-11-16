@@ -53,10 +53,14 @@ given by the pointer DNN:
 
 # Usage
 
-## Install required libraries
-
+## Install Latest Verson of Python 3.9
 ```
-pip install requirements.txt
+conda create -n cades python==3.9.*
+conda activate cades
+```
+## Install required libraries
+```
+pip install -r requirements.txt
 ```
 
 ## Train the agent
