@@ -20,3 +20,4 @@ fastapi
 uvicorn[standard]
 mlflow
 gym
+sb3-contrib
