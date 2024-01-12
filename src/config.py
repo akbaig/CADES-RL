@@ -10,12 +10,12 @@ def str2bool(v):
 
 parameters_definition = {
     "min_item_size": {"value": 200, "type": int, "desc": "Minimum item size"},
-    "max_item_size": {"value": 800, "type": int, "desc": "Maximum item size"},
+    "max_item_size": {"value": 200, "type": int, "desc": "Maximum item size"},
     "min_num_items": {"value": 20, "type": int, "desc": "Minimum number of items"},
     "max_num_items": {"value": 20, "type": int, "desc": "Maximum number of items"},
-    "min_bin_size": {"value": 1000, "type": int, "desc": "Minimum bin size"},
-    "max_bin_size": {"value": 2000, "type": int, "desc": "Maximum bin size"},
-    "total_bins": {"value": 8, "type": int, "desc": "Total number of bins"},
+    "min_bin_size": {"value": 1200, "type": int, "desc": "Minimum bin size"},
+    "max_bin_size": {"value": 1200, "type": int, "desc": "Maximum bin size"},
+    "total_bins": {"value": 10, "type": int, "desc": "Total number of bins"},
     "number_of_copies": {
         "value": 2,
         "type": int,
@@ -34,7 +34,7 @@ parameters_definition = {
     "alpha": {"value": 0.3, "type": float, "desc": "Alpha Value to compute reward"},
     # RUN OPTIONS #
     "device": {
-        "value": "cpu",
+        "value": "cuda",
         "type": str,
         "desc": "Device to use (if no GPU available, value should be 'cpu')",
     },
@@ -47,7 +47,7 @@ parameters_definition = {
     # REWARD SHAPING
     "SUCCESS_reward": {"value": 3, "type": int, "desc": "Success Reward"},
     "DUBLICATE_PICK_reward": {
-        "value": -3,
+        "value": -1,
         "type": int,
         "desc": "DUBLICATE_PICK Reward",
     },
@@ -55,7 +55,7 @@ parameters_definition = {
     "STEP_reward": {"value": 1, "type": int, "desc": "Step Reward"},
     "BONUS_reward": {"value": 0.01, "type": int, "desc": "Step Reward"},
     "CRITICAL_reward": {"value": 1, "type": int, "desc": "Critical Task Reward"},
-    "DUPLICATE_CRITICAL_PICK_reward": {"value": -3, "type": int, "desc": "Duplicate Critical Task Reward"}, 
+    "DUPLICATE_CRITICAL_PICK_reward": {"value": -1, "type": int, "desc": "Duplicate Critical Task Reward"}, 
 
 }
 

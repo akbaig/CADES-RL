@@ -5,4 +5,5 @@
 /logs/
 /models/
 /venv/
+/src/mlruns/
 /src/.ipynb_checkpoints/
