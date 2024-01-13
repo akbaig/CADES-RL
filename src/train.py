@@ -4,6 +4,7 @@ from stable_baselines3 import PPO, A2C
 from stable_baselines3.common import env_checker
 from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.callbacks import EvalCallback
+from sb3_contrib import RecurrentPPO
 import numpy as np
 from cades_env import CadesEnv
 from collections import defaultdict
@@ -45,8 +46,8 @@ if __name__ == "__main__":
     # Initiate environment variables
     env = CadesEnv(config)
     check_env(env)
-    model = PPO(
-        "MultiInputPolicy",
+    model = RecurrentPPO(
+        "MultiInputLstmPolicy",
         env,
         verbose=1,
         learning_rate=config.lr,

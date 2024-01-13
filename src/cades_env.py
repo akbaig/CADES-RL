@@ -70,20 +70,23 @@ class CadesEnv(gym.Env):
         selected_item_idx = action[0]
         selected_bin_idx = action[1]
         selected_item_cost = self.current_state["tasks"][selected_item_idx]
-
+        reward_type = ''
         # Agent picked the item which is already used
         if selected_item_cost == 0:
             reward = self.config.DUBLICATE_PICK_reward * self.info['episode_len'] * 0.25
-            done = True
-            self.info["termination_cause"] = TerminationCause.DUBLICATE_PICK.name
+            reward_type = 'Duplicate Pick Reward'
+            #done = True
+            #self.info["termination_cause"] = TerminationCause.DUBLICATE_PICK.name
         # Agent picked the bin which is already full
         elif selected_item_cost > self.current_state["nodes"][selected_bin_idx]:
             reward = self.config.BIN_OVERFLOW_reward * self.info['episode_len'] * 0.25
+            reward_type = 'Bin Overflow Reward'
             done = True
             self.info["termination_cause"] = TerminationCause.BIN_OVERFLOW.name
         # Agent picked the bin which already had critical task
         elif self._is_item_critical(selected_item_idx) and self._is_critical_item_duplicated(selected_item_idx, selected_bin_idx):
             reward = self.config.DUPLICATE_CRITICAL_PICK_reward * self.info['episode_len'] * 0.25
+            reward_type = 'Duplicate Critical Pick Reward'
             done = True
             self.info["termination_cause"] = TerminationCause.DUPLICATE_CRITICAL_PICK.name
         # Agent picked the correct item and bin
@@ -91,8 +94,10 @@ class CadesEnv(gym.Env):
             # Assign Rewards            
             reward = self.config.STEP_reward
             reward += self.config.BONUS_reward * self.info['episode_len']
+            reward_type = 'Step and Bonus Reward'
             if self._is_item_critical(selected_item_idx):
                 reward += self.config.CRITICAL_reward
+                reward_type += ' \nCritical Reward'
             # Mark the selected item as zero
             self.current_state["tasks"][selected_item_idx] = 0
             # Consume the space in selected bin
@@ -103,9 +108,14 @@ class CadesEnv(gym.Env):
             # Check if no task is remaining
             if sum(self.current_state["tasks"]) == 0:
                 reward += self.config.SUCCESS_reward
+                reward_type += ' \n Success Reward'
                 self.info["termination_cause"] = TerminationCause.SUCCESS.name
                 self.info["is_success"] = True
                 done = True
+        print("Observation Space: Tasks: ", self.current_state["tasks"], " Nodes:", self.current_state["nodes"])
+        print("Action : Selected Item: ", action[0], " Selected Bin: ", action[1], " Selected Item Cost: ", selected_item_cost)
+        print("Reward: ", reward)
+        print("Reward Type: ", reward_type)
         return reward,done
 
     def step(self, action):

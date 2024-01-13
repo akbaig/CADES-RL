@@ -28,7 +28,7 @@ parameters_definition = {
     },
     # TRAINING PARAMETERS #
     "seed": {"value": 3, "type": int, "desc": "Random seed"},
-    "epochs": {"value": 75, "type": int, "desc": "Number of episodes"},
+    "epochs": {"value": 150, "type": int, "desc": "Number of episodes"},
     "batch_size": {"value": 64, "type": int, "desc": "Batch size"},
     "lr": {"value": 0.0003, "type": float, "desc": "Initial learning rate"},
     "alpha": {"value": 0.3, "type": float, "desc": "Alpha Value to compute reward"},
@@ -45,7 +45,7 @@ parameters_definition = {
         "desc": "Name of the Experiment in mlflow",
     },
     # REWARD SHAPING
-    "SUCCESS_reward": {"value": 3, "type": int, "desc": "Success Reward"},
+    "SUCCESS_reward": {"value": 10, "type": int, "desc": "Success Reward"},
     "DUBLICATE_PICK_reward": {
         "value": -1,
         "type": int,
