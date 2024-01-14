@@ -11,11 +11,11 @@ def str2bool(v):
 parameters_definition = {
     "min_item_size": {"value": 200, "type": int, "desc": "Minimum item size"},
     "max_item_size": {"value": 200, "type": int, "desc": "Maximum item size"},
-    "min_num_items": {"value": 20, "type": int, "desc": "Minimum number of items"},
-    "max_num_items": {"value": 20, "type": int, "desc": "Maximum number of items"},
-    "min_bin_size": {"value": 1200, "type": int, "desc": "Minimum bin size"},
-    "max_bin_size": {"value": 1200, "type": int, "desc": "Maximum bin size"},
-    "total_bins": {"value": 10, "type": int, "desc": "Total number of bins"},
+    "min_num_items": {"value": 10, "type": int, "desc": "Minimum number of items"},
+    "max_num_items": {"value": 10, "type": int, "desc": "Maximum number of items"},
+    "min_bin_size": {"value": 800, "type": int, "desc": "Minimum bin size"},
+    "max_bin_size": {"value": 800, "type": int, "desc": "Maximum bin size"},
+    "total_bins": {"value": 5, "type": int, "desc": "Total number of bins"},
     "number_of_copies": {
         "value": 2,
         "type": int,
