@@ -73,7 +73,9 @@ class CadesEnv(gym.Env):
         reward_type = ''
         # Agent picked the item which is already used
         if selected_item_cost == 0:
-            reward = self.config.DUBLICATE_PICK_reward * self.info['episode_len'] * 0.25
+            # At last step Duplicate Pick Reward should be 0. Highest at early steps, lower at later steps.
+            # -1 - (max_steps-episode_length)*4/max_steps = 0 when, episode_length = max_steps, -5 when episode_length = 0
+            reward = self.config.DUPLICATE_PICK_reward - (abs(self.config.max_num_items - self.info['episode_len'])*4/self.config.max_num_items)
             reward_type = 'Duplicate Pick Reward'
             #done = True
             #self.info["termination_cause"] = TerminationCause.DUBLICATE_PICK.name

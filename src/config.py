@@ -46,7 +46,7 @@ parameters_definition = {
     },
     # REWARD SHAPING
     "SUCCESS_reward": {"value": 10, "type": int, "desc": "Success Reward"},
-    "DUBLICATE_PICK_reward": {
+    "DUPLICATE_PICK_reward": {
         "value": -1,
         "type": int,
         "desc": "DUBLICATE_PICK Reward",
