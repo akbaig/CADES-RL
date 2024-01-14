@@ -114,10 +114,9 @@ class CadesEnv(gym.Env):
                 self.info["termination_cause"] = TerminationCause.SUCCESS.name
                 self.info["is_success"] = True
                 done = True
-        print("Observation Space: Tasks: ", self.current_state["tasks"], " Nodes:", self.current_state["nodes"])
+        print("Observation Space: \nTasks: ", self.current_state["tasks"], " \nCritical Masks: ", self.current_state["critical_mask"], " \nNodes:", self.current_state["nodes"])
         print("Action : Selected Item: ", action[0], " Selected Bin: ", action[1], " Selected Item Cost: ", selected_item_cost)
-        print("Reward: ", reward)
-        print("Reward Type: ", reward_type)
+        print("Reward: ", reward, " Reward Type: ", reward_type)
         return reward,done
 
     def step(self, action):
