@@ -45,7 +45,7 @@ parameters_definition = {
         "desc": "Name of the Experiment in mlflow",
     },
     # REWARD SHAPING
-    "SUCCESS_reward": {"value": 3, "type": int, "desc": "Success Reward"},
+    "SUCCESS_reward": {"value": 10, "type": int, "desc": "Success Reward"},
     "DUBLICATE_PICK_reward": {
         "value": -1,
         "type": int,
