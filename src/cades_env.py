@@ -1,4 +1,5 @@
 import gym
+import random
 import numpy as np
 from gym import spaces
 from enum import Enum
@@ -63,20 +64,50 @@ class CadesEnv(gym.Env):
         replica_indices = list(np.where(critical_mask == critical_mask[item_index])[0]) 
         # check if these indices are in the assignment status of selected bin
         return np.intersect1d(replica_indices, self.assignment_status[bin_index]).size > 0
+    
+    # For Preventing the agent from choosing already chosen indices again
+    # This method masks the invalid choices
+    # And makes the agent choose a valid action instead 
+    def get_valid_action(self, action):
+        item_idx, bin_idx = action
+        if self.current_state["tasks"][item_idx] > 0:
+            return action  # The action is already valid
 
+        valid_item_indices = [idx for idx, task in enumerate(self.current_state["tasks"]) if task > 0]
+        if not valid_item_indices:
+            return []  # No valid actions available
+
+        # Select a new item while keeping the bin choice same
+        new_item_idx = random.choice(valid_item_indices)
+        return [new_item_idx, bin_idx]
+    
     def _reward(self,action):
 
         done = False
-        selected_item_idx = action[0]
-        selected_bin_idx = action[1]
+        original_action = action.copy()
+        adjusted_action = self.get_valid_action(action)
+
+        # Should be an unreachable condition based on our but the check here is just in case
+        if len(adjusted_action) == 0:
+            reward = 1
+            done = True #because adjusted action will be null only when there are no new action possible
+            return reward, done
+        
+        selected_item_idx = adjusted_action[0]
+        selected_bin_idx = adjusted_action[1]
         selected_item_cost = self.current_state["tasks"][selected_item_idx]
         reward_type = ''
         # Agent picked the item which is already used
-        if selected_item_cost == 0:
+        if selected_item_cost == 0 or original_action[0] != adjusted_action[0]:
             # At last step Duplicate Pick Reward should be 0. Highest at early steps, lower at later steps.
             # -1 - (max_steps-episode_length)*4/max_steps = 0 when, episode_length = max_steps, -5 when episode_length = 0
-            reward = self.config.DUPLICATE_PICK_reward - (abs(self.config.max_num_items - self.info['episode_len'])*4/self.config.max_num_items)
+            reward = self.config.DUPLICATE_PICK_reward - (abs(self.config.max_num_items - self.info['episode_len'])*3/self.config.max_num_items)
             reward_type = 'Duplicate Pick Reward'
+            print("Observation Space: \nTasks: ", self.current_state["tasks"], " \nCritical Masks: ", self.current_state["critical_mask"], " \nNodes:", self.current_state["nodes"])
+            print("Action : Selected Item: ", action[0], " Selected Bin: ", action[1], " Selected Item Cost: ", selected_item_cost)
+            print("Reward: ", reward, " Reward Type: ", reward_type)
+            _, done = self._reward(adjusted_action)
+            return reward, done
             #done = True
             #self.info["termination_cause"] = TerminationCause.DUBLICATE_PICK.name
         # Agent picked the bin which is already full
@@ -87,7 +118,7 @@ class CadesEnv(gym.Env):
             self.info["termination_cause"] = TerminationCause.BIN_OVERFLOW.name
         # Agent picked the bin which already had critical task
         elif self._is_item_critical(selected_item_idx) and self._is_critical_item_duplicated(selected_item_idx, selected_bin_idx):
-            reward = self.config.DUPLICATE_CRITICAL_PICK_reward * self.info['episode_len'] * 0.25
+            reward = self.config.DUPLICATE_CRITICAL_PICK_reward * self.info['episode_len'] * 0.15
             reward_type = 'Duplicate Critical Pick Reward'
             done = True
             self.info["termination_cause"] = TerminationCause.DUPLICATE_CRITICAL_PICK.name
