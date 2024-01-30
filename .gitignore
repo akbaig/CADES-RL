@@ -7,3 +7,5 @@
 /venv/
 /src/mlruns/
 /src/.ipynb_checkpoints/
+*.out
+mlruns/
