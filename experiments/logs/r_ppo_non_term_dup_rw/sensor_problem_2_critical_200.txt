@@ -1,0 +1,4675 @@
+Epoch # 1
+Eval num_timesteps=10000, episode_reward=-11.80 +/- 3.87
+Episode length: 4.40 +/- 1.02
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 4.4         |
+|    mean_reward          | -11.8       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 10000       |
+| train/                  |             |
+|    approx_kl            | 0.013157386 |
+|    clip_fraction        | 0.0633      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -7.31       |
+|    explained_variance   | 0.458       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 10.7        |
+|    n_updates            | 780         |
+|    policy_gradient_loss | -0.0371     |
+|    value_loss           | 22.3        |
+-----------------------------------------
+New best mean reward!
+Epoch # 2
+Eval num_timesteps=20000, episode_reward=-2.53 +/- 2.52
+Episode length: 3.00 +/- 0.89
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 3           |
+|    mean_reward          | -2.53       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 20000       |
+| train/                  |             |
+|    approx_kl            | 0.013499978 |
+|    clip_fraction        | 0.0453      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -7.17       |
+|    explained_variance   | 0.118       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 20.3        |
+|    n_updates            | 1560        |
+|    policy_gradient_loss | -0.033      |
+|    value_loss           | 62.8        |
+-----------------------------------------
+New best mean reward!
+Epoch # 3
+Eval num_timesteps=30000, episode_reward=-2.92 +/- 0.63
+Episode length: 2.20 +/- 0.40
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2.2         |
+|    mean_reward          | -2.92       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 30000       |
+| train/                  |             |
+|    approx_kl            | 0.025658334 |
+|    clip_fraction        | 0.134       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -6.95       |
+|    explained_variance   | 0.355       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 6.1         |
+|    n_updates            | 2340        |
+|    policy_gradient_loss | -0.0462     |
+|    value_loss           | 30          |
+-----------------------------------------
+Epoch # 4
+Eval num_timesteps=40000, episode_reward=-2.32 +/- 0.49
+Episode length: 2.80 +/- 0.98
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 2.8         |
+|    mean_reward          | -2.32       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 40000       |
+| train/                  |             |
+|    approx_kl            | 0.015929181 |
+|    clip_fraction        | 0.101       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -7.01       |
+|    explained_variance   | 0.136       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 34.3        |
+|    n_updates            | 3120        |
+|    policy_gradient_loss | -0.0278     |
+|    value_loss           | 69.6        |
+-----------------------------------------
+New best mean reward!
+Epoch # 5
+Eval num_timesteps=50000, episode_reward=-3.90 +/- 3.78
+Episode length: 4.60 +/- 0.80
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 4.6         |
+|    mean_reward          | -3.9        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 50000       |
+| train/                  |             |
+|    approx_kl            | 0.018295737 |
+|    clip_fraction        | 0.116       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -6.73       |
+|    explained_variance   | 0.304       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 17.8        |
+|    n_updates            | 3900        |
+|    policy_gradient_loss | -0.0378     |
+|    value_loss           | 37.4        |
+-----------------------------------------
+Epoch # 6
+Eval num_timesteps=60000, episode_reward=0.36 +/- 1.96
+Episode length: 5.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 5.4         |
+|    mean_reward          | 0.36        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 60000       |
+| train/                  |             |
+|    approx_kl            | 0.017861353 |
+|    clip_fraction        | 0.11        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -6.78       |
+|    explained_variance   | 0.42        |
+|    learning_rate        | 0.0003      |
+|    loss                 | 8.23        |
+|    n_updates            | 4680        |
+|    policy_gradient_loss | -0.0416     |
+|    value_loss           | 23.7        |
+-----------------------------------------
+New best mean reward!
+Epoch # 7
+Eval num_timesteps=70000, episode_reward=-0.60 +/- 5.49
+Episode length: 4.40 +/- 1.62
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 4.4         |
+|    mean_reward          | -0.6        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 70000       |
+| train/                  |             |
+|    approx_kl            | 0.027754612 |
+|    clip_fraction        | 0.146       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -6.48       |
+|    explained_variance   | -0.139      |
+|    learning_rate        | 0.0003      |
+|    loss                 | 42.8        |
+|    n_updates            | 5460        |
+|    policy_gradient_loss | -0.0218     |
+|    value_loss           | 68          |
+-----------------------------------------
+Epoch # 8
+Eval num_timesteps=80000, episode_reward=1.76 +/- 0.77
+Episode length: 3.60 +/- 0.80
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 3.6         |
+|    mean_reward          | 1.76        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 80000       |
+| train/                  |             |
+|    approx_kl            | 0.016460791 |
+|    clip_fraction        | 0.0797      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -6.56       |
+|    explained_variance   | 0.246       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 23.3        |
+|    n_updates            | 6240        |
+|    policy_gradient_loss | -0.0343     |
+|    value_loss           | 41.2        |
+-----------------------------------------
+New best mean reward!
+Epoch # 9
+Eval num_timesteps=90000, episode_reward=-2.82 +/- 3.96
+Episode length: 3.60 +/- 1.20
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 3.6         |
+|    mean_reward          | -2.82       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 90000       |
+| train/                  |             |
+|    approx_kl            | 0.009496694 |
+|    clip_fraction        | 0.0305      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -6.79       |
+|    explained_variance   | 0.211       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 26.9        |
+|    n_updates            | 7030        |
+|    policy_gradient_loss | -0.0265     |
+|    value_loss           | 102         |
+-----------------------------------------
+Epoch # 10
+Eval num_timesteps=100000, episode_reward=-2.31 +/- 1.73
+Episode length: 3.40 +/- 0.49
+Success rate: 0.00%
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 3.4          |
+|    mean_reward          | -2.31        |
+|    success_rate         | 0            |
+| time/                   |              |
+|    total_timesteps      | 100000       |
+| train/                  |              |
+|    approx_kl            | 0.0016912883 |
+|    clip_fraction        | 0            |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -6.58        |
+|    explained_variance   | 0.432        |
+|    learning_rate        | 0.0003       |
+|    loss                 | 14.1         |
+|    n_updates            | 7810         |
+|    policy_gradient_loss | -0.0079      |
+|    value_loss           | 34.7         |
+------------------------------------------
+Epoch # 11
+Eval num_timesteps=110000, episode_reward=-1.35 +/- 1.57
+Episode length: 3.60 +/- 0.80
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 3.6         |
+|    mean_reward          | -1.35       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 110000      |
+| train/                  |             |
+|    approx_kl            | 0.019866876 |
+|    clip_fraction        | 0.13        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -6.56       |
+|    explained_variance   | 0.412       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 22.1        |
+|    n_updates            | 8590        |
+|    policy_gradient_loss | -0.0368     |
+|    value_loss           | 39.3        |
+-----------------------------------------
+Epoch # 12
+Eval num_timesteps=120000, episode_reward=-2.88 +/- 3.99
+Episode length: 5.00 +/- 1.10
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 5           |
+|    mean_reward          | -2.88       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 120000      |
+| train/                  |             |
+|    approx_kl            | 0.028921498 |
+|    clip_fraction        | 0.176       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -6.26       |
+|    explained_variance   | 0.298       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 11.8        |
+|    n_updates            | 9370        |
+|    policy_gradient_loss | -0.0422     |
+|    value_loss           | 23.7        |
+-----------------------------------------
+Epoch # 13
+Eval num_timesteps=130000, episode_reward=-11.79 +/- 2.18
+Episode length: 7.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 7.4         |
+|    mean_reward          | -11.8       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 130000      |
+| train/                  |             |
+|    approx_kl            | 0.007921185 |
+|    clip_fraction        | 0.0172      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -6.49       |
+|    explained_variance   | 0.179       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 30.3        |
+|    n_updates            | 10150       |
+|    policy_gradient_loss | -0.0283     |
+|    value_loss           | 50.8        |
+-----------------------------------------
+Epoch # 14
+Eval num_timesteps=140000, episode_reward=0.65 +/- 2.24
+Episode length: 5.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 5.4         |
+|    mean_reward          | 0.655       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 140000      |
+| train/                  |             |
+|    approx_kl            | 0.015784789 |
+|    clip_fraction        | 0.0953      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -6.24       |
+|    explained_variance   | 0.342       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 16.5        |
+|    n_updates            | 10930       |
+|    policy_gradient_loss | -0.0437     |
+|    value_loss           | 30.4        |
+-----------------------------------------
+Epoch # 15
+Eval num_timesteps=150000, episode_reward=0.14 +/- 1.64
+Episode length: 5.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 5.4         |
+|    mean_reward          | 0.14        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 150000      |
+| train/                  |             |
+|    approx_kl            | 0.017297821 |
+|    clip_fraction        | 0.105       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -5.84       |
+|    explained_variance   | 0.352       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 14.4        |
+|    n_updates            | 11710       |
+|    policy_gradient_loss | -0.0442     |
+|    value_loss           | 31.3        |
+-----------------------------------------
+Epoch # 16
+Eval num_timesteps=160000, episode_reward=3.56 +/- 0.89
+Episode length: 4.20 +/- 0.40
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 4.2         |
+|    mean_reward          | 3.56        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 160000      |
+| train/                  |             |
+|    approx_kl            | 0.014536709 |
+|    clip_fraction        | 0.0648      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -6.09       |
+|    explained_variance   | 0.459       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 15.9        |
+|    n_updates            | 12490       |
+|    policy_gradient_loss | -0.0319     |
+|    value_loss           | 47.2        |
+-----------------------------------------
+New best mean reward!
+Epoch # 17
+Eval num_timesteps=170000, episode_reward=-0.49 +/- 2.57
+Episode length: 5.80 +/- 0.75
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 5.8         |
+|    mean_reward          | -0.485      |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 170000      |
+| train/                  |             |
+|    approx_kl            | 0.007095913 |
+|    clip_fraction        | 0.0227      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -5.8        |
+|    explained_variance   | 0.576       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 7.48        |
+|    n_updates            | 13280       |
+|    policy_gradient_loss | -0.0253     |
+|    value_loss           | 35.1        |
+-----------------------------------------
+Epoch # 18
+Eval num_timesteps=180000, episode_reward=-5.30 +/- 1.76
+Episode length: 5.60 +/- 0.49
+Success rate: 0.00%
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 5.6          |
+|    mean_reward          | -5.3         |
+|    success_rate         | 0            |
+| time/                   |              |
+|    total_timesteps      | 180000       |
+| train/                  |              |
+|    approx_kl            | 0.0092339665 |
+|    clip_fraction        | 0.032        |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -5.94        |
+|    explained_variance   | 0.429        |
+|    learning_rate        | 0.0003       |
+|    loss                 | 24           |
+|    n_updates            | 14060        |
+|    policy_gradient_loss | -0.0207      |
+|    value_loss           | 45.7         |
+------------------------------------------
+Epoch # 19
+Eval num_timesteps=190000, episode_reward=-0.67 +/- 4.36
+Episode length: 3.80 +/- 1.60
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 3.8         |
+|    mean_reward          | -0.67       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 190000      |
+| train/                  |             |
+|    approx_kl            | 0.020124773 |
+|    clip_fraction        | 0.116       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -5.85       |
+|    explained_variance   | 0.496       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 12.5        |
+|    n_updates            | 14840       |
+|    policy_gradient_loss | -0.0375     |
+|    value_loss           | 29.8        |
+-----------------------------------------
+Epoch # 20
+Eval num_timesteps=200000, episode_reward=-4.98 +/- 1.56
+Episode length: 5.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 5.4         |
+|    mean_reward          | -4.98       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 200000      |
+| train/                  |             |
+|    approx_kl            | 0.008754656 |
+|    clip_fraction        | 0.0688      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -5.77       |
+|    explained_variance   | 0.19        |
+|    learning_rate        | 0.0003      |
+|    loss                 | 37.2        |
+|    n_updates            | 15620       |
+|    policy_gradient_loss | -0.0307     |
+|    value_loss           | 110         |
+-----------------------------------------
+Epoch # 21
+Eval num_timesteps=210000, episode_reward=-0.26 +/- 1.73
+Episode length: 5.20 +/- 0.40
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 5.2        |
+|    mean_reward          | -0.255     |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 210000     |
+| train/                  |            |
+|    approx_kl            | 0.02896621 |
+|    clip_fraction        | 0.249      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -5.9       |
+|    explained_variance   | 0.355      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 20.1       |
+|    n_updates            | 16400      |
+|    policy_gradient_loss | -0.052     |
+|    value_loss           | 29.6       |
+----------------------------------------
+Epoch # 22
+Eval num_timesteps=220000, episode_reward=-0.88 +/- 0.76
+Episode length: 5.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 5.4         |
+|    mean_reward          | -0.875      |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 220000      |
+| train/                  |             |
+|    approx_kl            | 0.025669081 |
+|    clip_fraction        | 0.152       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -5.71       |
+|    explained_variance   | 0.307       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 14.3        |
+|    n_updates            | 17180       |
+|    policy_gradient_loss | -0.044      |
+|    value_loss           | 27.4        |
+-----------------------------------------
+Epoch # 23
+Eval num_timesteps=230000, episode_reward=-1.20 +/- 6.43
+Episode length: 6.20 +/- 2.32
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 6.2        |
+|    mean_reward          | -1.2       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 230000     |
+| train/                  |            |
+|    approx_kl            | 0.01591998 |
+|    clip_fraction        | 0.0945     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -5.87      |
+|    explained_variance   | 0.422      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 11.5       |
+|    n_updates            | 17960      |
+|    policy_gradient_loss | -0.0327    |
+|    value_loss           | 33.2       |
+----------------------------------------
+Epoch # 24
+Eval num_timesteps=240000, episode_reward=0.37 +/- 3.22
+Episode length: 5.00 +/- 1.26
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 5           |
+|    mean_reward          | 0.375       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 240000      |
+| train/                  |             |
+|    approx_kl            | 0.017565947 |
+|    clip_fraction        | 0.0773      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -5.88       |
+|    explained_variance   | 0.414       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 16.2        |
+|    n_updates            | 18740       |
+|    policy_gradient_loss | -0.0339     |
+|    value_loss           | 50.8        |
+-----------------------------------------
+Epoch # 25
+Eval num_timesteps=250000, episode_reward=2.80 +/- 0.00
+Episode length: 5.00 +/- 0.00
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 5           |
+|    mean_reward          | 2.8         |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 250000      |
+| train/                  |             |
+|    approx_kl            | 0.026191287 |
+|    clip_fraction        | 0.162       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -5.65       |
+|    explained_variance   | 0.276       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 23          |
+|    n_updates            | 19530       |
+|    policy_gradient_loss | -0.0622     |
+|    value_loss           | 53.8        |
+-----------------------------------------
+Epoch # 26
+Eval num_timesteps=260000, episode_reward=0.00 +/- 3.22
+Episode length: 6.40 +/- 1.74
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 6.4         |
+|    mean_reward          | 0.005       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 260000      |
+| train/                  |             |
+|    approx_kl            | 0.014972476 |
+|    clip_fraction        | 0.109       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -5.51       |
+|    explained_variance   | 0.419       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 15.8        |
+|    n_updates            | 20310       |
+|    policy_gradient_loss | -0.0387     |
+|    value_loss           | 35.1        |
+-----------------------------------------
+Epoch # 27
+Eval num_timesteps=270000, episode_reward=5.03 +/- 2.73
+Episode length: 7.00 +/- 0.00
+Success rate: 0.00%
+---------------------------------------
+| eval/                   |           |
+|    mean_ep_length       | 7         |
+|    mean_reward          | 5.03      |
+|    success_rate         | 0         |
+| time/                   |           |
+|    total_timesteps      | 270000    |
+| train/                  |           |
+|    approx_kl            | 0.0205854 |
+|    clip_fraction        | 0.13      |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -5.71     |
+|    explained_variance   | 0.236     |
+|    learning_rate        | 0.0003    |
+|    loss                 | 16.8      |
+|    n_updates            | 21090     |
+|    policy_gradient_loss | -0.0476   |
+|    value_loss           | 67.6      |
+---------------------------------------
+New best mean reward!
+Epoch # 28
+Eval num_timesteps=280000, episode_reward=3.60 +/- 1.41
+Episode length: 7.20 +/- 1.47
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 7.2         |
+|    mean_reward          | 3.6         |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 280000      |
+| train/                  |             |
+|    approx_kl            | 0.031263396 |
+|    clip_fraction        | 0.212       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -5.13       |
+|    explained_variance   | 0.561       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 5.86        |
+|    n_updates            | 21870       |
+|    policy_gradient_loss | -0.0515     |
+|    value_loss           | 22.1        |
+-----------------------------------------
+Epoch # 29
+Eval num_timesteps=290000, episode_reward=0.89 +/- 2.73
+Episode length: 7.20 +/- 1.17
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 7.2         |
+|    mean_reward          | 0.885       |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 290000      |
+| train/                  |             |
+|    approx_kl            | 0.037130736 |
+|    clip_fraction        | 0.182       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -5.12       |
+|    explained_variance   | 0.331       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 18          |
+|    n_updates            | 22650       |
+|    policy_gradient_loss | -0.0567     |
+|    value_loss           | 37.4        |
+-----------------------------------------
+Epoch # 30
+Eval num_timesteps=300000, episode_reward=1.18 +/- 5.65
+Episode length: 6.40 +/- 2.80
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 6.4        |
+|    mean_reward          | 1.18       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 300000     |
+| train/                  |            |
+|    approx_kl            | 0.04405781 |
+|    clip_fraction        | 0.197      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -4.93      |
+|    explained_variance   | 0.364      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 31.6       |
+|    n_updates            | 23430      |
+|    policy_gradient_loss | -0.0573    |
+|    value_loss           | 67.9       |
+----------------------------------------
+Epoch # 31
+Eval num_timesteps=310000, episode_reward=6.51 +/- 5.39
+Episode length: 9.00 +/- 1.26
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 9           |
+|    mean_reward          | 6.51        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 310000      |
+| train/                  |             |
+|    approx_kl            | 0.052862257 |
+|    clip_fraction        | 0.309       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -4.9        |
+|    explained_variance   | 0.529       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 13.3        |
+|    n_updates            | 24210       |
+|    policy_gradient_loss | -0.0625     |
+|    value_loss           | 27.1        |
+-----------------------------------------
+New best mean reward!
+Epoch # 32
+Eval num_timesteps=320000, episode_reward=1.16 +/- 2.45
+Episode length: 12.40 +/- 1.02
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 12.4        |
+|    mean_reward          | 1.16        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 320000      |
+| train/                  |             |
+|    approx_kl            | 0.035735887 |
+|    clip_fraction        | 0.177       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -4.44       |
+|    explained_variance   | 0.591       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 13.9        |
+|    n_updates            | 24990       |
+|    policy_gradient_loss | -0.0466     |
+|    value_loss           | 23.5        |
+-----------------------------------------
+Epoch # 33
+Eval num_timesteps=330000, episode_reward=3.85 +/- 3.20
+Episode length: 8.80 +/- 0.98
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 8.8        |
+|    mean_reward          | 3.85       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 330000     |
+| train/                  |            |
+|    approx_kl            | 0.06914272 |
+|    clip_fraction        | 0.145      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -4.73      |
+|    explained_variance   | 0.531      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 16.6       |
+|    n_updates            | 25780      |
+|    policy_gradient_loss | -0.0314    |
+|    value_loss           | 35.1       |
+----------------------------------------
+Epoch # 34
+Eval num_timesteps=340000, episode_reward=5.72 +/- 2.02
+Episode length: 9.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 9.4         |
+|    mean_reward          | 5.72        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 340000      |
+| train/                  |             |
+|    approx_kl            | 0.011796883 |
+|    clip_fraction        | 0.0563      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -4.32       |
+|    explained_variance   | 0.241       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 11.8        |
+|    n_updates            | 26560       |
+|    policy_gradient_loss | -0.0337     |
+|    value_loss           | 53.7        |
+-----------------------------------------
+Epoch # 35
+Eval num_timesteps=350000, episode_reward=4.95 +/- 2.21
+Episode length: 9.60 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 9.6         |
+|    mean_reward          | 4.95        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 350000      |
+| train/                  |             |
+|    approx_kl            | 0.024993889 |
+|    clip_fraction        | 0.18        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -4.44       |
+|    explained_variance   | 0.415       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 6.15        |
+|    n_updates            | 27340       |
+|    policy_gradient_loss | -0.0436     |
+|    value_loss           | 36.8        |
+-----------------------------------------
+Epoch # 36
+Eval num_timesteps=360000, episode_reward=6.38 +/- 2.47
+Episode length: 10.60 +/- 0.49
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 10.6       |
+|    mean_reward          | 6.38       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 360000     |
+| train/                  |            |
+|    approx_kl            | 0.01809399 |
+|    clip_fraction        | 0.0891     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -4.56      |
+|    explained_variance   | 0.47       |
+|    learning_rate        | 0.0003     |
+|    loss                 | 23.2       |
+|    n_updates            | 28120      |
+|    policy_gradient_loss | -0.0238    |
+|    value_loss           | 46.4       |
+----------------------------------------
+Epoch # 37
+Eval num_timesteps=370000, episode_reward=6.11 +/- 3.36
+Episode length: 10.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 10.4        |
+|    mean_reward          | 6.11        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 370000      |
+| train/                  |             |
+|    approx_kl            | 0.008335926 |
+|    clip_fraction        | 0.0641      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -4.21       |
+|    explained_variance   | 0.333       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 15.1        |
+|    n_updates            | 28900       |
+|    policy_gradient_loss | -0.0177     |
+|    value_loss           | 57.9        |
+-----------------------------------------
+Epoch # 38
+Eval num_timesteps=380000, episode_reward=13.45 +/- 2.27
+Episode length: 10.60 +/- 1.62
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 10.6        |
+|    mean_reward          | 13.4        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 380000      |
+| train/                  |             |
+|    approx_kl            | 0.015370887 |
+|    clip_fraction        | 0.0383      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -4.27       |
+|    explained_variance   | 0.692       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 7.73        |
+|    n_updates            | 29680       |
+|    policy_gradient_loss | -0.0208     |
+|    value_loss           | 38.5        |
+-----------------------------------------
+New best mean reward!
+Epoch # 39
+Eval num_timesteps=390000, episode_reward=10.12 +/- 2.50
+Episode length: 9.40 +/- 1.74
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 9.4         |
+|    mean_reward          | 10.1        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 390000      |
+| train/                  |             |
+|    approx_kl            | 0.020495338 |
+|    clip_fraction        | 0.106       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -4.14       |
+|    explained_variance   | 0.654       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 23.4        |
+|    n_updates            | 30460       |
+|    policy_gradient_loss | -0.0365     |
+|    value_loss           | 47.1        |
+-----------------------------------------
+Epoch # 40
+Eval num_timesteps=400000, episode_reward=15.20 +/- 1.54
+Episode length: 10.20 +/- 0.40
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 10.2        |
+|    mean_reward          | 15.2        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 400000      |
+| train/                  |             |
+|    approx_kl            | 0.018821742 |
+|    clip_fraction        | 0.106       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -4.3        |
+|    explained_variance   | 0.581       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 25.7        |
+|    n_updates            | 31240       |
+|    policy_gradient_loss | -0.0332     |
+|    value_loss           | 46.8        |
+-----------------------------------------
+New best mean reward!
+Epoch # 41
+Eval num_timesteps=410000, episode_reward=9.79 +/- 2.14
+Episode length: 9.00 +/- 1.26
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 9           |
+|    mean_reward          | 9.79        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 410000      |
+| train/                  |             |
+|    approx_kl            | 0.014083715 |
+|    clip_fraction        | 0.0898      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -3.56       |
+|    explained_variance   | 0.534       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 3.94        |
+|    n_updates            | 32030       |
+|    policy_gradient_loss | -0.0299     |
+|    value_loss           | 30.5        |
+-----------------------------------------
+Epoch # 42
+Eval num_timesteps=420000, episode_reward=14.77 +/- 2.35
+Episode length: 10.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 10.4        |
+|    mean_reward          | 14.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 420000      |
+| train/                  |             |
+|    approx_kl            | 0.012378942 |
+|    clip_fraction        | 0.0828      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -3.99       |
+|    explained_variance   | 0.382       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 21.8        |
+|    n_updates            | 32810       |
+|    policy_gradient_loss | -0.0189     |
+|    value_loss           | 66.5        |
+-----------------------------------------
+Epoch # 43
+Eval num_timesteps=430000, episode_reward=11.02 +/- 2.53
+Episode length: 11.40 +/- 0.80
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 11.4        |
+|    mean_reward          | 11          |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 430000      |
+| train/                  |             |
+|    approx_kl            | 0.020653952 |
+|    clip_fraction        | 0.13        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -4.7        |
+|    explained_variance   | 0.674       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 11.9        |
+|    n_updates            | 33590       |
+|    policy_gradient_loss | -0.034      |
+|    value_loss           | 47.7        |
+-----------------------------------------
+Epoch # 44
+Eval num_timesteps=440000, episode_reward=8.55 +/- 3.78
+Episode length: 10.80 +/- 2.32
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 10.8       |
+|    mean_reward          | 8.55       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 440000     |
+| train/                  |            |
+|    approx_kl            | 0.02772376 |
+|    clip_fraction        | 0.145      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -3.33      |
+|    explained_variance   | 0.763      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 7.46       |
+|    n_updates            | 34370      |
+|    policy_gradient_loss | -0.0435    |
+|    value_loss           | 21         |
+----------------------------------------
+Epoch # 45
+Eval num_timesteps=450000, episode_reward=22.96 +/- 3.68
+Episode length: 14.00 +/- 0.63
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 14          |
+|    mean_reward          | 23          |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 450000      |
+| train/                  |             |
+|    approx_kl            | 0.036444053 |
+|    clip_fraction        | 0.165       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -2.98       |
+|    explained_variance   | 0.586       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 15.3        |
+|    n_updates            | 35150       |
+|    policy_gradient_loss | -0.0383     |
+|    value_loss           | 32.3        |
+-----------------------------------------
+New best mean reward!
+Epoch # 46
+Eval num_timesteps=460000, episode_reward=15.05 +/- 1.92
+Episode length: 9.60 +/- 0.80
+Success rate: 0.00%
+---------------------------------------
+| eval/                   |           |
+|    mean_ep_length       | 9.6       |
+|    mean_reward          | 15.1      |
+|    success_rate         | 0         |
+| time/                   |           |
+|    total_timesteps      | 460000    |
+| train/                  |           |
+|    approx_kl            | 0.0257292 |
+|    clip_fraction        | 0.15      |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -3.17     |
+|    explained_variance   | 0.583     |
+|    learning_rate        | 0.0003    |
+|    loss                 | 18.5      |
+|    n_updates            | 35930     |
+|    policy_gradient_loss | -0.0347   |
+|    value_loss           | 33.8      |
+---------------------------------------
+Epoch # 47
+Eval num_timesteps=470000, episode_reward=12.78 +/- 4.92
+Episode length: 12.20 +/- 2.93
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 12.2        |
+|    mean_reward          | 12.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 470000      |
+| train/                  |             |
+|    approx_kl            | 0.017563902 |
+|    clip_fraction        | 0.113       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -3.7        |
+|    explained_variance   | 0.322       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 27.2        |
+|    n_updates            | 36710       |
+|    policy_gradient_loss | -0.0381     |
+|    value_loss           | 66.7        |
+-----------------------------------------
+Epoch # 48
+Eval num_timesteps=480000, episode_reward=16.24 +/- 5.46
+Episode length: 11.60 +/- 3.01
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 11.6        |
+|    mean_reward          | 16.2        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 480000      |
+| train/                  |             |
+|    approx_kl            | 0.018242642 |
+|    clip_fraction        | 0.0906      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -3.57       |
+|    explained_variance   | 0.448       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 24          |
+|    n_updates            | 37490       |
+|    policy_gradient_loss | -0.034      |
+|    value_loss           | 79.9        |
+-----------------------------------------
+Epoch # 49
+Eval num_timesteps=490000, episode_reward=16.80 +/- 4.91
+Episode length: 16.00 +/- 2.97
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 16          |
+|    mean_reward          | 16.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 490000      |
+| train/                  |             |
+|    approx_kl            | 0.040293515 |
+|    clip_fraction        | 0.172       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -3.92       |
+|    explained_variance   | 0.447       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 31          |
+|    n_updates            | 38280       |
+|    policy_gradient_loss | -0.0515     |
+|    value_loss           | 79.6        |
+-----------------------------------------
+Epoch # 50
+Eval num_timesteps=500000, episode_reward=8.74 +/- 2.22
+Episode length: 8.60 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 8.6         |
+|    mean_reward          | 8.74        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 500000      |
+| train/                  |             |
+|    approx_kl            | 0.034063756 |
+|    clip_fraction        | 0.188       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -3.88       |
+|    explained_variance   | 0.642       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 18.2        |
+|    n_updates            | 39060       |
+|    policy_gradient_loss | -0.0351     |
+|    value_loss           | 35.9        |
+-----------------------------------------
+Epoch # 51
+Eval num_timesteps=510000, episode_reward=35.35 +/- 7.87
+Episode length: 15.60 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 15.6        |
+|    mean_reward          | 35.4        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 510000      |
+| train/                  |             |
+|    approx_kl            | 0.017116388 |
+|    clip_fraction        | 0.102       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -3.48       |
+|    explained_variance   | 0.649       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 5.02        |
+|    n_updates            | 39840       |
+|    policy_gradient_loss | -0.0405     |
+|    value_loss           | 28.8        |
+-----------------------------------------
+New best mean reward!
+Epoch # 52
+Eval num_timesteps=520000, episode_reward=13.80 +/- 1.69
+Episode length: 9.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 9.4         |
+|    mean_reward          | 13.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 520000      |
+| train/                  |             |
+|    approx_kl            | 0.015231773 |
+|    clip_fraction        | 0.0875      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -3.49       |
+|    explained_variance   | 0.218       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 14.1        |
+|    n_updates            | 40620       |
+|    policy_gradient_loss | -0.0344     |
+|    value_loss           | 85.4        |
+-----------------------------------------
+Epoch # 53
+Eval num_timesteps=530000, episode_reward=18.34 +/- 4.08
+Episode length: 13.60 +/- 0.80
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 13.6       |
+|    mean_reward          | 18.3       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 530000     |
+| train/                  |            |
+|    approx_kl            | 0.02299271 |
+|    clip_fraction        | 0.115      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -2.93      |
+|    explained_variance   | 0.461      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 25.4       |
+|    n_updates            | 41400      |
+|    policy_gradient_loss | -0.0396    |
+|    value_loss           | 61.1       |
+----------------------------------------
+Epoch # 54
+Eval num_timesteps=540000, episode_reward=10.35 +/- 0.49
+Episode length: 8.00 +/- 0.00
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 8           |
+|    mean_reward          | 10.3        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 540000      |
+| train/                  |             |
+|    approx_kl            | 0.022726163 |
+|    clip_fraction        | 0.105       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -3.07       |
+|    explained_variance   | 0.596       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 4.24        |
+|    n_updates            | 42180       |
+|    policy_gradient_loss | -0.037      |
+|    value_loss           | 47          |
+-----------------------------------------
+Epoch # 55
+Eval num_timesteps=550000, episode_reward=32.37 +/- 4.59
+Episode length: 16.40 +/- 1.20
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 16.4        |
+|    mean_reward          | 32.4        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 550000      |
+| train/                  |             |
+|    approx_kl            | 0.036814492 |
+|    clip_fraction        | 0.172       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -3.55       |
+|    explained_variance   | 0.539       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 13          |
+|    n_updates            | 42960       |
+|    policy_gradient_loss | -0.0456     |
+|    value_loss           | 65.3        |
+-----------------------------------------
+Epoch # 56
+Eval num_timesteps=560000, episode_reward=28.83 +/- 3.44
+Episode length: 14.00 +/- 1.26
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 14          |
+|    mean_reward          | 28.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 560000      |
+| train/                  |             |
+|    approx_kl            | 0.114303015 |
+|    clip_fraction        | 0.239       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -3.03       |
+|    explained_variance   | 0.812       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 4.89        |
+|    n_updates            | 43740       |
+|    policy_gradient_loss | -0.0358     |
+|    value_loss           | 30.7        |
+-----------------------------------------
+Epoch # 57
+Eval num_timesteps=570000, episode_reward=25.53 +/- 2.32
+Episode length: 13.00 +/- 0.63
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 13         |
+|    mean_reward          | 25.5       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 570000     |
+| train/                  |            |
+|    approx_kl            | 0.03245839 |
+|    clip_fraction        | 0.151      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -3.29      |
+|    explained_variance   | 0.779      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 14.1       |
+|    n_updates            | 44530      |
+|    policy_gradient_loss | -0.0469    |
+|    value_loss           | 31.5       |
+----------------------------------------
+Epoch # 58
+Eval num_timesteps=580000, episode_reward=33.89 +/- 9.12
+Episode length: 15.00 +/- 2.45
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 15          |
+|    mean_reward          | 33.9        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 580000      |
+| train/                  |             |
+|    approx_kl            | 0.017941948 |
+|    clip_fraction        | 0.093       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -2.4        |
+|    explained_variance   | 0.704       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 12.3        |
+|    n_updates            | 45310       |
+|    policy_gradient_loss | -0.0389     |
+|    value_loss           | 40.4        |
+-----------------------------------------
+Epoch # 59
+Eval num_timesteps=590000, episode_reward=39.50 +/- 2.39
+Episode length: 16.40 +/- 0.80
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 16.4        |
+|    mean_reward          | 39.5        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 590000      |
+| train/                  |             |
+|    approx_kl            | 0.017729312 |
+|    clip_fraction        | 0.0844      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -2.22       |
+|    explained_variance   | 0.365       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 28.6        |
+|    n_updates            | 46090       |
+|    policy_gradient_loss | -0.0344     |
+|    value_loss           | 85.5        |
+-----------------------------------------
+New best mean reward!
+Epoch # 60
+Eval num_timesteps=600000, episode_reward=38.12 +/- 7.08
+Episode length: 16.60 +/- 2.58
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 16.6        |
+|    mean_reward          | 38.1        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 600000      |
+| train/                  |             |
+|    approx_kl            | 0.010356454 |
+|    clip_fraction        | 0.0672      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -2.12       |
+|    explained_variance   | 0.642       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 19.4        |
+|    n_updates            | 46870       |
+|    policy_gradient_loss | -0.0245     |
+|    value_loss           | 63.6        |
+-----------------------------------------
+Epoch # 61
+Eval num_timesteps=610000, episode_reward=34.80 +/- 4.02
+Episode length: 17.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 17.4        |
+|    mean_reward          | 34.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 610000      |
+| train/                  |             |
+|    approx_kl            | 0.015423215 |
+|    clip_fraction        | 0.0828      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -2.21       |
+|    explained_variance   | 0.823       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 10.4        |
+|    n_updates            | 47650       |
+|    policy_gradient_loss | -0.0334     |
+|    value_loss           | 41.8        |
+-----------------------------------------
+Epoch # 62
+Eval num_timesteps=620000, episode_reward=39.89 +/- 4.50
+Episode length: 17.00 +/- 0.63
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 17          |
+|    mean_reward          | 39.9        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 620000      |
+| train/                  |             |
+|    approx_kl            | 0.033540953 |
+|    clip_fraction        | 0.192       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -2.54       |
+|    explained_variance   | 0.825       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 11.1        |
+|    n_updates            | 48430       |
+|    policy_gradient_loss | -0.0513     |
+|    value_loss           | 27.6        |
+-----------------------------------------
+New best mean reward!
+Epoch # 63
+Eval num_timesteps=630000, episode_reward=45.80 +/- 3.95
+Episode length: 18.40 +/- 1.02
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 18.4        |
+|    mean_reward          | 45.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 630000      |
+| train/                  |             |
+|    approx_kl            | 0.009813316 |
+|    clip_fraction        | 0.05        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.69       |
+|    explained_variance   | 0.503       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 37.2        |
+|    n_updates            | 49210       |
+|    policy_gradient_loss | -0.0166     |
+|    value_loss           | 105         |
+-----------------------------------------
+New best mean reward!
+Epoch # 64
+Eval num_timesteps=640000, episode_reward=45.79 +/- 5.15
+Episode length: 18.00 +/- 1.10
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 18         |
+|    mean_reward          | 45.8       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 640000     |
+| train/                  |            |
+|    approx_kl            | 0.05915099 |
+|    clip_fraction        | 0.0891     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -1.96      |
+|    explained_variance   | 0.659      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 35.2       |
+|    n_updates            | 49990      |
+|    policy_gradient_loss | -0.0296    |
+|    value_loss           | 91.9       |
+----------------------------------------
+Epoch # 65
+Eval num_timesteps=650000, episode_reward=41.47 +/- 5.28
+Episode length: 21.40 +/- 1.36
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21.4        |
+|    mean_reward          | 41.5        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 650000      |
+| train/                  |             |
+|    approx_kl            | 0.016533876 |
+|    clip_fraction        | 0.0531      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -2.2        |
+|    explained_variance   | 0.712       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 13.6        |
+|    n_updates            | 50780       |
+|    policy_gradient_loss | -0.0218     |
+|    value_loss           | 98.5        |
+-----------------------------------------
+Epoch # 66
+Eval num_timesteps=660000, episode_reward=57.20 +/- 6.07
+Episode length: 19.80 +/- 0.75
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 19.8       |
+|    mean_reward          | 57.2       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 660000     |
+| train/                  |            |
+|    approx_kl            | 0.02162411 |
+|    clip_fraction        | 0.0906     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -1.76      |
+|    explained_variance   | 0.813      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 7.04       |
+|    n_updates            | 51560      |
+|    policy_gradient_loss | -0.0289    |
+|    value_loss           | 37.3       |
+----------------------------------------
+New best mean reward!
+Epoch # 67
+Eval num_timesteps=670000, episode_reward=47.50 +/- 7.88
+Episode length: 18.60 +/- 1.36
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 18.6        |
+|    mean_reward          | 47.5        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 670000      |
+| train/                  |             |
+|    approx_kl            | 0.051391236 |
+|    clip_fraction        | 0.209       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -2.01       |
+|    explained_variance   | 0.837       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 18          |
+|    n_updates            | 52340       |
+|    policy_gradient_loss | -0.0284     |
+|    value_loss           | 43.8        |
+-----------------------------------------
+Epoch # 68
+Eval num_timesteps=680000, episode_reward=49.39 +/- 5.17
+Episode length: 21.20 +/- 1.47
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 21.2       |
+|    mean_reward          | 49.4       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 680000     |
+| train/                  |            |
+|    approx_kl            | 0.04833515 |
+|    clip_fraction        | 0.0992     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -1.68      |
+|    explained_variance   | 0.954      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 6.59       |
+|    n_updates            | 53120      |
+|    policy_gradient_loss | -0.029     |
+|    value_loss           | 20.9       |
+----------------------------------------
+Epoch # 69
+Eval num_timesteps=690000, episode_reward=53.17 +/- 4.29
+Episode length: 20.20 +/- 1.17
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.2        |
+|    mean_reward          | 53.2        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 690000      |
+| train/                  |             |
+|    approx_kl            | 0.008100311 |
+|    clip_fraction        | 0.0609      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.87       |
+|    explained_variance   | 0.84        |
+|    learning_rate        | 0.0003      |
+|    loss                 | 30.4        |
+|    n_updates            | 53900       |
+|    policy_gradient_loss | -0.0177     |
+|    value_loss           | 65.6        |
+-----------------------------------------
+Epoch # 70
+Eval num_timesteps=700000, episode_reward=52.74 +/- 4.97
+Episode length: 22.00 +/- 1.10
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 22          |
+|    mean_reward          | 52.7        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 700000      |
+| train/                  |             |
+|    approx_kl            | 0.032856796 |
+|    clip_fraction        | 0.138       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.53       |
+|    explained_variance   | 0.904       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 11          |
+|    n_updates            | 54680       |
+|    policy_gradient_loss | -0.0369     |
+|    value_loss           | 24.1        |
+-----------------------------------------
+Epoch # 71
+Eval num_timesteps=710000, episode_reward=37.60 +/- 8.27
+Episode length: 16.00 +/- 2.00
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 16          |
+|    mean_reward          | 37.6        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 710000      |
+| train/                  |             |
+|    approx_kl            | 0.020272098 |
+|    clip_fraction        | 0.093       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.49       |
+|    explained_variance   | 0.695       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 28.5        |
+|    n_updates            | 55460       |
+|    policy_gradient_loss | -0.0325     |
+|    value_loss           | 60.8        |
+-----------------------------------------
+Epoch # 72
+Eval num_timesteps=720000, episode_reward=56.33 +/- 9.33
+Episode length: 20.40 +/- 1.85
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.4        |
+|    mean_reward          | 56.3        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 720000      |
+| train/                  |             |
+|    approx_kl            | 0.039822355 |
+|    clip_fraction        | 0.188       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.51       |
+|    explained_variance   | 0.864       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 6.56        |
+|    n_updates            | 56240       |
+|    policy_gradient_loss | -0.0437     |
+|    value_loss           | 32          |
+-----------------------------------------
+Epoch # 73
+Eval num_timesteps=730000, episode_reward=48.14 +/- 5.98
+Episode length: 20.00 +/- 0.89
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20          |
+|    mean_reward          | 48.1        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 730000      |
+| train/                  |             |
+|    approx_kl            | 0.019229166 |
+|    clip_fraction        | 0.0633      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.56       |
+|    explained_variance   | 0.795       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 6.93        |
+|    n_updates            | 57030       |
+|    policy_gradient_loss | -0.0167     |
+|    value_loss           | 44.7        |
+-----------------------------------------
+Epoch # 74
+Eval num_timesteps=740000, episode_reward=54.82 +/- 4.25
+Episode length: 19.00 +/- 0.00
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 19          |
+|    mean_reward          | 54.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 740000      |
+| train/                  |             |
+|    approx_kl            | 0.015674027 |
+|    clip_fraction        | 0.1         |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.39       |
+|    explained_variance   | 0.865       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 10.1        |
+|    n_updates            | 57810       |
+|    policy_gradient_loss | -0.0308     |
+|    value_loss           | 33.2        |
+-----------------------------------------
+Epoch # 75
+Eval num_timesteps=750000, episode_reward=56.70 +/- 4.19
+Episode length: 20.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.4        |
+|    mean_reward          | 56.7        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 750000      |
+| train/                  |             |
+|    approx_kl            | 0.038695227 |
+|    clip_fraction        | 0.162       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.19       |
+|    explained_variance   | 0.911       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 9.57        |
+|    n_updates            | 58590       |
+|    policy_gradient_loss | -0.0285     |
+|    value_loss           | 27.7        |
+-----------------------------------------
+Epoch # 76
+Eval num_timesteps=760000, episode_reward=55.51 +/- 6.61
+Episode length: 21.00 +/- 2.10
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 21         |
+|    mean_reward          | 55.5       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 760000     |
+| train/                  |            |
+|    approx_kl            | 0.01903835 |
+|    clip_fraction        | 0.0852     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -1.01      |
+|    explained_variance   | 0.949      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 4.77       |
+|    n_updates            | 59370      |
+|    policy_gradient_loss | -0.0281    |
+|    value_loss           | 21.8       |
+----------------------------------------
+Epoch # 77
+Eval num_timesteps=770000, episode_reward=61.35 +/- 8.33
+Episode length: 20.60 +/- 1.50
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.6        |
+|    mean_reward          | 61.3        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 770000      |
+| train/                  |             |
+|    approx_kl            | 0.034493253 |
+|    clip_fraction        | 0.0953      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.15       |
+|    explained_variance   | 0.711       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 29.2        |
+|    n_updates            | 60150       |
+|    policy_gradient_loss | -0.0284     |
+|    value_loss           | 75.8        |
+-----------------------------------------
+New best mean reward!
+Epoch # 78
+Eval num_timesteps=780000, episode_reward=60.80 +/- 6.84
+Episode length: 21.20 +/- 2.40
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21.2        |
+|    mean_reward          | 60.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 780000      |
+| train/                  |             |
+|    approx_kl            | 0.010071099 |
+|    clip_fraction        | 0.0453      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.718      |
+|    explained_variance   | 0.92        |
+|    learning_rate        | 0.0003      |
+|    loss                 | 6.24        |
+|    n_updates            | 60930       |
+|    policy_gradient_loss | -0.0116     |
+|    value_loss           | 23.5        |
+-----------------------------------------
+Epoch # 79
+Eval num_timesteps=790000, episode_reward=59.63 +/- 4.06
+Episode length: 20.80 +/- 0.75
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 20.8       |
+|    mean_reward          | 59.6       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 790000     |
+| train/                  |            |
+|    approx_kl            | 0.07131531 |
+|    clip_fraction        | 0.159      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.747     |
+|    explained_variance   | 0.912      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 4.27       |
+|    n_updates            | 61710      |
+|    policy_gradient_loss | -0.0333    |
+|    value_loss           | 22.8       |
+----------------------------------------
+Epoch # 80
+Eval num_timesteps=800000, episode_reward=62.72 +/- 3.43
+Episode length: 20.60 +/- 1.20
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.6        |
+|    mean_reward          | 62.7        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 800000      |
+| train/                  |             |
+|    approx_kl            | 0.055735096 |
+|    clip_fraction        | 0.082       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.575      |
+|    explained_variance   | 0.966       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 2.36        |
+|    n_updates            | 62490       |
+|    policy_gradient_loss | -0.0227     |
+|    value_loss           | 9.79        |
+-----------------------------------------
+New best mean reward!
+Epoch # 81
+Eval num_timesteps=810000, episode_reward=63.99 +/- 2.46
+Episode length: 20.40 +/- 0.80
+Success rate: 0.00%
+---------------------------------------
+| eval/                   |           |
+|    mean_ep_length       | 20.4      |
+|    mean_reward          | 64        |
+|    success_rate         | 0         |
+| time/                   |           |
+|    total_timesteps      | 810000    |
+| train/                  |           |
+|    approx_kl            | 0.1158943 |
+|    clip_fraction        | 0.0867    |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.668    |
+|    explained_variance   | 0.888     |
+|    learning_rate        | 0.0003    |
+|    loss                 | 4.44      |
+|    n_updates            | 63280     |
+|    policy_gradient_loss | -0.02     |
+|    value_loss           | 29.4      |
+---------------------------------------
+New best mean reward!
+Epoch # 82
+Eval num_timesteps=820000, episode_reward=53.59 +/- 2.95
+Episode length: 19.00 +/- 0.00
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 19          |
+|    mean_reward          | 53.6        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 820000      |
+| train/                  |             |
+|    approx_kl            | 0.018221308 |
+|    clip_fraction        | 0.0805      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.791      |
+|    explained_variance   | 0.839       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 27.9        |
+|    n_updates            | 64060       |
+|    policy_gradient_loss | -0.0202     |
+|    value_loss           | 53.3        |
+-----------------------------------------
+Epoch # 83
+Eval num_timesteps=830000, episode_reward=53.13 +/- 7.21
+Episode length: 20.80 +/- 0.98
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.8        |
+|    mean_reward          | 53.1        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 830000      |
+| train/                  |             |
+|    approx_kl            | 0.028402328 |
+|    clip_fraction        | 0.0492      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.893      |
+|    explained_variance   | 0.857       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 21.9        |
+|    n_updates            | 64840       |
+|    policy_gradient_loss | -0.0193     |
+|    value_loss           | 87.1        |
+-----------------------------------------
+Epoch # 84
+Eval num_timesteps=840000, episode_reward=60.18 +/- 5.23
+Episode length: 20.80 +/- 0.98
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 20.8       |
+|    mean_reward          | 60.2       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 840000     |
+| train/                  |            |
+|    approx_kl            | 0.01806196 |
+|    clip_fraction        | 0.0711     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -1.03      |
+|    explained_variance   | 0.6        |
+|    learning_rate        | 0.0003     |
+|    loss                 | 27.3       |
+|    n_updates            | 65620      |
+|    policy_gradient_loss | -0.0242    |
+|    value_loss           | 120        |
+----------------------------------------
+Epoch # 85
+Eval num_timesteps=850000, episode_reward=68.44 +/- 10.70
+Episode length: 21.60 +/- 1.62
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21.6        |
+|    mean_reward          | 68.4        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 850000      |
+| train/                  |             |
+|    approx_kl            | 0.051433645 |
+|    clip_fraction        | 0.0945      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.892      |
+|    explained_variance   | 0.93        |
+|    learning_rate        | 0.0003      |
+|    loss                 | 5.74        |
+|    n_updates            | 66400       |
+|    policy_gradient_loss | -0.0284     |
+|    value_loss           | 26.3        |
+-----------------------------------------
+New best mean reward!
+Epoch # 86
+Eval num_timesteps=860000, episode_reward=57.93 +/- 6.84
+Episode length: 21.60 +/- 0.80
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21.6        |
+|    mean_reward          | 57.9        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 860000      |
+| train/                  |             |
+|    approx_kl            | 0.043947224 |
+|    clip_fraction        | 0.145       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.12       |
+|    explained_variance   | 0.786       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 32.3        |
+|    n_updates            | 67180       |
+|    policy_gradient_loss | -0.0161     |
+|    value_loss           | 77.5        |
+-----------------------------------------
+Epoch # 87
+Eval num_timesteps=870000, episode_reward=66.77 +/- 11.18
+Episode length: 22.80 +/- 2.93
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 22.8       |
+|    mean_reward          | 66.8       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 870000     |
+| train/                  |            |
+|    approx_kl            | 0.03533035 |
+|    clip_fraction        | 0.075      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.813     |
+|    explained_variance   | 0.917      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 7.19       |
+|    n_updates            | 67960      |
+|    policy_gradient_loss | -0.0257    |
+|    value_loss           | 25.2       |
+----------------------------------------
+Epoch # 88
+Eval num_timesteps=880000, episode_reward=72.46 +/- 3.88
+Episode length: 23.00 +/- 0.63
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 23          |
+|    mean_reward          | 72.5        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 880000      |
+| train/                  |             |
+|    approx_kl            | 0.021489162 |
+|    clip_fraction        | 0.0578      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.748      |
+|    explained_variance   | 0.581       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 90.6        |
+|    n_updates            | 68740       |
+|    policy_gradient_loss | -0.0186     |
+|    value_loss           | 186         |
+-----------------------------------------
+New best mean reward!
+Epoch # 89
+Eval num_timesteps=890000, episode_reward=75.94 +/- 1.95
+Episode length: 22.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 22.4        |
+|    mean_reward          | 75.9        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 890000      |
+| train/                  |             |
+|    approx_kl            | 0.013486494 |
+|    clip_fraction        | 0.068       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.594      |
+|    explained_variance   | 0.955       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 2.45        |
+|    n_updates            | 69530       |
+|    policy_gradient_loss | -0.0252     |
+|    value_loss           | 17.8        |
+-----------------------------------------
+New best mean reward!
+Epoch # 90
+Eval num_timesteps=900000, episode_reward=78.82 +/- 4.76
+Episode length: 24.00 +/- 0.89
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 24          |
+|    mean_reward          | 78.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 900000      |
+| train/                  |             |
+|    approx_kl            | 0.005239991 |
+|    clip_fraction        | 0.0273      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.381      |
+|    explained_variance   | 0.928       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 10          |
+|    n_updates            | 70310       |
+|    policy_gradient_loss | -0.011      |
+|    value_loss           | 26.2        |
+-----------------------------------------
+New best mean reward!
+Eval num_timesteps=910000, episode_reward=89.55 +/- 10.79
+Episode length: 25.20 +/- 0.40
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 25.2       |
+|    mean_reward          | 89.5       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 910000     |
+| train/                  |            |
+|    approx_kl            | 0.04419218 |
+|    clip_fraction        | 0.12       |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.805     |
+|    explained_variance   | 0.916      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 7.65       |
+|    n_updates            | 71090      |
+|    policy_gradient_loss | -0.0314    |
+|    value_loss           | 40         |
+----------------------------------------
+New best mean reward!
+Epoch # 91
+Eval num_timesteps=920000, episode_reward=66.78 +/- 4.79
+Episode length: 21.80 +/- 0.75
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21.8        |
+|    mean_reward          | 66.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 920000      |
+| train/                  |             |
+|    approx_kl            | 0.067423485 |
+|    clip_fraction        | 0.131       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.661      |
+|    explained_variance   | 0.888       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 14.8        |
+|    n_updates            | 71870       |
+|    policy_gradient_loss | -0.032      |
+|    value_loss           | 45.4        |
+-----------------------------------------
+Epoch # 92
+Eval num_timesteps=930000, episode_reward=80.27 +/- 6.92
+Episode length: 23.80 +/- 0.75
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 23.8        |
+|    mean_reward          | 80.3        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 930000      |
+| train/                  |             |
+|    approx_kl            | 0.017202377 |
+|    clip_fraction        | 0.0914      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.968      |
+|    explained_variance   | 0.957       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 6.1         |
+|    n_updates            | 72650       |
+|    policy_gradient_loss | -0.0248     |
+|    value_loss           | 23.1        |
+-----------------------------------------
+Epoch # 93
+Eval num_timesteps=940000, episode_reward=84.59 +/- 6.30
+Episode length: 24.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 24.4        |
+|    mean_reward          | 84.6        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 940000      |
+| train/                  |             |
+|    approx_kl            | 0.012439687 |
+|    clip_fraction        | 0.0875      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.3        |
+|    explained_variance   | 0.928       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 13.3        |
+|    n_updates            | 73430       |
+|    policy_gradient_loss | -0.0343     |
+|    value_loss           | 38.6        |
+-----------------------------------------
+Epoch # 94
+Eval num_timesteps=950000, episode_reward=81.30 +/- 5.89
+Episode length: 23.80 +/- 1.17
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 23.8        |
+|    mean_reward          | 81.3        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 950000      |
+| train/                  |             |
+|    approx_kl            | 0.045395438 |
+|    clip_fraction        | 0.0938      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.504      |
+|    explained_variance   | 0.985       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.879       |
+|    n_updates            | 74210       |
+|    policy_gradient_loss | -0.0267     |
+|    value_loss           | 4.93        |
+-----------------------------------------
+Epoch # 95
+Eval num_timesteps=960000, episode_reward=75.59 +/- 6.83
+Episode length: 22.80 +/- 0.75
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 22.8        |
+|    mean_reward          | 75.6        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 960000      |
+| train/                  |             |
+|    approx_kl            | 0.013278406 |
+|    clip_fraction        | 0.0742      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.02       |
+|    explained_variance   | 0.952       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 5.74        |
+|    n_updates            | 74990       |
+|    policy_gradient_loss | -0.0272     |
+|    value_loss           | 24.9        |
+-----------------------------------------
+Epoch # 96
+Eval num_timesteps=970000, episode_reward=67.67 +/- 12.28
+Episode length: 23.80 +/- 2.71
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 23.8        |
+|    mean_reward          | 67.7        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 970000      |
+| train/                  |             |
+|    approx_kl            | 0.121452704 |
+|    clip_fraction        | 0.0953      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.738      |
+|    explained_variance   | 0.935       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 6.2         |
+|    n_updates            | 75780       |
+|    policy_gradient_loss | -0.0281     |
+|    value_loss           | 43.1        |
+-----------------------------------------
+Epoch # 97
+Eval num_timesteps=980000, episode_reward=78.13 +/- 6.40
+Episode length: 24.00 +/- 0.89
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 24         |
+|    mean_reward          | 78.1       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 980000     |
+| train/                  |            |
+|    approx_kl            | 0.08716495 |
+|    clip_fraction        | 0.12       |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.745     |
+|    explained_variance   | 0.981      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 2.76       |
+|    n_updates            | 76560      |
+|    policy_gradient_loss | -0.0285    |
+|    value_loss           | 9.99       |
+----------------------------------------
+Epoch # 98
+Eval num_timesteps=990000, episode_reward=87.83 +/- 2.75
+Episode length: 24.20 +/- 0.40
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 24.2       |
+|    mean_reward          | 87.8       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 990000     |
+| train/                  |            |
+|    approx_kl            | 0.00820953 |
+|    clip_fraction        | 0.0398     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.569     |
+|    explained_variance   | 0.78       |
+|    learning_rate        | 0.0003     |
+|    loss                 | 72.4       |
+|    n_updates            | 77340      |
+|    policy_gradient_loss | -0.0147    |
+|    value_loss           | 103        |
+----------------------------------------
+Epoch # 99
+Eval num_timesteps=1000000, episode_reward=93.52 +/- 7.35
+Episode length: 25.40 +/- 1.96
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 25.4       |
+|    mean_reward          | 93.5       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1000000    |
+| train/                  |            |
+|    approx_kl            | 0.02120031 |
+|    clip_fraction        | 0.0398     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.684     |
+|    explained_variance   | 0.526      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 133        |
+|    n_updates            | 78120      |
+|    policy_gradient_loss | -0.0162    |
+|    value_loss           | 228        |
+----------------------------------------
+New best mean reward!
+Epoch # 100
+Eval num_timesteps=1010000, episode_reward=87.21 +/- 1.69
+Episode length: 24.80 +/- 0.40
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 24.8       |
+|    mean_reward          | 87.2       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1010000    |
+| train/                  |            |
+|    approx_kl            | 0.06753051 |
+|    clip_fraction        | 0.144      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.853     |
+|    explained_variance   | 0.929      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 21         |
+|    n_updates            | 78900      |
+|    policy_gradient_loss | -0.0393    |
+|    value_loss           | 43         |
+----------------------------------------
+Epoch # 101
+Eval num_timesteps=1020000, episode_reward=89.06 +/- 11.39
+Episode length: 25.20 +/- 1.60
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 25.2        |
+|    mean_reward          | 89.1        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1020000     |
+| train/                  |             |
+|    approx_kl            | 0.056903444 |
+|    clip_fraction        | 0.0594      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.772      |
+|    explained_variance   | 0.682       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 27.3        |
+|    n_updates            | 79680       |
+|    policy_gradient_loss | -0.0166     |
+|    value_loss           | 246         |
+-----------------------------------------
+Epoch # 102
+Eval num_timesteps=1030000, episode_reward=80.22 +/- 7.88
+Episode length: 23.60 +/- 1.50
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 23.6        |
+|    mean_reward          | 80.2        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1030000     |
+| train/                  |             |
+|    approx_kl            | 0.026307886 |
+|    clip_fraction        | 0.0547      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.618      |
+|    explained_variance   | 0.885       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 14.3        |
+|    n_updates            | 80460       |
+|    policy_gradient_loss | -0.0209     |
+|    value_loss           | 80.7        |
+-----------------------------------------
+Epoch # 103
+Eval num_timesteps=1040000, episode_reward=104.27 +/- 1.03
+Episode length: 26.20 +/- 0.40
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 26.2        |
+|    mean_reward          | 104         |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1040000     |
+| train/                  |             |
+|    approx_kl            | 0.011972326 |
+|    clip_fraction        | 0.0586      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.557      |
+|    explained_variance   | 0.951       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 10.1        |
+|    n_updates            | 81240       |
+|    policy_gradient_loss | -0.0146     |
+|    value_loss           | 28.5        |
+-----------------------------------------
+New best mean reward!
+Epoch # 104
+Eval num_timesteps=1050000, episode_reward=90.15 +/- 16.69
+Episode length: 24.60 +/- 2.87
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 24.6        |
+|    mean_reward          | 90.2        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1050000     |
+| train/                  |             |
+|    approx_kl            | 0.007515409 |
+|    clip_fraction        | 0.0383      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.636      |
+|    explained_variance   | 0.811       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 25.8        |
+|    n_updates            | 82030       |
+|    policy_gradient_loss | -0.0107     |
+|    value_loss           | 111         |
+-----------------------------------------
+Epoch # 105
+Eval num_timesteps=1060000, episode_reward=90.38 +/- 6.90
+Episode length: 25.20 +/- 0.40
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 25.2       |
+|    mean_reward          | 90.4       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1060000    |
+| train/                  |            |
+|    approx_kl            | 0.00250821 |
+|    clip_fraction        | 0.00859    |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.595     |
+|    explained_variance   | 0.874      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 3.43       |
+|    n_updates            | 82810      |
+|    policy_gradient_loss | -0.0064    |
+|    value_loss           | 64         |
+----------------------------------------
+Epoch # 106
+Eval num_timesteps=1070000, episode_reward=84.85 +/- 19.38
+Episode length: 25.00 +/- 3.03
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 25          |
+|    mean_reward          | 84.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1070000     |
+| train/                  |             |
+|    approx_kl            | 0.107480906 |
+|    clip_fraction        | 0.12        |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.723      |
+|    explained_variance   | 0.917       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 19.2        |
+|    n_updates            | 83590       |
+|    policy_gradient_loss | -0.0252     |
+|    value_loss           | 49          |
+-----------------------------------------
+Epoch # 107
+Eval num_timesteps=1080000, episode_reward=93.64 +/- 3.84
+Episode length: 25.00 +/- 0.00
+Success rate: 0.00%
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 25           |
+|    mean_reward          | 93.6         |
+|    success_rate         | 0            |
+| time/                   |              |
+|    total_timesteps      | 1080000      |
+| train/                  |              |
+|    approx_kl            | 0.0055766986 |
+|    clip_fraction        | 0.0328       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -0.717       |
+|    explained_variance   | 0.891        |
+|    learning_rate        | 0.0003       |
+|    loss                 | 9.23         |
+|    n_updates            | 84370        |
+|    policy_gradient_loss | -0.0119      |
+|    value_loss           | 55.1         |
+------------------------------------------
+Epoch # 108
+Eval num_timesteps=1090000, episode_reward=88.69 +/- 1.22
+Episode length: 24.40 +/- 0.49
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 24.4       |
+|    mean_reward          | 88.7       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1090000    |
+| train/                  |            |
+|    approx_kl            | 0.05228175 |
+|    clip_fraction        | 0.105      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.778     |
+|    explained_variance   | 0.969      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 4.59       |
+|    n_updates            | 85150      |
+|    policy_gradient_loss | -0.022     |
+|    value_loss           | 18.5       |
+----------------------------------------
+Epoch # 109
+Eval num_timesteps=1100000, episode_reward=86.96 +/- 1.24
+Episode length: 25.20 +/- 0.75
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 25.2        |
+|    mean_reward          | 87          |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1100000     |
+| train/                  |             |
+|    approx_kl            | 0.045627233 |
+|    clip_fraction        | 0.0641      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.691      |
+|    explained_variance   | 0.938       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 13.8        |
+|    n_updates            | 85930       |
+|    policy_gradient_loss | -0.0155     |
+|    value_loss           | 42.8        |
+-----------------------------------------
+Epoch # 110
+Eval num_timesteps=1110000, episode_reward=67.11 +/- 19.54
+Episode length: 21.40 +/- 2.94
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21.4        |
+|    mean_reward          | 67.1        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1110000     |
+| train/                  |             |
+|    approx_kl            | 0.008914847 |
+|    clip_fraction        | 0.0453      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.76       |
+|    explained_variance   | 0.843       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 34          |
+|    n_updates            | 86710       |
+|    policy_gradient_loss | -0.0206     |
+|    value_loss           | 89.5        |
+-----------------------------------------
+Epoch # 111
+Eval num_timesteps=1120000, episode_reward=72.19 +/- 25.40
+Episode length: 23.00 +/- 4.00
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 23         |
+|    mean_reward          | 72.2       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1120000    |
+| train/                  |            |
+|    approx_kl            | 0.23004185 |
+|    clip_fraction        | 0.0734     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.552     |
+|    explained_variance   | 0.616      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 147        |
+|    n_updates            | 87490      |
+|    policy_gradient_loss | -0.0148    |
+|    value_loss           | 267        |
+----------------------------------------
+Epoch # 112
+Eval num_timesteps=1130000, episode_reward=93.96 +/- 3.38
+Episode length: 26.00 +/- 1.55
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 26          |
+|    mean_reward          | 94          |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1130000     |
+| train/                  |             |
+|    approx_kl            | 0.023351388 |
+|    clip_fraction        | 0.0922      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.966      |
+|    explained_variance   | 0.971       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 5.04        |
+|    n_updates            | 88280       |
+|    policy_gradient_loss | -0.0218     |
+|    value_loss           | 24.7        |
+-----------------------------------------
+Epoch # 113
+Eval num_timesteps=1140000, episode_reward=97.00 +/- 1.17
+Episode length: 25.00 +/- 0.00
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 25          |
+|    mean_reward          | 97          |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1140000     |
+| train/                  |             |
+|    approx_kl            | 0.008171175 |
+|    clip_fraction        | 0.0609      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.72       |
+|    explained_variance   | 0.979       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 7.37        |
+|    n_updates            | 89060       |
+|    policy_gradient_loss | -0.0126     |
+|    value_loss           | 23          |
+-----------------------------------------
+Epoch # 114
+Eval num_timesteps=1150000, episode_reward=85.55 +/- 6.44
+Episode length: 24.80 +/- 0.75
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 24.8        |
+|    mean_reward          | 85.5        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1150000     |
+| train/                  |             |
+|    approx_kl            | 0.015589632 |
+|    clip_fraction        | 0.0406      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.346      |
+|    explained_variance   | 0.982       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 1.33        |
+|    n_updates            | 89840       |
+|    policy_gradient_loss | -0.0151     |
+|    value_loss           | 6.73        |
+-----------------------------------------
+Epoch # 115
+Eval num_timesteps=1160000, episode_reward=94.90 +/- 3.95
+Episode length: 25.00 +/- 0.00
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 25          |
+|    mean_reward          | 94.9        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1160000     |
+| train/                  |             |
+|    approx_kl            | 0.059531003 |
+|    clip_fraction        | 0.068       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.423      |
+|    explained_variance   | 0.929       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 12.9        |
+|    n_updates            | 90620       |
+|    policy_gradient_loss | -0.0196     |
+|    value_loss           | 28.9        |
+-----------------------------------------
+Epoch # 116
+Eval num_timesteps=1170000, episode_reward=83.05 +/- 17.54
+Episode length: 23.80 +/- 3.54
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 23.8        |
+|    mean_reward          | 83.1        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1170000     |
+| train/                  |             |
+|    approx_kl            | 0.012943132 |
+|    clip_fraction        | 0.0555      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.498      |
+|    explained_variance   | 0.635       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 17          |
+|    n_updates            | 91400       |
+|    policy_gradient_loss | -0.0168     |
+|    value_loss           | 148         |
+-----------------------------------------
+Epoch # 117
+Eval num_timesteps=1180000, episode_reward=94.10 +/- 2.12
+Episode length: 26.00 +/- 0.89
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 26          |
+|    mean_reward          | 94.1        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1180000     |
+| train/                  |             |
+|    approx_kl            | 0.043498002 |
+|    clip_fraction        | 0.0563      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.387      |
+|    explained_variance   | 0.885       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 38.8        |
+|    n_updates            | 92180       |
+|    policy_gradient_loss | -0.0182     |
+|    value_loss           | 112         |
+-----------------------------------------
+Epoch # 118
+Eval num_timesteps=1190000, episode_reward=100.08 +/- 5.41
+Episode length: 25.80 +/- 0.98
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 25.8        |
+|    mean_reward          | 100         |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1190000     |
+| train/                  |             |
+|    approx_kl            | 0.052444294 |
+|    clip_fraction        | 0.0859      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.683      |
+|    explained_variance   | 0.788       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 3.9         |
+|    n_updates            | 92960       |
+|    policy_gradient_loss | -0.0215     |
+|    value_loss           | 175         |
+-----------------------------------------
+Epoch # 119
+Eval num_timesteps=1200000, episode_reward=91.22 +/- 3.93
+Episode length: 24.80 +/- 0.40
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 24.8       |
+|    mean_reward          | 91.2       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1200000    |
+| train/                  |            |
+|    approx_kl            | 0.07457933 |
+|    clip_fraction        | 0.128      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.728     |
+|    explained_variance   | 0.977      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 5.32       |
+|    n_updates            | 93740      |
+|    policy_gradient_loss | -0.0266    |
+|    value_loss           | 18.1       |
+----------------------------------------
+Epoch # 120
+Eval num_timesteps=1210000, episode_reward=94.51 +/- 1.76
+Episode length: 25.80 +/- 0.75
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 25.8       |
+|    mean_reward          | 94.5       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1210000    |
+| train/                  |            |
+|    approx_kl            | 0.04584022 |
+|    clip_fraction        | 0.043      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.378     |
+|    explained_variance   | 0.936      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 2.96       |
+|    n_updates            | 94530      |
+|    policy_gradient_loss | -0.0116    |
+|    value_loss           | 28.6       |
+----------------------------------------
+Epoch # 121
+Eval num_timesteps=1220000, episode_reward=91.39 +/- 7.85
+Episode length: 25.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 25.4        |
+|    mean_reward          | 91.4        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1220000     |
+| train/                  |             |
+|    approx_kl            | 0.007135618 |
+|    clip_fraction        | 0.0297      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.473      |
+|    explained_variance   | 0.937       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 6.03        |
+|    n_updates            | 95310       |
+|    policy_gradient_loss | -0.0157     |
+|    value_loss           | 48.6        |
+-----------------------------------------
+Epoch # 122
+Eval num_timesteps=1230000, episode_reward=95.53 +/- 7.90
+Episode length: 25.60 +/- 0.49
+Success rate: 0.00%
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 25.6         |
+|    mean_reward          | 95.5         |
+|    success_rate         | 0            |
+| time/                   |              |
+|    total_timesteps      | 1230000      |
+| train/                  |              |
+|    approx_kl            | 0.0055683763 |
+|    clip_fraction        | 0.0344       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -0.351       |
+|    explained_variance   | 0.953        |
+|    learning_rate        | 0.0003       |
+|    loss                 | 10.6         |
+|    n_updates            | 96090        |
+|    policy_gradient_loss | -0.00819     |
+|    value_loss           | 31.8         |
+------------------------------------------
+Epoch # 123
+Eval num_timesteps=1240000, episode_reward=77.74 +/- 14.16
+Episode length: 23.80 +/- 2.64
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 23.8       |
+|    mean_reward          | 77.7       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1240000    |
+| train/                  |            |
+|    approx_kl            | 0.07105234 |
+|    clip_fraction        | 0.131      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.539     |
+|    explained_variance   | 0.815      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 60.9       |
+|    n_updates            | 96870      |
+|    policy_gradient_loss | -0.0293    |
+|    value_loss           | 94.3       |
+----------------------------------------
+Epoch # 124
+Eval num_timesteps=1250000, episode_reward=66.20 +/- 4.53
+Episode length: 22.00 +/- 1.10
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 22          |
+|    mean_reward          | 66.2        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1250000     |
+| train/                  |             |
+|    approx_kl            | 0.010366866 |
+|    clip_fraction        | 0.043       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.681      |
+|    explained_variance   | 0.684       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 16.3        |
+|    n_updates            | 97650       |
+|    policy_gradient_loss | -0.0113     |
+|    value_loss           | 118         |
+-----------------------------------------
+Epoch # 125
+Eval num_timesteps=1260000, episode_reward=58.09 +/- 12.62
+Episode length: 20.60 +/- 2.06
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.6        |
+|    mean_reward          | 58.1        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1260000     |
+| train/                  |             |
+|    approx_kl            | 0.056370124 |
+|    clip_fraction        | 0.148       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.872      |
+|    explained_variance   | 0.874       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 16          |
+|    n_updates            | 98430       |
+|    policy_gradient_loss | -0.0264     |
+|    value_loss           | 42.8        |
+-----------------------------------------
+Epoch # 126
+Eval num_timesteps=1270000, episode_reward=39.93 +/- 12.01
+Episode length: 18.00 +/- 2.00
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 18         |
+|    mean_reward          | 39.9       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1270000    |
+| train/                  |            |
+|    approx_kl            | 0.04971222 |
+|    clip_fraction        | 0.151      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.947     |
+|    explained_variance   | 0.912      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 4.82       |
+|    n_updates            | 99210      |
+|    policy_gradient_loss | -0.0317    |
+|    value_loss           | 14.6       |
+----------------------------------------
+Epoch # 127
+Eval num_timesteps=1280000, episode_reward=69.27 +/- 12.91
+Episode length: 21.80 +/- 1.94
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21.8        |
+|    mean_reward          | 69.3        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1280000     |
+| train/                  |             |
+|    approx_kl            | 0.016349033 |
+|    clip_fraction        | 0.0352      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.648      |
+|    explained_variance   | 0.91        |
+|    learning_rate        | 0.0003      |
+|    loss                 | 10.9        |
+|    n_updates            | 99990       |
+|    policy_gradient_loss | -0.015      |
+|    value_loss           | 45.9        |
+-----------------------------------------
+Epoch # 128
+Eval num_timesteps=1290000, episode_reward=43.60 +/- 19.15
+Episode length: 18.60 +/- 5.00
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 18.6       |
+|    mean_reward          | 43.6       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1290000    |
+| train/                  |            |
+|    approx_kl            | 0.06850099 |
+|    clip_fraction        | 0.127      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.485     |
+|    explained_variance   | 0.782      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 34.4       |
+|    n_updates            | 100780     |
+|    policy_gradient_loss | -0.0281    |
+|    value_loss           | 79.5       |
+----------------------------------------
+Epoch # 129
+Eval num_timesteps=1300000, episode_reward=81.06 +/- 7.91
+Episode length: 24.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 24.4        |
+|    mean_reward          | 81.1        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1300000     |
+| train/                  |             |
+|    approx_kl            | 0.016806789 |
+|    clip_fraction        | 0.0344      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.361      |
+|    explained_variance   | 0.834       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 4.22        |
+|    n_updates            | 101560      |
+|    policy_gradient_loss | -0.00674    |
+|    value_loss           | 74.6        |
+-----------------------------------------
+Epoch # 130
+Eval num_timesteps=1310000, episode_reward=83.28 +/- 8.63
+Episode length: 23.60 +/- 0.49
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 23.6       |
+|    mean_reward          | 83.3       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1310000    |
+| train/                  |            |
+|    approx_kl            | 0.01313114 |
+|    clip_fraction        | 0.0375     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.457     |
+|    explained_variance   | 0.842      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 22.8       |
+|    n_updates            | 102340     |
+|    policy_gradient_loss | -0.0124    |
+|    value_loss           | 58.5       |
+----------------------------------------
+Epoch # 131
+Eval num_timesteps=1320000, episode_reward=55.06 +/- 22.91
+Episode length: 19.40 +/- 5.57
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 19.4       |
+|    mean_reward          | 55.1       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1320000    |
+| train/                  |            |
+|    approx_kl            | 0.14355236 |
+|    clip_fraction        | 0.0766     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.751     |
+|    explained_variance   | 0.662      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 122        |
+|    n_updates            | 103120     |
+|    policy_gradient_loss | -0.0095    |
+|    value_loss           | 166        |
+----------------------------------------
+Epoch # 132
+Eval num_timesteps=1330000, episode_reward=79.30 +/- 8.19
+Episode length: 24.80 +/- 0.75
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 24.8        |
+|    mean_reward          | 79.3        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1330000     |
+| train/                  |             |
+|    approx_kl            | 0.059828177 |
+|    clip_fraction        | 0.107       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.563      |
+|    explained_variance   | 0.944       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 6.02        |
+|    n_updates            | 103900      |
+|    policy_gradient_loss | -0.0245     |
+|    value_loss           | 28.9        |
+-----------------------------------------
+Epoch # 133
+Eval num_timesteps=1340000, episode_reward=72.52 +/- 7.77
+Episode length: 22.00 +/- 1.67
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 22          |
+|    mean_reward          | 72.5        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1340000     |
+| train/                  |             |
+|    approx_kl            | 0.062478594 |
+|    clip_fraction        | 0.0984      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.812      |
+|    explained_variance   | 0.942       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 4.14        |
+|    n_updates            | 104680      |
+|    policy_gradient_loss | -0.0287     |
+|    value_loss           | 26          |
+-----------------------------------------
+Epoch # 134
+Eval num_timesteps=1350000, episode_reward=92.30 +/- 3.44
+Episode length: 26.00 +/- 0.89
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 26          |
+|    mean_reward          | 92.3        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1350000     |
+| train/                  |             |
+|    approx_kl            | 0.006092331 |
+|    clip_fraction        | 0.0258      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.432      |
+|    explained_variance   | 0.711       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 34.4        |
+|    n_updates            | 105460      |
+|    policy_gradient_loss | -0.0069     |
+|    value_loss           | 156         |
+-----------------------------------------
+Epoch # 135
+Eval num_timesteps=1360000, episode_reward=76.51 +/- 5.27
+Episode length: 23.80 +/- 1.47
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 23.8       |
+|    mean_reward          | 76.5       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1360000    |
+| train/                  |            |
+|    approx_kl            | 0.05721971 |
+|    clip_fraction        | 0.0844     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.542     |
+|    explained_variance   | 0.955      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 2.37       |
+|    n_updates            | 106240     |
+|    policy_gradient_loss | -0.0267    |
+|    value_loss           | 28.1       |
+----------------------------------------
+Epoch # 136
+Eval num_timesteps=1370000, episode_reward=82.71 +/- 6.47
+Episode length: 26.00 +/- 2.61
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 26         |
+|    mean_reward          | 82.7       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1370000    |
+| train/                  |            |
+|    approx_kl            | 0.05356037 |
+|    clip_fraction        | 0.0938     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.655     |
+|    explained_variance   | 0.842      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 17         |
+|    n_updates            | 107030     |
+|    policy_gradient_loss | -0.0314    |
+|    value_loss           | 62.7       |
+----------------------------------------
+Epoch # 137
+Eval num_timesteps=1380000, episode_reward=85.29 +/- 4.51
+Episode length: 25.00 +/- 1.67
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 25          |
+|    mean_reward          | 85.3        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1380000     |
+| train/                  |             |
+|    approx_kl            | 0.016333496 |
+|    clip_fraction        | 0.0547      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.507      |
+|    explained_variance   | 0.931       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 10.6        |
+|    n_updates            | 107810      |
+|    policy_gradient_loss | -0.0176     |
+|    value_loss           | 36          |
+-----------------------------------------
+Epoch # 138
+Eval num_timesteps=1390000, episode_reward=48.94 +/- 8.51
+Episode length: 18.00 +/- 0.89
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 18         |
+|    mean_reward          | 48.9       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1390000    |
+| train/                  |            |
+|    approx_kl            | 0.02965018 |
+|    clip_fraction        | 0.135      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -1.02      |
+|    explained_variance   | 0.809      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 7.94       |
+|    n_updates            | 108590     |
+|    policy_gradient_loss | -0.0284    |
+|    value_loss           | 51.8       |
+----------------------------------------
+Epoch # 139
+Eval num_timesteps=1400000, episode_reward=45.51 +/- 6.55
+Episode length: 18.40 +/- 1.74
+Success rate: 0.00%
+---------------------------------------
+| eval/                   |           |
+|    mean_ep_length       | 18.4      |
+|    mean_reward          | 45.5      |
+|    success_rate         | 0         |
+| time/                   |           |
+|    total_timesteps      | 1400000   |
+| train/                  |           |
+|    approx_kl            | 1.0716066 |
+|    clip_fraction        | 0.188     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.673    |
+|    explained_variance   | 0.798     |
+|    learning_rate        | 0.0003    |
+|    loss                 | 6.82      |
+|    n_updates            | 109370    |
+|    policy_gradient_loss | -0.0147   |
+|    value_loss           | 45.3      |
+---------------------------------------
+Epoch # 140
+Eval num_timesteps=1410000, episode_reward=58.81 +/- 7.37
+Episode length: 20.80 +/- 0.75
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.8        |
+|    mean_reward          | 58.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1410000     |
+| train/                  |             |
+|    approx_kl            | 0.010373471 |
+|    clip_fraction        | 0.093       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.606      |
+|    explained_variance   | 0.745       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 19.8        |
+|    n_updates            | 110150      |
+|    policy_gradient_loss | -0.0123     |
+|    value_loss           | 87.3        |
+-----------------------------------------
+Epoch # 141
+Eval num_timesteps=1420000, episode_reward=72.91 +/- 4.48
+Episode length: 23.00 +/- 1.67
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 23          |
+|    mean_reward          | 72.9        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1420000     |
+| train/                  |             |
+|    approx_kl            | 0.014185127 |
+|    clip_fraction        | 0.0555      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.462      |
+|    explained_variance   | 0.884       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 17.9        |
+|    n_updates            | 110930      |
+|    policy_gradient_loss | -0.0155     |
+|    value_loss           | 30.1        |
+-----------------------------------------
+Epoch # 142
+Eval num_timesteps=1430000, episode_reward=88.17 +/- 1.33
+Episode length: 24.00 +/- 0.00
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 24          |
+|    mean_reward          | 88.2        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1430000     |
+| train/                  |             |
+|    approx_kl            | 0.022488074 |
+|    clip_fraction        | 0.093       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.541      |
+|    explained_variance   | 0.798       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 43.2        |
+|    n_updates            | 111710      |
+|    policy_gradient_loss | -0.0235     |
+|    value_loss           | 96.4        |
+-----------------------------------------
+Epoch # 143
+Eval num_timesteps=1440000, episode_reward=88.76 +/- 4.65
+Episode length: 24.60 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 24.6        |
+|    mean_reward          | 88.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1440000     |
+| train/                  |             |
+|    approx_kl            | 0.047941294 |
+|    clip_fraction        | 0.101       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.5        |
+|    explained_variance   | 0.95        |
+|    learning_rate        | 0.0003      |
+|    loss                 | 4.01        |
+|    n_updates            | 112490      |
+|    policy_gradient_loss | -0.0302     |
+|    value_loss           | 25.2        |
+-----------------------------------------
+Epoch # 144
+Eval num_timesteps=1450000, episode_reward=95.55 +/- 1.51
+Episode length: 25.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 25.4        |
+|    mean_reward          | 95.5        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1450000     |
+| train/                  |             |
+|    approx_kl            | 0.004570492 |
+|    clip_fraction        | 0.0312      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.246      |
+|    explained_variance   | 0.696       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 61.4        |
+|    n_updates            | 113280      |
+|    policy_gradient_loss | -0.0124     |
+|    value_loss           | 213         |
+-----------------------------------------
+Epoch # 145
+Eval num_timesteps=1460000, episode_reward=36.38 +/- 4.50
+Episode length: 16.00 +/- 1.10
+Success rate: 0.00%
+---------------------------------------
+| eval/                   |           |
+|    mean_ep_length       | 16        |
+|    mean_reward          | 36.4      |
+|    success_rate         | 0         |
+| time/                   |           |
+|    total_timesteps      | 1460000   |
+| train/                  |           |
+|    approx_kl            | 6.1862087 |
+|    clip_fraction        | 0.263     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.726    |
+|    explained_variance   | 0.902     |
+|    learning_rate        | 0.0003    |
+|    loss                 | 22.7      |
+|    n_updates            | 114060    |
+|    policy_gradient_loss | 0.0466    |
+|    value_loss           | 74.3      |
+---------------------------------------
+Epoch # 146
+Eval num_timesteps=1470000, episode_reward=37.83 +/- 12.78
+Episode length: 15.80 +/- 3.43
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 15.8       |
+|    mean_reward          | 37.8       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1470000    |
+| train/                  |            |
+|    approx_kl            | 0.13289294 |
+|    clip_fraction        | 0.267      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.977     |
+|    explained_variance   | 0.926      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 5.54       |
+|    n_updates            | 114840     |
+|    policy_gradient_loss | -0.0472    |
+|    value_loss           | 15.5       |
+----------------------------------------
+Epoch # 147
+Eval num_timesteps=1480000, episode_reward=49.68 +/- 6.43
+Episode length: 18.80 +/- 0.98
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 18.8       |
+|    mean_reward          | 49.7       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1480000    |
+| train/                  |            |
+|    approx_kl            | 0.23100618 |
+|    clip_fraction        | 0.17       |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.829     |
+|    explained_variance   | 0.933      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 6.71       |
+|    n_updates            | 115620     |
+|    policy_gradient_loss | -0.0363    |
+|    value_loss           | 17.8       |
+----------------------------------------
+Epoch # 148
+Eval num_timesteps=1490000, episode_reward=41.84 +/- 2.46
+Episode length: 18.20 +/- 0.40
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 18.2        |
+|    mean_reward          | 41.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1490000     |
+| train/                  |             |
+|    approx_kl            | 0.118438244 |
+|    clip_fraction        | 0.118       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.529      |
+|    explained_variance   | 0.94        |
+|    learning_rate        | 0.0003      |
+|    loss                 | 2.1         |
+|    n_updates            | 116400      |
+|    policy_gradient_loss | -0.0301     |
+|    value_loss           | 16.7        |
+-----------------------------------------
+Epoch # 149
+Eval num_timesteps=1500000, episode_reward=43.10 +/- 10.91
+Episode length: 17.40 +/- 2.42
+Success rate: 0.00%
+---------------------------------------
+| eval/                   |           |
+|    mean_ep_length       | 17.4      |
+|    mean_reward          | 43.1      |
+|    success_rate         | 0         |
+| time/                   |           |
+|    total_timesteps      | 1500000   |
+| train/                  |           |
+|    approx_kl            | 0.7945714 |
+|    clip_fraction        | 0.205     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.63     |
+|    explained_variance   | 0.854     |
+|    learning_rate        | 0.0003    |
+|    loss                 | 7.63      |
+|    n_updates            | 117180    |
+|    policy_gradient_loss | -0.0122   |
+|    value_loss           | 28.8      |
+---------------------------------------
+Epoch # 150
+Eval num_timesteps=1510000, episode_reward=55.10 +/- 21.95
+Episode length: 18.40 +/- 4.45
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 18.4       |
+|    mean_reward          | 55.1       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1510000    |
+| train/                  |            |
+|    approx_kl            | 0.13787188 |
+|    clip_fraction        | 0.181      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.667     |
+|    explained_variance   | 0.763      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 17.9       |
+|    n_updates            | 117960     |
+|    policy_gradient_loss | -0.0401    |
+|    value_loss           | 64         |
+----------------------------------------
+Epoch # 151
+Eval num_timesteps=1520000, episode_reward=82.31 +/- 8.69
+Episode length: 25.40 +/- 0.80
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 25.4        |
+|    mean_reward          | 82.3        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1520000     |
+| train/                  |             |
+|    approx_kl            | 0.079590075 |
+|    clip_fraction        | 0.0953      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.385      |
+|    explained_variance   | 0.936       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 11.7        |
+|    n_updates            | 118740      |
+|    policy_gradient_loss | -0.00772    |
+|    value_loss           | 35.5        |
+-----------------------------------------
+Epoch # 152
+Eval num_timesteps=1530000, episode_reward=57.01 +/- 26.43
+Episode length: 18.80 +/- 4.79
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 18.8        |
+|    mean_reward          | 57          |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1530000     |
+| train/                  |             |
+|    approx_kl            | 0.030833121 |
+|    clip_fraction        | 0.0289      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.196      |
+|    explained_variance   | 0.119       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 156         |
+|    n_updates            | 119530      |
+|    policy_gradient_loss | -0.00245    |
+|    value_loss           | 789         |
+-----------------------------------------
+Epoch # 153
+Eval num_timesteps=1540000, episode_reward=22.54 +/- 4.07
+Episode length: 13.00 +/- 2.10
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 13          |
+|    mean_reward          | 22.5        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1540000     |
+| train/                  |             |
+|    approx_kl            | 0.029369064 |
+|    clip_fraction        | 0.134       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.539      |
+|    explained_variance   | 0.703       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 7.39        |
+|    n_updates            | 120310      |
+|    policy_gradient_loss | -0.0221     |
+|    value_loss           | 15.2        |
+-----------------------------------------
+Epoch # 154
+Eval num_timesteps=1550000, episode_reward=45.44 +/- 14.77
+Episode length: 19.40 +/- 3.67
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 19.4       |
+|    mean_reward          | 45.4       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1550000    |
+| train/                  |            |
+|    approx_kl            | 0.28367692 |
+|    clip_fraction        | 0.152      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.68      |
+|    explained_variance   | 0.819      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 13.7       |
+|    n_updates            | 121090     |
+|    policy_gradient_loss | -0.0306    |
+|    value_loss           | 40.2       |
+----------------------------------------
+Epoch # 155
+Eval num_timesteps=1560000, episode_reward=58.56 +/- 5.56
+Episode length: 20.60 +/- 1.20
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 20.6       |
+|    mean_reward          | 58.6       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1560000    |
+| train/                  |            |
+|    approx_kl            | 0.12927502 |
+|    clip_fraction        | 0.0992     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.544     |
+|    explained_variance   | 0.732      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 37.7       |
+|    n_updates            | 121870     |
+|    policy_gradient_loss | -0.0245    |
+|    value_loss           | 76.3       |
+----------------------------------------
+Epoch # 156
+Eval num_timesteps=1570000, episode_reward=62.57 +/- 0.86
+Episode length: 20.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.4        |
+|    mean_reward          | 62.6        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1570000     |
+| train/                  |             |
+|    approx_kl            | 0.016762402 |
+|    clip_fraction        | 0.0484      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.251      |
+|    explained_variance   | 0.97        |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.99        |
+|    n_updates            | 122650      |
+|    policy_gradient_loss | -0.017      |
+|    value_loss           | 7.35        |
+-----------------------------------------
+Epoch # 157
+Eval num_timesteps=1580000, episode_reward=40.47 +/- 1.86
+Episode length: 16.40 +/- 0.80
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 16.4       |
+|    mean_reward          | 40.5       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1580000    |
+| train/                  |            |
+|    approx_kl            | 0.10771739 |
+|    clip_fraction        | 0.0992     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.392     |
+|    explained_variance   | 0.961      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 2.43       |
+|    n_updates            | 123430     |
+|    policy_gradient_loss | -0.0227    |
+|    value_loss           | 6.63       |
+----------------------------------------
+Epoch # 158
+Eval num_timesteps=1590000, episode_reward=38.87 +/- 3.18
+Episode length: 17.00 +/- 1.55
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 17          |
+|    mean_reward          | 38.9        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1590000     |
+| train/                  |             |
+|    approx_kl            | 0.003901646 |
+|    clip_fraction        | 0.0133      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.199      |
+|    explained_variance   | 0.926       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 2.31        |
+|    n_updates            | 124210      |
+|    policy_gradient_loss | -0.00669    |
+|    value_loss           | 10.2        |
+-----------------------------------------
+Epoch # 159
+Eval num_timesteps=1600000, episode_reward=44.57 +/- 22.49
+Episode length: 16.60 +/- 6.41
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 16.6        |
+|    mean_reward          | 44.6        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1600000     |
+| train/                  |             |
+|    approx_kl            | 0.043641526 |
+|    clip_fraction        | 0.0594      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.208      |
+|    explained_variance   | 0.956       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 1.04        |
+|    n_updates            | 124990      |
+|    policy_gradient_loss | -0.0161     |
+|    value_loss           | 11.8        |
+-----------------------------------------
+Epoch # 160
+Eval num_timesteps=1610000, episode_reward=60.72 +/- 2.91
+Episode length: 21.00 +/- 1.10
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21          |
+|    mean_reward          | 60.7        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1610000     |
+| train/                  |             |
+|    approx_kl            | 0.022352893 |
+|    clip_fraction        | 0.0477      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.208      |
+|    explained_variance   | 0.984       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 1.01        |
+|    n_updates            | 125780      |
+|    policy_gradient_loss | -0.00592    |
+|    value_loss           | 4.46        |
+-----------------------------------------
+Epoch # 161
+Eval num_timesteps=1620000, episode_reward=60.07 +/- 3.92
+Episode length: 19.80 +/- 0.40
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 19.8       |
+|    mean_reward          | 60.1       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1620000    |
+| train/                  |            |
+|    approx_kl            | 0.09094101 |
+|    clip_fraction        | 0.113      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.384     |
+|    explained_variance   | 0.923      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 2.59       |
+|    n_updates            | 126560     |
+|    policy_gradient_loss | -0.0203    |
+|    value_loss           | 20.9       |
+----------------------------------------
+Epoch # 162
+Eval num_timesteps=1630000, episode_reward=25.07 +/- 30.10
+Episode length: 9.40 +/- 9.07
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 9.4         |
+|    mean_reward          | 25.1        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1630000     |
+| train/                  |             |
+|    approx_kl            | 0.080420755 |
+|    clip_fraction        | 0.108       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.359      |
+|    explained_variance   | 0.692       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 14.4        |
+|    n_updates            | 127340      |
+|    policy_gradient_loss | -0.0191     |
+|    value_loss           | 70.9        |
+-----------------------------------------
+Epoch # 163
+Eval num_timesteps=1640000, episode_reward=52.57 +/- 19.05
+Episode length: 18.60 +/- 3.32
+Success rate: 0.00%
+---------------------------------------
+| eval/                   |           |
+|    mean_ep_length       | 18.6      |
+|    mean_reward          | 52.6      |
+|    success_rate         | 0         |
+| time/                   |           |
+|    total_timesteps      | 1640000   |
+| train/                  |           |
+|    approx_kl            | 0.1719655 |
+|    clip_fraction        | 0.126     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.402    |
+|    explained_variance   | 0.732     |
+|    learning_rate        | 0.0003    |
+|    loss                 | 18.5      |
+|    n_updates            | 128120    |
+|    policy_gradient_loss | -0.0281   |
+|    value_loss           | 49.6      |
+---------------------------------------
+Epoch # 164
+Eval num_timesteps=1650000, episode_reward=23.48 +/- 10.28
+Episode length: 13.00 +/- 3.95
+Success rate: 0.00%
+---------------------------------------
+| eval/                   |           |
+|    mean_ep_length       | 13        |
+|    mean_reward          | 23.5      |
+|    success_rate         | 0         |
+| time/                   |           |
+|    total_timesteps      | 1650000   |
+| train/                  |           |
+|    approx_kl            | 2.4700015 |
+|    clip_fraction        | 0.188     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.485    |
+|    explained_variance   | 0.964     |
+|    learning_rate        | 0.0003    |
+|    loss                 | 1.62      |
+|    n_updates            | 128900    |
+|    policy_gradient_loss | 0.00695   |
+|    value_loss           | 9.06      |
+---------------------------------------
+Epoch # 165
+Eval num_timesteps=1660000, episode_reward=34.05 +/- 12.32
+Episode length: 14.80 +/- 2.93
+Success rate: 0.00%
+---------------------------------------
+| eval/                   |           |
+|    mean_ep_length       | 14.8      |
+|    mean_reward          | 34.1      |
+|    success_rate         | 0         |
+| time/                   |           |
+|    total_timesteps      | 1660000   |
+| train/                  |           |
+|    approx_kl            | 0.9910667 |
+|    clip_fraction        | 0.155     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.496    |
+|    explained_variance   | 0.839     |
+|    learning_rate        | 0.0003    |
+|    loss                 | 11.3      |
+|    n_updates            | 129680    |
+|    policy_gradient_loss | -0.0198   |
+|    value_loss           | 33.1      |
+---------------------------------------
+Epoch # 166
+Eval num_timesteps=1670000, episode_reward=37.23 +/- 25.84
+Episode length: 15.00 +/- 5.59
+Success rate: 0.00%
+---------------------------------------
+| eval/                   |           |
+|    mean_ep_length       | 15        |
+|    mean_reward          | 37.2      |
+|    success_rate         | 0         |
+| time/                   |           |
+|    total_timesteps      | 1670000   |
+| train/                  |           |
+|    approx_kl            | 0.7299904 |
+|    clip_fraction        | 0.126     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.433    |
+|    explained_variance   | 0.905     |
+|    learning_rate        | 0.0003    |
+|    loss                 | 1.69      |
+|    n_updates            | 130460    |
+|    policy_gradient_loss | -0.0153   |
+|    value_loss           | 10.6      |
+---------------------------------------
+Epoch # 167
+Eval num_timesteps=1680000, episode_reward=55.90 +/- 8.19
+Episode length: 19.60 +/- 1.36
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 19.6        |
+|    mean_reward          | 55.9        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1680000     |
+| train/                  |             |
+|    approx_kl            | 0.052808713 |
+|    clip_fraction        | 0.104       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.336      |
+|    explained_variance   | 0.753       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 30.5        |
+|    n_updates            | 131240      |
+|    policy_gradient_loss | -0.0197     |
+|    value_loss           | 79.4        |
+-----------------------------------------
+Epoch # 168
+Eval num_timesteps=1690000, episode_reward=56.92 +/- 8.62
+Episode length: 19.60 +/- 1.85
+Success rate: 0.00%
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 19.6         |
+|    mean_reward          | 56.9         |
+|    success_rate         | 0            |
+| time/                   |              |
+|    total_timesteps      | 1690000      |
+| train/                  |              |
+|    approx_kl            | 0.0075908573 |
+|    clip_fraction        | 0.0406       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -0.193       |
+|    explained_variance   | 0.97         |
+|    learning_rate        | 0.0003       |
+|    loss                 | 2.07         |
+|    n_updates            | 132030       |
+|    policy_gradient_loss | -0.0122      |
+|    value_loss           | 7.95         |
+------------------------------------------
+Epoch # 169
+Eval num_timesteps=1700000, episode_reward=57.78 +/- 9.57
+Episode length: 20.40 +/- 0.80
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 20.4       |
+|    mean_reward          | 57.8       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1700000    |
+| train/                  |            |
+|    approx_kl            | 0.12070524 |
+|    clip_fraction        | 0.131      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.308     |
+|    explained_variance   | 0.951      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 5.2        |
+|    n_updates            | 132810     |
+|    policy_gradient_loss | -0.0296    |
+|    value_loss           | 11         |
+----------------------------------------
+Epoch # 170
+Eval num_timesteps=1710000, episode_reward=60.82 +/- 3.81
+Episode length: 20.80 +/- 1.17
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.8        |
+|    mean_reward          | 60.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1710000     |
+| train/                  |             |
+|    approx_kl            | 0.010524584 |
+|    clip_fraction        | 0.0492      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.318      |
+|    explained_variance   | 0.796       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 14.8        |
+|    n_updates            | 133590      |
+|    policy_gradient_loss | -0.0133     |
+|    value_loss           | 79.4        |
+-----------------------------------------
+Epoch # 171
+Eval num_timesteps=1720000, episode_reward=61.07 +/- 8.47
+Episode length: 20.60 +/- 1.85
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 20.6       |
+|    mean_reward          | 61.1       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1720000    |
+| train/                  |            |
+|    approx_kl            | 0.92122626 |
+|    clip_fraction        | 0.102      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.346     |
+|    explained_variance   | 0.976      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 2.12       |
+|    n_updates            | 134370     |
+|    policy_gradient_loss | -0.0255    |
+|    value_loss           | 9.15       |
+----------------------------------------
+Epoch # 172
+Eval num_timesteps=1730000, episode_reward=61.20 +/- 15.61
+Episode length: 19.60 +/- 2.80
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 19.6        |
+|    mean_reward          | 61.2        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1730000     |
+| train/                  |             |
+|    approx_kl            | 0.012915129 |
+|    clip_fraction        | 0.0367      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.236      |
+|    explained_variance   | 0.929       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 8.8         |
+|    n_updates            | 135150      |
+|    policy_gradient_loss | -0.00847    |
+|    value_loss           | 24.4        |
+-----------------------------------------
+Epoch # 173
+Eval num_timesteps=1740000, episode_reward=65.21 +/- 7.49
+Episode length: 21.80 +/- 1.72
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 21.8       |
+|    mean_reward          | 65.2       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1740000    |
+| train/                  |            |
+|    approx_kl            | 0.07145348 |
+|    clip_fraction        | 0.0406     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.246     |
+|    explained_variance   | 0.891      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 9.18       |
+|    n_updates            | 135930     |
+|    policy_gradient_loss | -0.0122    |
+|    value_loss           | 35.8       |
+----------------------------------------
+Epoch # 174
+Eval num_timesteps=1750000, episode_reward=37.87 +/- 4.93
+Episode length: 16.20 +/- 0.40
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 16.2       |
+|    mean_reward          | 37.9       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1750000    |
+| train/                  |            |
+|    approx_kl            | 0.11030689 |
+|    clip_fraction        | 0.161      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.323     |
+|    explained_variance   | 0.96       |
+|    learning_rate        | 0.0003     |
+|    loss                 | 1.23       |
+|    n_updates            | 136710     |
+|    policy_gradient_loss | -0.0163    |
+|    value_loss           | 5.02       |
+----------------------------------------
+Epoch # 175
+Eval num_timesteps=1760000, episode_reward=38.96 +/- 6.03
+Episode length: 16.60 +/- 1.20
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 16.6       |
+|    mean_reward          | 39         |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1760000    |
+| train/                  |            |
+|    approx_kl            | 0.04862812 |
+|    clip_fraction        | 0.0734     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.322     |
+|    explained_variance   | 0.771      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 4.15       |
+|    n_updates            | 137490     |
+|    policy_gradient_loss | -0.0181    |
+|    value_loss           | 31.8       |
+----------------------------------------
+Epoch # 176
+Eval num_timesteps=1770000, episode_reward=54.10 +/- 4.18
+Episode length: 19.00 +/- 1.26
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 19         |
+|    mean_reward          | 54.1       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1770000    |
+| train/                  |            |
+|    approx_kl            | 0.02820433 |
+|    clip_fraction        | 0.043      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.235     |
+|    explained_variance   | 0.899      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 9.47       |
+|    n_updates            | 138280     |
+|    policy_gradient_loss | -0.0104    |
+|    value_loss           | 22.7       |
+----------------------------------------
+Epoch # 177
+Eval num_timesteps=1780000, episode_reward=60.16 +/- 4.03
+Episode length: 21.00 +/- 1.55
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 21         |
+|    mean_reward          | 60.2       |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1780000    |
+| train/                  |            |
+|    approx_kl            | 0.04562325 |
+|    clip_fraction        | 0.0242     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.138     |
+|    explained_variance   | 0.917      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 1.51       |
+|    n_updates            | 139060     |
+|    policy_gradient_loss | -0.00474   |
+|    value_loss           | 15.2       |
+----------------------------------------
+Epoch # 178
+Eval num_timesteps=1790000, episode_reward=62.47 +/- 2.01
+Episode length: 20.60 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.6        |
+|    mean_reward          | 62.5        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1790000     |
+| train/                  |             |
+|    approx_kl            | 0.007098393 |
+|    clip_fraction        | 0.0336      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.218      |
+|    explained_variance   | 0.701       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 20.9        |
+|    n_updates            | 139840      |
+|    policy_gradient_loss | -0.0074     |
+|    value_loss           | 57.2        |
+-----------------------------------------
+Epoch # 179
+Eval num_timesteps=1800000, episode_reward=59.20 +/- 5.49
+Episode length: 20.20 +/- 0.40
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.2        |
+|    mean_reward          | 59.2        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1800000     |
+| train/                  |             |
+|    approx_kl            | 0.011005133 |
+|    clip_fraction        | 0.0477      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.196      |
+|    explained_variance   | 0.961       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 2.2         |
+|    n_updates            | 140620      |
+|    policy_gradient_loss | -0.00401    |
+|    value_loss           | 8.81        |
+-----------------------------------------
+Eval num_timesteps=1810000, episode_reward=61.86 +/- 5.59
+Episode length: 20.80 +/- 0.75
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.8        |
+|    mean_reward          | 61.9        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1810000     |
+| train/                  |             |
+|    approx_kl            | 0.005807948 |
+|    clip_fraction        | 0.0187      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.226      |
+|    explained_variance   | 0.947       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 3.06        |
+|    n_updates            | 141400      |
+|    policy_gradient_loss | -0.00792    |
+|    value_loss           | 11.2        |
+-----------------------------------------
+Epoch # 180
+Eval num_timesteps=1820000, episode_reward=59.03 +/- 9.96
+Episode length: 20.60 +/- 2.65
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 20.6       |
+|    mean_reward          | 59         |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1820000    |
+| train/                  |            |
+|    approx_kl            | 0.07320329 |
+|    clip_fraction        | 0.0656     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.311     |
+|    explained_variance   | 0.961      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 4.95       |
+|    n_updates            | 142180     |
+|    policy_gradient_loss | -0.0171    |
+|    value_loss           | 15.4       |
+----------------------------------------
+Epoch # 181
+Eval num_timesteps=1830000, episode_reward=69.40 +/- 1.96
+Episode length: 21.00 +/- 0.00
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21          |
+|    mean_reward          | 69.4        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1830000     |
+| train/                  |             |
+|    approx_kl            | 0.003695548 |
+|    clip_fraction        | 0.0164      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.142      |
+|    explained_variance   | 0.969       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 5.63        |
+|    n_updates            | 142960      |
+|    policy_gradient_loss | -0.006      |
+|    value_loss           | 10.2        |
+-----------------------------------------
+Epoch # 182
+Eval num_timesteps=1840000, episode_reward=67.48 +/- 2.00
+Episode length: 21.80 +/- 0.75
+Success rate: 0.00%
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 21.8         |
+|    mean_reward          | 67.5         |
+|    success_rate         | 0            |
+| time/                   |              |
+|    total_timesteps      | 1840000      |
+| train/                  |              |
+|    approx_kl            | 0.0044316556 |
+|    clip_fraction        | 0.0203       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -0.121       |
+|    explained_variance   | 0.985        |
+|    learning_rate        | 0.0003       |
+|    loss                 | 1.45         |
+|    n_updates            | 143740       |
+|    policy_gradient_loss | -0.00589     |
+|    value_loss           | 6.3          |
+------------------------------------------
+Epoch # 183
+Eval num_timesteps=1850000, episode_reward=61.60 +/- 2.54
+Episode length: 20.80 +/- 0.98
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.8        |
+|    mean_reward          | 61.6        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1850000     |
+| train/                  |             |
+|    approx_kl            | 0.012053432 |
+|    clip_fraction        | 0.0641      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.144      |
+|    explained_variance   | 0.981       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 1.09        |
+|    n_updates            | 144530      |
+|    policy_gradient_loss | -0.0144     |
+|    value_loss           | 5.65        |
+-----------------------------------------
+Epoch # 184
+Eval num_timesteps=1860000, episode_reward=38.98 +/- 14.96
+Episode length: 15.60 +/- 2.80
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 15.6       |
+|    mean_reward          | 39         |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1860000    |
+| train/                  |            |
+|    approx_kl            | 0.26038903 |
+|    clip_fraction        | 0.133      |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.22      |
+|    explained_variance   | 0.894      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 10.9       |
+|    n_updates            | 145310     |
+|    policy_gradient_loss | -0.0203    |
+|    value_loss           | 18.3       |
+----------------------------------------
+Epoch # 185
+Eval num_timesteps=1870000, episode_reward=56.79 +/- 5.86
+Episode length: 22.40 +/- 1.85
+Success rate: 0.00%
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 22.4         |
+|    mean_reward          | 56.8         |
+|    success_rate         | 0            |
+| time/                   |              |
+|    total_timesteps      | 1870000      |
+| train/                  |              |
+|    approx_kl            | 0.0072842506 |
+|    clip_fraction        | 0.0391       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -0.11        |
+|    explained_variance   | 0.91         |
+|    learning_rate        | 0.0003       |
+|    loss                 | 21.8         |
+|    n_updates            | 146090       |
+|    policy_gradient_loss | -0.0045      |
+|    value_loss           | 32.7         |
+------------------------------------------
+Epoch # 186
+Eval num_timesteps=1880000, episode_reward=61.13 +/- 3.82
+Episode length: 21.00 +/- 1.26
+Success rate: 0.00%
+---------------------------------------
+| eval/                   |           |
+|    mean_ep_length       | 21        |
+|    mean_reward          | 61.1      |
+|    success_rate         | 0         |
+| time/                   |           |
+|    total_timesteps      | 1880000   |
+| train/                  |           |
+|    approx_kl            | 0.2138247 |
+|    clip_fraction        | 0.0828    |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.24     |
+|    explained_variance   | 0.859     |
+|    learning_rate        | 0.0003    |
+|    loss                 | 6.01      |
+|    n_updates            | 146870    |
+|    policy_gradient_loss | -0.015    |
+|    value_loss           | 28.8      |
+---------------------------------------
+Epoch # 187
+Eval num_timesteps=1890000, episode_reward=61.55 +/- 6.13
+Episode length: 20.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.4        |
+|    mean_reward          | 61.5        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1890000     |
+| train/                  |             |
+|    approx_kl            | 0.001325821 |
+|    clip_fraction        | 0.00547     |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.172      |
+|    explained_variance   | 0.946       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 1.93        |
+|    n_updates            | 147650      |
+|    policy_gradient_loss | -0.00336    |
+|    value_loss           | 17.9        |
+-----------------------------------------
+Epoch # 188
+Eval num_timesteps=1900000, episode_reward=61.00 +/- 4.08
+Episode length: 20.80 +/- 0.98
+Success rate: 0.00%
+----------------------------------------
+| eval/                   |            |
+|    mean_ep_length       | 20.8       |
+|    mean_reward          | 61         |
+|    success_rate         | 0          |
+| time/                   |            |
+|    total_timesteps      | 1900000    |
+| train/                  |            |
+|    approx_kl            | 0.16989586 |
+|    clip_fraction        | 0.0352     |
+|    clip_range           | 0.2        |
+|    entropy_loss         | -0.098     |
+|    explained_variance   | 0.892      |
+|    learning_rate        | 0.0003     |
+|    loss                 | 6.95       |
+|    n_updates            | 148430     |
+|    policy_gradient_loss | -0.0102    |
+|    value_loss           | 37.7       |
+----------------------------------------
+Epoch # 189
+Eval num_timesteps=1910000, episode_reward=68.72 +/- 2.07
+Episode length: 21.20 +/- 0.40
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21.2        |
+|    mean_reward          | 68.7        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1910000     |
+| train/                  |             |
+|    approx_kl            | 0.011382655 |
+|    clip_fraction        | 0.0281      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.119      |
+|    explained_variance   | 0.986       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 2.88        |
+|    n_updates            | 149210      |
+|    policy_gradient_loss | -0.0142     |
+|    value_loss           | 4.97        |
+-----------------------------------------
+Epoch # 190
+Eval num_timesteps=1920000, episode_reward=61.28 +/- 8.24
+Episode length: 21.20 +/- 1.83
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21.2        |
+|    mean_reward          | 61.3        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1920000     |
+| train/                  |             |
+|    approx_kl            | 0.002378452 |
+|    clip_fraction        | 0.0125      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.109      |
+|    explained_variance   | 0.996       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.341       |
+|    n_updates            | 149990      |
+|    policy_gradient_loss | -0.00622    |
+|    value_loss           | 1           |
+-----------------------------------------
+Epoch # 191
+Eval num_timesteps=1930000, episode_reward=68.96 +/- 1.37
+Episode length: 21.60 +/- 0.80
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21.6        |
+|    mean_reward          | 69          |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1930000     |
+| train/                  |             |
+|    approx_kl            | 0.009696238 |
+|    clip_fraction        | 0.0234      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.135      |
+|    explained_variance   | 0.992       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.557       |
+|    n_updates            | 150780      |
+|    policy_gradient_loss | -0.012      |
+|    value_loss           | 2.07        |
+-----------------------------------------
+Epoch # 192
+Eval num_timesteps=1940000, episode_reward=54.85 +/- 21.19
+Episode length: 18.60 +/- 4.03
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 18.6        |
+|    mean_reward          | 54.9        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1940000     |
+| train/                  |             |
+|    approx_kl            | 0.031537175 |
+|    clip_fraction        | 0.0844      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.283      |
+|    explained_variance   | 0.954       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 1.87        |
+|    n_updates            | 151560      |
+|    policy_gradient_loss | -0.0218     |
+|    value_loss           | 12.8        |
+-----------------------------------------
+Epoch # 193
+Eval num_timesteps=1950000, episode_reward=66.85 +/- 2.79
+Episode length: 21.60 +/- 0.49
+Success rate: 0.00%
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 21.6         |
+|    mean_reward          | 66.8         |
+|    success_rate         | 0            |
+| time/                   |              |
+|    total_timesteps      | 1950000      |
+| train/                  |              |
+|    approx_kl            | 0.0066793994 |
+|    clip_fraction        | 0.0125       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -0.137       |
+|    explained_variance   | 0.978        |
+|    learning_rate        | 0.0003       |
+|    loss                 | 2.92         |
+|    n_updates            | 152340       |
+|    policy_gradient_loss | -0.004       |
+|    value_loss           | 7.46         |
+------------------------------------------
+Epoch # 194
+Eval num_timesteps=1960000, episode_reward=66.47 +/- 3.08
+Episode length: 22.40 +/- 1.02
+Success rate: 0.00%
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 22.4         |
+|    mean_reward          | 66.5         |
+|    success_rate         | 0            |
+| time/                   |              |
+|    total_timesteps      | 1960000      |
+| train/                  |              |
+|    approx_kl            | 0.0014223047 |
+|    clip_fraction        | 0.0148       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -0.11        |
+|    explained_variance   | 0.987        |
+|    learning_rate        | 0.0003       |
+|    loss                 | 2.24         |
+|    n_updates            | 153120       |
+|    policy_gradient_loss | -0.00302     |
+|    value_loss           | 4.58         |
+------------------------------------------
+Epoch # 195
+Eval num_timesteps=1970000, episode_reward=55.24 +/- 14.16
+Episode length: 18.80 +/- 2.40
+Success rate: 0.00%
+---------------------------------------
+| eval/                   |           |
+|    mean_ep_length       | 18.8      |
+|    mean_reward          | 55.2      |
+|    success_rate         | 0         |
+| time/                   |           |
+|    total_timesteps      | 1970000   |
+| train/                  |           |
+|    approx_kl            | 0.8104069 |
+|    clip_fraction        | 0.127     |
+|    clip_range           | 0.2       |
+|    entropy_loss         | -0.2      |
+|    explained_variance   | 0.977     |
+|    learning_rate        | 0.0003    |
+|    loss                 | 1.09      |
+|    n_updates            | 153900    |
+|    policy_gradient_loss | 0.0287    |
+|    value_loss           | 5.23      |
+---------------------------------------
+Epoch # 196
+Eval num_timesteps=1980000, episode_reward=68.35 +/- 2.35
+Episode length: 21.60 +/- 0.49
+Success rate: 0.00%
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 21.6         |
+|    mean_reward          | 68.3         |
+|    success_rate         | 0            |
+| time/                   |              |
+|    total_timesteps      | 1980000      |
+| train/                  |              |
+|    approx_kl            | 0.0060550254 |
+|    clip_fraction        | 0.0211       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -0.126       |
+|    explained_variance   | 0.993        |
+|    learning_rate        | 0.0003       |
+|    loss                 | 0.576        |
+|    n_updates            | 154680       |
+|    policy_gradient_loss | -0.00723     |
+|    value_loss           | 2.31         |
+------------------------------------------
+Epoch # 197
+Eval num_timesteps=1990000, episode_reward=68.83 +/- 1.41
+Episode length: 21.40 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21.4        |
+|    mean_reward          | 68.8        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 1990000     |
+| train/                  |             |
+|    approx_kl            | 0.027770001 |
+|    clip_fraction        | 0.00703     |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.133      |
+|    explained_variance   | 0.992       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 0.99        |
+|    n_updates            | 155460      |
+|    policy_gradient_loss | -0.00362    |
+|    value_loss           | 3.08        |
+-----------------------------------------
+Epoch # 198
+Eval num_timesteps=2000000, episode_reward=58.12 +/- 4.79
+Episode length: 20.40 +/- 0.80
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 20.4        |
+|    mean_reward          | 58.1        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 2000000     |
+| train/                  |             |
+|    approx_kl            | 0.006557628 |
+|    clip_fraction        | 0.0297      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.124      |
+|    explained_variance   | 0.95        |
+|    learning_rate        | 0.0003      |
+|    loss                 | 7.58        |
+|    n_updates            | 156240      |
+|    policy_gradient_loss | -0.00992    |
+|    value_loss           | 14.9        |
+-----------------------------------------
+Epoch # 199
+Eval num_timesteps=2010000, episode_reward=68.95 +/- 2.32
+Episode length: 21.60 +/- 0.49
+Success rate: 0.00%
+-----------------------------------------
+| eval/                   |             |
+|    mean_ep_length       | 21.6        |
+|    mean_reward          | 68.9        |
+|    success_rate         | 0           |
+| time/                   |             |
+|    total_timesteps      | 2010000     |
+| train/                  |             |
+|    approx_kl            | 0.010309318 |
+|    clip_fraction        | 0.0234      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -0.206      |
+|    explained_variance   | 0.968       |
+|    learning_rate        | 0.0003      |
+|    loss                 | 3.71        |
+|    n_updates            | 157030      |
+|    policy_gradient_loss | -0.00899    |
+|    value_loss           | 9.65        |
+-----------------------------------------
+Epoch # 200
+Eval num_timesteps=2020000, episode_reward=67.95 +/- 1.23
+Episode length: 21.60 +/- 0.49
+Success rate: 0.00%
+------------------------------------------
+| eval/                   |              |
+|    mean_ep_length       | 21.6         |
+|    mean_reward          | 67.9         |
+|    success_rate         | 0            |
+| time/                   |              |
+|    total_timesteps      | 2020000      |
+| train/                  |              |
+|    approx_kl            | 0.0044624885 |
+|    clip_fraction        | 0.025        |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -0.135       |
+|    explained_variance   | 0.997        |
+|    learning_rate        | 0.0003       |
+|    loss                 | 0.292        |
+|    n_updates            | 157810       |
+|    policy_gradient_loss | -0.00274     |
+|    value_loss           | 1.01         |
+------------------------------------------
+mean_reward:-4.22
+mean_episode_len:1.40
+defaultdict(<class 'int'>, {'BIN_OVERFLOW': 100})
+Average Occupancy ratio: nan
+Average time per input: 0.017451484203338623
