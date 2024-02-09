@@ -7,6 +7,8 @@ from states_generator import StatesGenerator
 from config import get_config
 
 
+INVALID_ITEM_IDX = -1
+
 class TerminationCause(Enum):
     SUCCESS = 1
     DUBLICATE_PICK = 2
@@ -72,44 +74,33 @@ class CadesEnv(gym.Env):
         item_idx, bin_idx = action
         if self.current_state["tasks"][item_idx] > 0:
             return action  # The action is already valid
-
         valid_item_indices = [idx for idx, task in enumerate(self.current_state["tasks"]) if task > 0]
-        if not valid_item_indices:
-            return []  # No valid actions available
-
-        # Select a new item while keeping the bin choice same
-        new_item_idx = random.choice(valid_item_indices)
+        if not valid_item_indices: # No valid item left
+            new_item_idx = INVALID_ITEM_IDX
+        else: # Choose a new item from the valid items
+            new_item_idx = random.choice(valid_item_indices)
         return [new_item_idx, bin_idx]
     
     def _reward(self,action):
 
         done = False
-        original_action = action.copy()
-        adjusted_action = self.get_valid_action(action)
-
-        # Should be an unreachable condition based on our but the check here is just in case
-        if len(adjusted_action) == 0:
-            reward = 1
-            done = True #because adjusted action will be null only when there are no new action possible
-            return reward, done
-        
-        selected_item_idx = adjusted_action[0]
-        selected_bin_idx = adjusted_action[1]
+        # Agent outputs two actions, one for item index and one for bin index
+        selected_item_idx = action[0]
+        selected_bin_idx = action[1]
         selected_item_cost = self.current_state["tasks"][selected_item_idx]
         reward_type = ''
         # Agent picked the item which is already used
-        if selected_item_cost == 0 or original_action[0] != adjusted_action[0]:
-            # At last step Duplicate Pick Reward should be 0. Highest at early steps, lower at later steps.
-            # -1 - (max_steps-episode_length)*4/max_steps = 0 when, episode_length = max_steps, -5 when episode_length = 0
+        if selected_item_cost == 0:
+            # Agent receives reward based on its step number. Highest at early steps, lower at later steps.
             reward = self.config.DUPLICATE_PICK_reward - (abs(self.config.max_num_items - self.info['episode_len'])*3/self.config.max_num_items)
-            reward_type = 'Duplicate Pick Reward'
-            print("Observation Space: \nTasks: ", self.current_state["tasks"], " \nCritical Masks: ", self.current_state["critical_mask"], " \nNodes:", self.current_state["nodes"])
-            print("Action : Selected Item: ", action[0], " Selected Bin: ", action[1], " Selected Item Cost: ", selected_item_cost)
-            print("Reward: ", reward, " Reward Type: ", reward_type)
-            _, done = self._reward(adjusted_action)
-            return reward, done
-            #done = True
-            #self.info["termination_cause"] = TerminationCause.DUBLICATE_PICK.name
+            # Select any other valid action
+            new_action = self.get_valid_action(action)
+            if new_action[0] == INVALID_ITEM_IDX: # No valid item left (unreachable)
+                reward = self.config.SUCCESS_reward
+                done = True
+                self.info["termination_cause"] = TerminationCause.SUCCESS.name
+            else:
+                _, done = self._reward(new_action)
         # Agent picked the bin which is already full
         elif selected_item_cost > self.current_state["nodes"][selected_bin_idx]:
             reward = self.config.BIN_OVERFLOW_reward * self.info['episode_len'] * 0.25
@@ -145,14 +136,17 @@ class CadesEnv(gym.Env):
                 self.info["termination_cause"] = TerminationCause.SUCCESS.name
                 self.info["is_success"] = True
                 done = True
-        print("Observation Space: \nTasks: ", self.current_state["tasks"], " \nCritical Masks: ", self.current_state["critical_mask"], " \nNodes:", self.current_state["nodes"])
-        print("Action : Selected Item: ", action[0], " Selected Bin: ", action[1], " Selected Item Cost: ", selected_item_cost)
-        print("Reward: ", reward, " Reward Type: ", reward_type)
+
         return reward,done
 
     def step(self, action):
         observation = self.current_state
         reward,done = self._reward(action)
+        if done is True:
+            print("Observation Space: \nTasks: ", self.current_state["tasks"], " \nCritical Masks: ", self.current_state["critical_mask"], " \nNodes:", self.current_state["nodes"])
+            print("Last Action : Selected Item: ", action[0], " Selected Bin: ", action[1])
+            print("Episode Reward: ", reward, " Termination Cause: ", self.info["termination_cause"])
+
         self.info["assignment_status"] = self.assignment_status
         self.total_reward = self.total_reward + reward
         return observation, reward, done, self.info
