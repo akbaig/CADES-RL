@@ -10,12 +10,12 @@ def str2bool(v):
 
 parameters_definition = {
     "min_item_size": {"value": 200, "type": int, "desc": "Minimum item size"},
-    "max_item_size": {"value": 800, "type": int, "desc": "Maximum item size"},
+    "max_item_size": {"value": 200, "type": int, "desc": "Maximum item size"},
     "min_num_items": {"value": 20, "type": int, "desc": "Minimum number of items"},
     "max_num_items": {"value": 20, "type": int, "desc": "Maximum number of items"},
-    "min_bin_size": {"value": 1000, "type": int, "desc": "Minimum bin size"},
-    "max_bin_size": {"value": 2000, "type": int, "desc": "Maximum bin size"},
-    "total_bins": {"value": 8, "type": int, "desc": "Total number of bins"},
+    "min_bin_size": {"value": 1200, "type": int, "desc": "Minimum bin size"},
+    "max_bin_size": {"value": 1200, "type": int, "desc": "Maximum bin size"},
+    "total_bins": {"value": 10, "type": int, "desc": "Total number of bins"},
     "number_of_copies": {
         "value": 2,
         "type": int,
@@ -28,21 +28,21 @@ parameters_definition = {
     },
     # TRAINING PARAMETERS #
     "seed": {"value": 3, "type": int, "desc": "Random seed"},
-    "epochs": {"value": 75, "type": int, "desc": "Number of episodes"},
+    "epochs": {"value": 150, "type": int, "desc": "Number of episodes"},
     "batch_size": {"value": 64, "type": int, "desc": "Batch size"},
     "lr": {"value": 0.0003, "type": float, "desc": "Initial learning rate"},
     "alpha": {"value": 0.3, "type": float, "desc": "Alpha Value to compute reward"},
     # RUN OPTIONS #
     "device": {
-        "value": "cpu",
+        "value": "cuda",
         "type": str,
         "desc": "Device to use (if no GPU available, value should be 'cpu')",
     },
     "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
     "experiment_name": {
-        "value": "Reward Shaping",
+        "value": "r_ppo_critical_tasks",
         "type": str,
-        "desc": "Name of the Experiment in mlflow",
+        "desc": "Recurrent PPO with Critical Tasks",
     },
     # REWARD SHAPING
     "SUCCESS_reward": {"value": 3, "type": int, "desc": "Success Reward"},

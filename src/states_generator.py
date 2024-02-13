@@ -85,7 +85,7 @@ class StatesGenerator(object):
 
         bins_available = []
         bin_choices = [
-            bin_size for bin_size in range(self.min_bin_size, self.max_bin_size, 100)
+            bin_size for bin_size in range(self.min_bin_size, self.max_bin_size+1, 100)
         ]
 
         for i in range(self.total_bins):

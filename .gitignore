@@ -6,3 +6,5 @@
 /models/
 /venv/
 /src/.ipynb_checkpoints/
+*mlruns
+*.out
