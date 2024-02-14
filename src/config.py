@@ -40,9 +40,9 @@ parameters_definition = {
     },
     "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
     "experiment_name": {
-        "value": "r_ppo_critical_tasks",
+        "value": "r_ppo_balance_reward",
         "type": str,
-        "desc": "Recurrent PPO with Critical Tasks",
+        "desc": "Recurrent PPO with Balance Reward",
     },
     # REWARD SHAPING
     "SUCCESS_reward": {"value": 10, "type": int, "desc": "Success Reward"},
