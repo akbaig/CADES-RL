@@ -28,7 +28,7 @@ parameters_definition = {
     },
     # TRAINING PARAMETERS #
     "seed": {"value": 3, "type": int, "desc": "Random seed"},
-    "epochs": {"value": 75, "type": int, "desc": "Number of episodes"},
+    "epochs": {"value": 150, "type": int, "desc": "Number of episodes"},
     "batch_size": {"value": 64, "type": int, "desc": "Batch size"},
     "lr": {"value": 0.0003, "type": float, "desc": "Initial learning rate"},
     "alpha": {"value": 0.3, "type": float, "desc": "Alpha Value to compute reward"},
@@ -40,9 +40,9 @@ parameters_definition = {
     },
     "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
     "experiment_name": {
-        "value": "Reward Shaping",
+        "value": "r_ppo_critical_tasks",
         "type": str,
-        "desc": "Name of the Experiment in mlflow",
+        "desc": "Recurrent PPO with Critical Tasks",
     },
     # REWARD SHAPING
     "SUCCESS_reward": {"value": 10, "type": int, "desc": "Success Reward"},
