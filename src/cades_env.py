@@ -6,9 +6,6 @@ from enum import Enum
 from states_generator import StatesGenerator
 from config import get_config
 
-
-INVALID_ITEM_IDX = -1
-
 class TerminationCause(Enum):
     SUCCESS = 1
     DUBLICATE_PICK = 2
@@ -76,7 +73,7 @@ class CadesEnv(gym.Env):
             return action  # The action is already valid
         valid_item_indices = [idx for idx, task in enumerate(self.current_state["tasks"]) if task > 0]
         if not valid_item_indices: # No valid item left
-            new_item_idx = INVALID_ITEM_IDX
+            raise ValueError('No valid action found')
         else: # Choose a new item from the valid items
             new_item_idx = random.choice(valid_item_indices)
         return [new_item_idx, bin_idx]
@@ -95,12 +92,7 @@ class CadesEnv(gym.Env):
             reward = self.config.DUPLICATE_PICK_reward - (abs(self.config.max_num_items - self.info['episode_len'])*3/self.config.max_num_items)
             # Select any other valid action
             new_action = self.get_valid_action(action)
-            if new_action[0] == INVALID_ITEM_IDX: # No valid item left (unreachable)
-                reward = self.config.SUCCESS_reward
-                done = True
-                self.info["termination_cause"] = TerminationCause.SUCCESS.name
-            else:
-                _, done = self._reward(new_action)
+            _, done = self._reward(new_action)
         # Agent picked the bin which is already full
         elif selected_item_cost > self.current_state["nodes"][selected_bin_idx]:
             reward = self.config.BIN_OVERFLOW_reward * self.info['episode_len'] * 0.25
