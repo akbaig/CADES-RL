@@ -53,7 +53,7 @@ parameters_definition = {
     },
     "BIN_OVERFLOW_reward": {"value": -2, "type": int, "desc": "BIN_OVERFLOW Reward"},
     "STEP_reward": {"value": 1, "type": int, "desc": "Step Reward"},
-    "BONUS_reward": {"value": 0.01, "type": int, "desc": "Step Reward"},
+    "BONUS_reward": {"value": 1, "type": int, "desc": "Step Reward"},
     "CRITICAL_reward": {"value": 1, "type": int, "desc": "Critical Task Reward"},
     "DUPLICATE_CRITICAL_PICK_reward": {"value": -1, "type": int, "desc": "Duplicate Critical Task Reward"}, 
 
