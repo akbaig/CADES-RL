@@ -42,7 +42,12 @@ parameters_definition = {
     "experiment_name": {
         "value": "r_ppo_balance_reward",
         "type": str,
-        "desc": "Recurrent PPO with Balance Reward",
+        "desc": "Experiment Name for mlflow",
+    },
+    "run_name": {
+        "value": "static_weights",
+        "type": str,
+        "desc": "Run Name for mlflow",
     },
     # REWARD SHAPING
     "SUCCESS_reward": {"value": 10, "type": int, "desc": "Success Reward"},
