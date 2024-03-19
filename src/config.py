@@ -10,19 +10,19 @@ def str2bool(v):
 
 parameters_definition = {
     "min_item_size": {"value": 200, "type": int, "desc": "Minimum item size"},
-    "max_item_size": {"value": 500, "type": int, "desc": "Maximum item size"},
-    "min_num_items": {"value": 12, "type": int, "desc": "Minimum number of items"},
-    "max_num_items": {"value": 12, "type": int, "desc": "Maximum number of items"},
-    "min_bin_size": {"value": 1000, "type": int, "desc": "Minimum bin size"},
-    "max_bin_size": {"value": 1000, "type": int, "desc": "Maximum bin size"},
-    "total_bins": {"value": 8, "type": int, "desc": "Total number of bins"},
+    "max_item_size": {"value": 200, "type": int, "desc": "Maximum item size"},
+    "min_num_items": {"value": 20, "type": int, "desc": "Minimum number of items"},
+    "max_num_items": {"value": 20, "type": int, "desc": "Maximum number of items"},
+    "min_bin_size": {"value": 1200, "type": int, "desc": "Minimum bin size"},
+    "max_bin_size": {"value": 1200, "type": int, "desc": "Maximum bin size"},
+    "total_bins": {"value": 10, "type": int, "desc": "Total number of bins"},
     "number_of_copies": {
         "value": 2,
         "type": int,
         "desc": "Number of critical item copies",
     },
     "number_of_critical_items": {
-        "value": 2,
+        "value": 3,
         "type": int,
         "desc": "Number of critical item",
     },
