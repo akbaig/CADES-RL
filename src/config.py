@@ -42,7 +42,12 @@ parameters_definition = {
     "experiment_name": {
         "value": "r_ppo_critical_tasks",
         "type": str,
-        "desc": "Recurrent PPO with Critical Tasks",
+        "desc": "Experiment Name for mlflow",
+    },
+    "run_name": {
+        "value": "static_weights",
+        "type": str,
+        "desc": "Run Name for mlflow",
     },
     # REWARD SHAPING
     "SUCCESS_reward": {"value": 3, "type": int, "desc": "Success Reward"},
