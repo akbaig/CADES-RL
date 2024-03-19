@@ -13,6 +13,7 @@ from utils import evaluate
 import numpy as np
 import time
 from config import get_config
+import torch
 import mlflow
 import sys
 from typing import Any, Dict, Tuple, Union
@@ -34,6 +35,7 @@ loggers = Logger(
 
 
 if __name__ == "__main__":
+
     # Experiment Project Name for mlflow
     mlflow.set_experiment(config.experiment_name)
     # Run Name for mlflow
@@ -43,6 +45,11 @@ if __name__ == "__main__":
     config_dict = vars(config)
     for key in config_dict:
         mlflow.log_param(key, config_dict[key])
+
+    # Setting random seed
+    random.seed(config.seed)
+    np.random.seed(config.seed)
+    torch.manual_seed(config.seed)
 
     # Initiate environment variables
     env = CadesEnv(config)
@@ -55,6 +62,7 @@ if __name__ == "__main__":
         tensorboard_log=logdir,
         batch_size=config.batch_size,
         device=config.device,
+        seed=config.seed,
     )
     model.set_logger(loggers)
     env.reset()
