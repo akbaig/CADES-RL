@@ -107,26 +107,32 @@ if __name__ == "__main__":
         mean_episode_len,
         termination_cause,
         is_success,
-        avg_occupancy_ratio,
+        avg_occupancies,
     ) = evaluate(model, env, 100)
+
+    # Calculate Average Occupancy Ratio
+
+    mean_avg_ratio = np.array(avg_occupancies).mean() if len(avg_occupancies) > 0 else 0
+    avg_time_per_input = (time.time() - t1) / 100
 
     # Log Evaluation Metrics in STDOUT
     print(f"Mean Reward: {mean_reward:.2f}")
     print(f"Mean Episode Length: {mean_episode_len:.2f}")
-    print(f"Termination Cause:", termination_cause)
-    print("Average Occupancy Ratio:", np.array(avg_occupancy_ratio).mean())
-    print("Average Time per Input:", (time.time() - t1) / 100)
+    print("Termination Cause:", termination_cause)
+    print("Average Occupancy Ratio:", mean_avg_ratio)
+    print("Average Time per Input:", avg_time_per_input)
 
     # Log Evaluation Metrics in MLflow
-    mlflow.log_metric("Avg_occupancy_ratio", np.array(avg_occupancy_ratio).mean())
+    mlflow.log_metric("avg_occupancy_ratio", mean_avg_ratio)
+    mlflow.log_metric("avg_time_per_input", avg_time_per_input)
     for key in termination_cause.keys():
         mlflow.log_metric(key, termination_cause[key])
     mlflow.log_artifacts(logs_dir, "logs")
     mlflow.log_artifacts(models_dir,"models")
 
     # Clean up local directories models_dir and logs_dir
-    shutil.rmtree(models_path)
-    shutil.rmtree(logs_path)
+    shutil.rmtree(models_path, ignore_errors=True)
+    shutil.rmtree(logs_path, ignore_errors=True)
 
     # End mlflow run session
     mlflow.end_run()
