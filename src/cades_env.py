@@ -144,13 +144,21 @@ class CadesEnv(gym.Env):
         return observation, reward, done, self.info
 
     def reset(self):
+        # assignment status is an variable-sized 2D Array, having dimensions total_bins x (size of bin)
+        # it stores the indices of task assignment on the nodes
         self.assignment_status = []
         for i in range(self.config.total_bins):
             self.assignment_status.append([])
 
+
         self.info = {"is_success": False, "episode_len": 0, "termination_cause": None}
         self.done = False
         self.total_reward = 0
+        # states_batch_generator gives the following variables
+        # states - 2D Array (Batch Size x num of items) - elements contain size of task
+        # states_lens - 1D Array (Batch Size) - elements contain num of valid items in each row of states variable
+        # states_mask - 2D Array (Batch Size x num of items) - elements represent a mask of states variable having all 1 values
+        # bins_available - 2D Array (Batch Size x num of bins) - elements contain size of bins (imp: all batches contain same values of bin sizes)
         (
             states,
             states_lens,
@@ -164,8 +172,10 @@ class CadesEnv(gym.Env):
             states_mask,
             states_lens
         )
+        # norm factor is the largest bin size of first batch in bins_available
         self.norm_factor = max(list(bins_available[0]))
 
+        # use first batch of states and bins_available and normalize the values, this is our observation now
         observation = {
             "tasks": np.array(list(states[0]) / self.norm_factor),
             "critical_mask": np.array(critical_mask[0]),
