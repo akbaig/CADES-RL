@@ -128,7 +128,6 @@ class CadesEnv(gym.Env):
                 self.info["termination_cause"] = TerminationCause.SUCCESS.name
                 self.info["is_success"] = True
                 done = True
-
         return reward,done
 
     def step(self, action):

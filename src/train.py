@@ -37,7 +37,7 @@ if __name__ == "__main__":
     # Experiment Project Name for mlflow
     mlflow.set_experiment(config.experiment_name)
     # Run Name for mlflow
-    mlflow.start_run(run_name=config.run_name)
+    mlflow.start_run(run_name="Test: 12 Tasks variable weights - normal RL")
 
     # Log config params
     config_dict = vars(config)
