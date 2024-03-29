@@ -26,6 +26,16 @@ parameters_definition = {
         "type": int,
         "desc": "Number of critical item",
     },
+    "min_num_comms": {
+        "value": 10,
+        "type": int,
+        "desc": "Min number of communications",
+    },
+    "max_num_comms": {
+        "value": 10,
+        "type": int,
+        "desc": "Max number of communications",
+    },
     # TRAINING PARAMETERS #
     "seed": {"value": 3, "type": int, "desc": "Random seed"},
     "epochs": {"value": 150, "type": int, "desc": "Number of episodes"},
@@ -40,7 +50,7 @@ parameters_definition = {
     },
     "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
     "experiment_name": {
-        "value": "r_ppo_non_term_dup_rw",
+        "value": "alternate_message_passing",
         "type": str,
         "desc": "Experiment Name for mlflow",
     },
@@ -61,7 +71,7 @@ parameters_definition = {
     "BONUS_reward": {"value": 0.25, "type": int, "desc": "Step Reward"},
     "CRITICAL_reward": {"value": 1, "type": int, "desc": "Critical Task Reward"},
     "DUPLICATE_CRITICAL_PICK_reward": {"value": -1, "type": int, "desc": "Duplicate Critical Task Reward"}, 
-
+    "COMM_reward": {"value": 10, "type": int, "desc": "Total Communication Reward"},
 }
 
 

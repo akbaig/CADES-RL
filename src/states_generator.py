@@ -26,6 +26,8 @@ class StatesGenerator(object):
 
         self.num_critical_items = config.number_of_critical_items
         self.num_critical_copies = config.number_of_copies
+        self.min_num_comms = config.min_num_comms
+        self.max_num_comms = config.max_num_comms
         self.ci_groups = []
 
     def generate_critical_items(self, items_seqs_batch, items_len_mask, items_seq_lens):
@@ -67,6 +69,38 @@ class StatesGenerator(object):
             critical_copy_mask.append(critical_mask)
             batch_ci_groups.append(ci_groups)
         return (items_with_critical, critical_copy_mask, batch_ci_groups)
+    
+    def generate_communications(self, states, critical_mask, states_lens):
+        """
+        Generate communication matrix for each batch
+        """
+        batch_comms = []
+        batch_comms_count = []
+        for state, mask, seq_len in zip(states, critical_mask, states_lens):
+            comms = np.zeros((seq_len, seq_len), dtype="uint8")
+            num_comms = np.random.randint(self.min_num_comms, self.max_num_comms + 1)
+            valid_tasks = np.where(state != 0)[0] # valid tasks indices
+            for _ in range(num_comms):
+                # select random sender
+                sender = random.choice(valid_tasks)
+                # remove sender from valid_tasks
+                valid_receivers = np.setdiff1d(valid_tasks, np.array([sender]))
+                # remove receivers which are already communicating with sender (handling duplicate entries)
+                valid_receivers = np.setdiff1d(valid_receivers, np.where(comms[sender] == 1)[0])
+                # get sender's mask value
+                sender_mask = mask[sender]
+                # is sender critical
+                is_sender_critical = sender_mask > 1
+                # if sender is critical, get receivers which are not replicas of sender
+                if is_sender_critical:
+                    # get all the unselected_tasks which don't have the same mask value as sender
+                    valid_receivers = [task for task in valid_receivers if mask[task] != sender_mask]
+                # select random receiver
+                receiver = random.choice(valid_receivers)
+                comms[sender, receiver] = 1
+            batch_comms.append(comms)
+            batch_comms_count.append(num_comms)
+        return batch_comms, batch_comms_count
 
     def generate_states_batch(self, batch_size=None):
         """Generate new batch of initial states"""

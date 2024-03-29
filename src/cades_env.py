@@ -20,9 +20,7 @@ class CadesEnv(gym.Env):
 
     def __init__(self, config):
         super().__init__()
-        # Define action and observation space
-        # They must be gym.spaces objects
-        # Example when using discrete actions:
+
         self.config = config
         self.states_generator = StatesGenerator(config)
         self.norm_factor = None
@@ -42,6 +40,9 @@ class CadesEnv(gym.Env):
                 "nodes": spaces.Box(
                     low=0, high=1, shape=(config.total_bins,), dtype=np.float
                 ),
+                "communications": spaces.Box(
+                    low=0, high=1, shape=(config.max_num_items, config.max_num_items), dtype=np.uint8
+                )
             }
         )
 
@@ -63,7 +64,18 @@ class CadesEnv(gym.Env):
         replica_indices = list(np.where(critical_mask == critical_mask[item_index])[0]) 
         # check if these indices are in the assignment status of selected bin
         return np.intersect1d(replica_indices, self.assignment_status[bin_index]).size > 0
+
+    def get_item_receivers(self, item_index):
+        receivers =  self.current_state["communications"][item_index]
+        return np.where(receivers == 1)[0]
     
+    def get_item_senders(self, item_index):
+        senders =  self.current_state["communications"][:, item_index]
+        return np.where(senders == 1)[0]
+    
+    def get_items_placed_in_bin(self, list_of_items, bin_index):
+       return np.intersect1d(list_of_items, self.assignment_status[bin_index])
+
     # For Preventing the agent from choosing already chosen indices again
     # This method masks the invalid choices
     # And makes the agent choose a valid action instead 
@@ -114,6 +126,41 @@ class CadesEnv(gym.Env):
             if self._is_item_critical(selected_item_idx):
                 reward += self.config.CRITICAL_reward
                 reward_type += ' \nCritical Reward'
+            # Check if the item is communicating
+            item_receivers = self.get_item_receivers(selected_item_idx)
+            item_senders = self.get_item_senders(selected_item_idx)
+            # if the item is a sender i.e has receivers
+            if(len(item_receivers) > 0): 
+                # narrow down the receivers to the ones that are already placed in the bin
+                allocated_receivers = self.get_items_placed_in_bin(item_receivers, selected_bin_idx)
+                # construct tuple pairs of such receivers and selected item
+                allocated_pairs = list(map(lambda x: (selected_item_idx, x), allocated_receivers))
+                # extract pairs which have yet not been allocated
+                unallocated_pairs = list(set(allocated_pairs) - self.communication_status)
+                if(len(unallocated_pairs) > 0):
+                    # select a valid comm pair
+                    pair = random.choice(unallocated_pairs)
+                    # add the pair to the communication status for record keeping
+                    self.communication_status.add(pair)
+                    # assign normalized reward
+                    reward += (self.config.COMM_reward/self.env_stats["comms_len"])
+                    reward_type += f' \nCommunication Reward for {pair}'
+            # if the item is a receiver, i.e. has senders
+            if(len(item_senders) > 0):
+                # narrow down the senders to the ones that are already placed in the bin
+                allocated_senders = self.get_items_placed_in_bin(item_senders, selected_bin_idx)
+                # construct tuple pairs of such senders and selected item
+                allocated_pairs = list(map(lambda x: (x, selected_item_idx), allocated_senders))
+                # extract pairs which have yet not been allocated
+                unallocated_pairs = list(set(allocated_pairs) - self.communication_status)
+                if(len(unallocated_pairs) > 0):
+                    # select a valid comm pair
+                    pair = random.choice(unallocated_pairs)
+                    # add the pair to the communication status for record keeping
+                    self.communication_status.add(pair)
+                    # assign normalized reward
+                    reward += (self.config.COMM_reward/self.env_stats["comms_len"])
+                    reward_type += f' \nCommunication Reward for {pair}'
             # Mark the selected item as zero
             self.current_state["tasks"][selected_item_idx] = 0
             # Consume the space in selected bin
@@ -135,8 +182,9 @@ class CadesEnv(gym.Env):
         observation = self.current_state
         reward,done = self._reward(action)
         if done is True:
-            print("Observation Space: \nTasks: ", self.current_state["tasks"], " \nCritical Masks: ", self.current_state["critical_mask"], " \nNodes:", self.current_state["nodes"])
+            print("Observation Space: \nTasks: ", self.current_state["tasks"], " \nCritical Masks: ", self.current_state["critical_mask"], " \nNodes:", self.current_state["nodes"], " \nPossible Communications: ", self.env_stats["comms_len"])
             print("Last Action : Selected Item: ", action[0], " Selected Bin: ", action[1])
+            print("Accounted Communications: ", len(self.communication_status))
             print("Episode Reward: ", reward, " Termination Cause: ", self.info["termination_cause"])
 
         self.info["assignment_status"] = self.assignment_status
@@ -147,6 +195,7 @@ class CadesEnv(gym.Env):
         # assignment status is an variable-sized 2D Array, having dimensions total_bins x (size of bin)
         # it stores the indices of task assignment on the nodes
         self.assignment_status = []
+        self.communication_status = set()
         for i in range(self.config.total_bins):
             self.assignment_status.append([])
 
@@ -172,6 +221,14 @@ class CadesEnv(gym.Env):
             states_mask,
             states_lens
         )
+        (
+            communications,
+            communications_lens
+        ) = self.states_generator.generate_communications(
+            states,
+            critical_mask,
+            states_lens
+        )
         # norm factor is the largest bin size of first batch in bins_available
         self.norm_factor = max(list(bins_available[0]))
 
@@ -180,8 +237,10 @@ class CadesEnv(gym.Env):
             "tasks": np.array(list(states[0]) / self.norm_factor),
             "critical_mask": np.array(critical_mask[0]),
             "nodes": np.array(list(bins_available[0]) / self.norm_factor),
+            "communications": np.array(communications[0])
         }
         self.current_state = observation
+        self.env_stats["comms_len"] = communications_lens[0]
         self.env_stats["tasks_total_cost"] = sum(
             observation["tasks"] * self.norm_factor
         )
