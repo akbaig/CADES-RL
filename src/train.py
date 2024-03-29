@@ -1,38 +1,42 @@
+# System imports
+import mlflow
+import numpy as np
+import random
+import shutil
+import sys
+import time
+
+# Torch Imports
+import torch
+import torch.optim as optim
+
+# SB3, GYM and custom config imports
+from cades_env import CadesEnv
+from config import get_config
 from stable_baselines3.common.env_checker import check_env
 from stable_baselines3 import PPO, A2C
 from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.callbacks import EvalCallback
 from sb3_contrib import RecurrentPPO
-
-import random
-import shutil
-import numpy as np
-from cades_env import CadesEnv
-from utils import evaluate
-import numpy as np
-import time
-from config import get_config
-import torch
-import mlflow
-import sys
 from stable_baselines3.common.logger import HumanOutputFormat, Logger
-from utils import MLflowOutputFormat
+from utils import evaluate, MLflowOutputFormat
 
-# Config files
-config, _ = get_config()
 
-# Logs and model directories
-logs_path = "../logs"
-models_path = "../models"
-logs_dir = f"{logs_path}/{config.experiment_name}/{config.run_name}/"
-models_dir = f"{models_path}/{config.experiment_name}/{config.run_name}/"
 
-loggers = Logger(
-    folder=None,
-    output_formats=[HumanOutputFormat(sys.stdout), MLflowOutputFormat()],
-)
+def train(rank, world_size):
+    # Config files
+    config, _ = get_config()
 
-if __name__ == "__main__":
+    # Logs and model directories
+    logs_path = "../logs"
+    models_path = "../models"
+    logs_dir = f"{logs_path}/{config.experiment_name}/{config.run_name}/"
+    models_dir = f"{models_path}/{config.experiment_name}/{config.run_name}/"
+
+    loggers = Logger(
+        folder=None,
+        output_formats=[HumanOutputFormat(sys.stdout), MLflowOutputFormat()],
+    )
 
     # Experiment Project Name for mlflow
     mlflow.set_experiment(config.experiment_name)
@@ -64,8 +68,10 @@ if __name__ == "__main__":
         device=config.device,
         seed=config.seed,
     )
+
     # Set logger
     model.set_logger(loggers)
+
     # Initialize Environment (By Resetting it)
     env.reset()
 
@@ -136,3 +142,10 @@ if __name__ == "__main__":
 
     # End mlflow run session
     mlflow.end_run()
+
+
+
+
+if __name__ == "__main__":
+    train()
+
