@@ -9,22 +9,22 @@ def str2bool(v):
 
 
 parameters_definition = {
-    "min_item_size": {"value": 200, "type": int, "desc": "Minimum item size"},
-    "max_item_size": {"value": 200, "type": int, "desc": "Maximum item size"},
-    "min_num_items": {"value": 20, "type": int, "desc": "Minimum number of items"},
-    "max_num_items": {"value": 20, "type": int, "desc": "Maximum number of items"},
-    "min_bin_size": {"value": 1200, "type": int, "desc": "Minimum bin size"},
-    "max_bin_size": {"value": 1200, "type": int, "desc": "Maximum bin size"},
-    "total_bins": {"value": 10, "type": int, "desc": "Total number of bins"},
+    "min_task_size": {"value": 4, "type": int, "desc": "Minimum task size"},
+    "max_task_size": {"value": 4, "type": int, "desc": "Maximum task size"},
+    "min_num_tasks": {"value": 12, "type": int, "desc": "Minimum number of tasks"},
+    "max_num_tasks": {"value": 12, "type": int, "desc": "Maximum number of tasks"},
+    "min_node_size": {"value": 12, "type": int, "desc": "Minimum node size"},
+    "max_node_size": {"value": 12, "type": int, "desc": "Maximum node size"},
+    "total_nodes": {"value": 8, "type": int, "desc": "Total number of nodes"},
     "number_of_copies": {
         "value": 2,
         "type": int,
-        "desc": "Number of critical item copies",
+        "desc": "Number of critical task copies",
     },
-    "number_of_critical_items": {
+    "number_of_critical_tasks": {
         "value": 3,
         "type": int,
-        "desc": "Number of critical item",
+        "desc": "Number of critical task",
     },
     "min_num_comms": {
         "value": 10,
@@ -50,12 +50,12 @@ parameters_definition = {
     },
     "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
     "experiment_name": {
-        "value": "alternate_message_passing",
+        "value": "message_communication_channel_2d_matrix",
         "type": str,
         "desc": "Experiment Name for mlflow",
     },
     "run_name": {
-        "value": "static_weights",
+        "value": "Message Communication Channel 2D Matrix - Run 1",
         "type": str,
         "desc": "Run Name for mlflow",
     },
@@ -66,11 +66,15 @@ parameters_definition = {
         "type": int,
         "desc": "DUPLICATE_PICK Reward",
     },
-    "BIN_OVERFLOW_reward": {"value": -2, "type": int, "desc": "BIN_OVERFLOW Reward"},
+    "NODE_OVERFLOW_reward": {"value": -2, "type": int, "desc": "NODE_OVERFLOW Reward"},
     "STEP_reward": {"value": 1, "type": int, "desc": "Step Reward"},
     "BONUS_reward": {"value": 0.25, "type": int, "desc": "Step Reward"},
     "CRITICAL_reward": {"value": 1, "type": int, "desc": "Critical Task Reward"},
-    "DUPLICATE_CRITICAL_PICK_reward": {"value": -1, "type": int, "desc": "Duplicate Critical Task Reward"}, 
+    "DUPLICATE_CRITICAL_PICK_reward": {
+        "value": -1,
+        "type": int,
+        "desc": "Duplicate Critical Task Reward",
+    },
     "COMM_reward": {"value": 10, "type": int, "desc": "Total Communication Reward"},
 }
 

@@ -76,10 +76,12 @@ def evaluate(model, env, num_episodes=100):
         episode_rewards = []
         done = False
         obs = env.reset()
-        total_bins = obs["nodes"] * env.norm_factor
+        total_nodes = obs["nodes"] * env.norm_factor
         while not done:
             # _states are only useful when using LSTM policies
-            action, lstm_states = model.predict(obs, state=lstm_states, episode_start=episode_starts)
+            action, lstm_states = model.predict(
+                obs, state=lstm_states, episode_start=episode_starts
+            )
             # here, action, rewards and dones are arrays
             # because we are using vectorized env
             obs, reward, done, info = env.step(action)
@@ -91,7 +93,10 @@ def evaluate(model, env, num_episodes=100):
                     round(
                         100
                         - np.mean(
-                            (np.array(remaining_node_capacities) / np.array(total_bins))
+                            (
+                                np.array(remaining_node_capacities)
+                                / np.array(total_nodes)
+                            )
                         )
                         * 100,
                         2,
