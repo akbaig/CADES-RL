@@ -133,34 +133,19 @@ class CadesEnv(gym.Env):
             if(len(item_receivers) > 0): 
                 # narrow down the receivers to the ones that are already placed in the bin
                 allocated_receivers = self.get_items_placed_in_bin(item_receivers, selected_bin_idx)
-                # construct tuple pairs of such receivers and selected item
-                allocated_pairs = list(map(lambda x: (selected_item_idx, x), allocated_receivers))
-                # extract pairs which have yet not been allocated
-                unallocated_pairs = list(set(allocated_pairs) - self.communication_status)
-                if(len(unallocated_pairs) > 0):
-                    # select a valid comm pair
-                    pair = random.choice(unallocated_pairs)
-                    # add the pair to the communication status for record keeping
-                    self.communication_status.add(pair)
-                    # assign normalized reward
-                    reward += (self.config.COMM_reward/self.env_stats["comms_len"])
-                    reward_type += f' \nCommunication Reward for {pair}'
-            # if the item is a receiver, i.e. has senders
+                reward += (self.config.COMM_reward/self.env_stats["comms_len"]) * len(allocated_receivers)
+                reward_type += f' \nCommunication Reward for {selected_item_idx} communicating with {allocated_receivers}'
+                if(len(allocated_receivers) > 0):
+                    # set the communication mask to zero
+                    self.current_state["communications"][selected_item_idx, allocated_receivers] = 0
             if(len(item_senders) > 0):
                 # narrow down the senders to the ones that are already placed in the bin
                 allocated_senders = self.get_items_placed_in_bin(item_senders, selected_bin_idx)
-                # construct tuple pairs of such senders and selected item
-                allocated_pairs = list(map(lambda x: (x, selected_item_idx), allocated_senders))
-                # extract pairs which have yet not been allocated
-                unallocated_pairs = list(set(allocated_pairs) - self.communication_status)
-                if(len(unallocated_pairs) > 0):
-                    # select a valid comm pair
-                    pair = random.choice(unallocated_pairs)
-                    # add the pair to the communication status for record keeping
-                    self.communication_status.add(pair)
-                    # assign normalized reward
-                    reward += (self.config.COMM_reward/self.env_stats["comms_len"])
-                    reward_type += f' \nCommunication Reward for {pair}'
+                reward += (self.config.COMM_reward/self.env_stats["comms_len"]) * len(allocated_senders)
+                reward_type += f' \nCommunication Reward for {allocated_senders} communicating with {selected_item_idx}'
+                if(len(allocated_senders) > 0):
+                    # set the communication mask to zero
+                    self.current_state["communications"][allocated_senders, selected_item_idx] = 0
             # Mark the selected item as zero
             self.current_state["tasks"][selected_item_idx] = 0
             # Consume the space in selected bin
@@ -182,9 +167,8 @@ class CadesEnv(gym.Env):
         observation = self.current_state
         reward,done = self._reward(action)
         if done is True:
-            print("Observation Space: \nTasks: ", self.current_state["tasks"], " \nCritical Masks: ", self.current_state["critical_mask"], " \nNodes:", self.current_state["nodes"], " \nPossible Communications: ", self.env_stats["comms_len"])
+            print("Observation Space: \nTasks: ", self.current_state["tasks"], " \nCritical Masks: ", self.current_state["critical_mask"], " \nNodes:", self.current_state["nodes"])
             print("Last Action : Selected Item: ", action[0], " Selected Bin: ", action[1])
-            print("Accounted Communications: ", len(self.communication_status))
             print("Episode Reward: ", reward, " Termination Cause: ", self.info["termination_cause"])
 
         self.info["assignment_status"] = self.assignment_status
@@ -195,7 +179,6 @@ class CadesEnv(gym.Env):
         # assignment status is an variable-sized 2D Array, having dimensions total_bins x (size of bin)
         # it stores the indices of task assignment on the nodes
         self.assignment_status = []
-        self.communication_status = set()
         for i in range(self.config.total_bins):
             self.assignment_status.append([])
 
