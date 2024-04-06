@@ -146,6 +146,8 @@ class CadesEnv(gym.Env):
                 if(len(allocated_senders) > 0):
                     # set the communication mask to zero
                     self.current_state["communications"][allocated_senders, selected_item_idx] = 0
+            # Set the selected item mask value as zero
+            self.current_state["critical_mask"][selected_item_idx] = 0
             # Mark the selected item as zero
             self.current_state["tasks"][selected_item_idx] = 0
             # Consume the space in selected bin
