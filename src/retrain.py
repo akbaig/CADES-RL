@@ -36,7 +36,7 @@ if __name__ == "__main__":
     # Experiment Project Name for mlflow
     mlflow.set_experiment(config.experiment_name)
     # Run Name for mlflow
-    mlflow.start_run(run_name="Test 1.2 - Curriculum Learning")
+    mlflow.start_run(run_name="Test 2 - Bonus reward")
 
     # Logging config params
     config_dict = vars(config)
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     env = CadesEnv(config)
     check_env(env)
     model = RecurrentPPO.load(
-        '../models/1707570648/200',
+        '../models/1705355208/150',
         env=env,
         device=config.device,
     )

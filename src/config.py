@@ -9,13 +9,13 @@ def str2bool(v):
 
 
 parameters_definition = {
-    "min_item_size": {"value": 1, "type": int, "desc": "Minimum item size"},
-    "max_item_size": {"value": 5, "type": int, "desc": "Maximum item size"},
-    "min_num_items": {"value": 12, "type": int, "desc": "Minimum number of items"},
-    "max_num_items": {"value": 12, "type": int, "desc": "Maximum number of items"},
-    "min_bin_size": {"value": 12, "type": int, "desc": "Minimum bin size"},
-    "max_bin_size": {"value": 12, "type": int, "desc": "Maximum bin size"},
-    "total_bins": {"value": 8, "type": int, "desc": "Total number of bins"},
+    "min_item_size": {"value": 200, "type": int, "desc": "Minimum item size"},
+    "max_item_size": {"value": 200, "type": int, "desc": "Maximum item size"},
+    "min_num_items": {"value": 20, "type": int, "desc": "Minimum number of items"},
+    "max_num_items": {"value": 20, "type": int, "desc": "Maximum number of items"},
+    "min_bin_size": {"value": 1200, "type": int, "desc": "Minimum bin size"},
+    "max_bin_size": {"value": 1200, "type": int, "desc": "Maximum bin size"},
+    "total_bins": {"value": 10, "type": int, "desc": "Total number of bins"},
     "number_of_copies": {
         "value": 2,
         "type": int,
@@ -40,9 +40,14 @@ parameters_definition = {
     },
     "inference": {"value": False, "type": str2bool, "desc": "Do not train the model"},
     "experiment_name": {
-        "value": "Action Mask - Curriculum learn",
+        "value": "r_ppo_non_term_dup_rw",
         "type": str,
-        "desc": "We start from training 4 weighted 12 tasks to 1-6 weighted variable tasks.",
+        "desc": "Experiment Name for mlflow",
+    },
+    "run_name": {
+        "value": "static_weights",
+        "type": str,
+        "desc": "Run Name for mlflow",
     },
     # REWARD SHAPING
     "SUCCESS_reward": {"value": 10, "type": int, "desc": "Success Reward"},
