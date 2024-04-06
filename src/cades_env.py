@@ -114,6 +114,8 @@ class CadesEnv(gym.Env):
             if self._is_item_critical(selected_item_idx):
                 reward += self.config.CRITICAL_reward
                 reward_type += ' \nCritical Reward'
+            # Set the selected item mask value as zero
+            self.current_state["critical_mask"][selected_item_idx] = 0
             # Mark the selected item as zero
             self.current_state["tasks"][selected_item_idx] = 0
             # Consume the space in selected bin
