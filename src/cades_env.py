@@ -150,58 +150,33 @@ class CadesEnv(gym.Env):
             reward_type = "Step and Bonus Reward"
             if self._is_task_critical(selected_task_idx):
                 reward += self.config.CRITICAL_reward
-                reward_type += " \nCritical Reward"
-            # Check if the task is communicating
-            task_receivers = self.get_task_receivers(selected_task_idx)
-            task_senders = self.get_task_senders(selected_task_idx)
-            # if the task is a sender i.e has receivers
-            if len(task_receivers) > 0:
+                reward_type += ' \nCritical Reward'
+            # Check if the item is communicating
+            item_receivers = self.get_task_receivers(selected_task_idx)
+            item_senders = self.get_task_senders(selected_task_idx)
+            # if the item is a sender i.e has receivers
+            if(len(item_receivers) > 0): 
                 # narrow down the receivers to the ones that are already placed in the node
-                allocated_receivers = self.get_tasks_placed_in_node(
-                    task_receivers, selected_node_idx
-                )
-                # construct tuple pairs of such receivers and selected task
-                allocated_pairs = list(
-                    map(lambda x: (selected_task_idx, x), allocated_receivers)
-                )
-                # extract pairs which have yet not been allocated
-                unallocated_pairs = list(
-                    set(allocated_pairs) - self.communication_status
-                )
-                if len(unallocated_pairs) > 0:
-                    # select a valid comm pair
-                    pair = random.choice(unallocated_pairs)
-                    # add the pair to the communication status for record keeping
-                    self.communication_status.add(pair)
-                    # assign normalized reward
-                    reward += self.config.COMM_reward / self.env_stats["comms_len"]
-                    reward_type += f" \nCommunication Reward for {pair}"
-            # if the task is a receiver, i.e. has senders
-            if len(task_senders) > 0:
+                allocated_receivers = self.get_tasks_placed_in_node(item_receivers, selected_node_idx)
+                reward += (self.config.COMM_reward/self.env_stats["comms_len"]) * len(allocated_receivers)
+                reward_type += f' \nCommunication Reward for {selected_task_idx} communicating with {allocated_receivers}'
+                if(len(allocated_receivers) > 0):
+                    # set the communication mask to zero
+                    self.current_state["communications"][selected_task_idx, allocated_receivers] = 0
+            if(len(item_senders) > 0):
                 # narrow down the senders to the ones that are already placed in the node
-                allocated_senders = self.get_tasks_placed_in_node(
-                    task_senders, selected_node_idx
-                )
-                # construct tuple pairs of such senders and selected task
-                allocated_pairs = list(
-                    map(lambda x: (x, selected_task_idx), allocated_senders)
-                )
-                # extract pairs which have yet not been allocated
-                unallocated_pairs = list(
-                    set(allocated_pairs) - self.communication_status
-                )
-                if len(unallocated_pairs) > 0:
-                    # select a valid comm pair
-                    pair = random.choice(unallocated_pairs)
-                    # add the pair to the communication status for record keeping
-                    self.communication_status.add(pair)
-                    # assign normalized reward
-                    reward += self.config.COMM_reward / self.env_stats["comms_len"]
-                    reward_type += f" \nCommunication Reward for {pair}"
-            # Mark the selected task as zero
+                allocated_senders = self.get_tasks_placed_in_node(item_senders, selected_node_idx)
+                reward += (self.config.COMM_reward/self.env_stats["comms_len"]) * len(allocated_senders)
+                reward_type += f' \nCommunication Reward for {allocated_senders} communicating with {selected_task_idx}'
+                if(len(allocated_senders) > 0):
+                    # set the communication mask to zero
+                    self.current_state["communications"][allocated_senders, selected_task_idx] = 0
+            # Set the selected item mask value as zero
+            self.current_state["critical_mask"][selected_task_idx] = 0
+            # Mark the selected item as zero
             self.current_state["tasks"][selected_task_idx] = 0
-            # Consume the space in selected node
-            self.current_state["nodes"][selected_node_idx] -= selected_task_cost
+            # Consume the space in selected bin
+            self.current_state["nodes"][selected_task_idx] -= selected_task_cost
             # Update Assignment status
             self.assignment_status[selected_node_idx].append(selected_task_idx)
             self.info["episode_len"] = self.info["episode_len"] + 1
