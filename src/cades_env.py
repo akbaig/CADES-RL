@@ -163,6 +163,9 @@ class CadesEnv(gym.Env):
                 if(len(allocated_receivers) > 0):
                     # set the communication mask to zero
                     self.current_state["communications"][selected_task_idx, allocated_receivers] = 0
+                    # add pair to communication status
+                    for receiver in allocated_receivers:
+                        self.communication_status.add((selected_task_idx, receiver))
             if(len(item_senders) > 0):
                 # narrow down the senders to the ones that are already placed in the node
                 allocated_senders = self.get_tasks_placed_in_node(item_senders, selected_node_idx)
@@ -171,6 +174,9 @@ class CadesEnv(gym.Env):
                 if(len(allocated_senders) > 0):
                     # set the communication mask to zero
                     self.current_state["communications"][allocated_senders, selected_task_idx] = 0
+                    # add pair to communication status
+                    for sender in allocated_senders:
+                        self.communication_status.add((sender, selected_task_idx))
             # Set the selected item mask value as zero
             self.current_state["critical_mask"][selected_task_idx] = 0
             # Mark the selected item as zero
