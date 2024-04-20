@@ -64,7 +64,7 @@ class CadesEnv(gym.Env):
         return self.current_state["critical_mask"][task_index] > 1
 
     def _is_critical_task_duplicated(self, task_index, node_index):
-        critical_mask = self.current_state["critical_mask"]
+        critical_mask = self.initial_state["critical_mask"]
         # get indices which have same mask value
         replica_indices = list(np.where(critical_mask == critical_mask[task_index])[0])
         # check if these indices are in the assignment status of selected node
@@ -268,6 +268,7 @@ class CadesEnv(gym.Env):
             "nodes": np.array(list(nodes_available[0]) / self.norm_factor),
             "communications": np.array(communications[0]),
         }
+        self.initial_state = observation
         self.current_state = observation
         self.env_stats["comms_len"] = communications_lens[0]
         self.env_stats["tasks_total_cost"] = sum(
