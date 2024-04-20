@@ -182,7 +182,7 @@ class CadesEnv(gym.Env):
             # Mark the selected item as zero
             self.current_state["tasks"][selected_task_idx] = 0
             # Consume the space in selected bin
-            self.current_state["nodes"][selected_task_idx] -= selected_task_cost
+            self.current_state["nodes"][selected_node_idx] -= selected_task_cost
             # Update Assignment status
             self.assignment_status[selected_node_idx].append(selected_task_idx)
             self.info["episode_len"] = self.info["episode_len"] + 1
