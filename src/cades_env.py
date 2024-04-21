@@ -98,6 +98,15 @@ class CadesEnv(gym.Env):
         else:  # Choose a new task from the valid tasks
             new_task_idx = random.choice(valid_task_indices)
         return [new_task_idx, node_idx]
+    
+    def _exponential_decay_reward(self, step, max_steps, max_reward, k=2):
+        """
+        An adjusted exponential decay formula to reach exactly 0 at the final step
+        Where k is an exponent that determines how quickly the function approaches zero. 
+        Higher values of k will make the decay steeper towards the end.
+        """
+        reward = max_reward * (1 - (step / max_steps) ** k)
+        return reward
 
     def _reward(self, action):
 
@@ -110,12 +119,11 @@ class CadesEnv(gym.Env):
 
         # Agent picked the task which is already used
         if selected_task_cost == 0:
-            # Agent receives reward based on its step number. Highest at early steps, lower at later steps.
-            reward = self.config.DUPLICATE_PICK_reward - (
-                abs(self.config.max_num_tasks - self.info["episode_len"])
-                * 3
-                / self.config.max_num_tasks
-            )
+            step = self.info["episode_len"]
+            max_steps = self.config.max_num_tasks
+            max_reward = self.config.DUPLICATE_PICK_reward
+            reward = self._exponential_decay_reward(step, max_steps, max_reward)
+            reward_type = f"Duplicate Pick Reward on Step {step}: {reward}"
             # Select any other valid action
             new_action = self.get_valid_action(action)
             _, done = self._reward(new_action)
