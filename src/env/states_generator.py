@@ -1,6 +1,7 @@
 import numpy as np
 import random
 import torch
+from env.comm_tree import CommunicationTree
 
 """
 Logic to generate new states using .
@@ -28,6 +29,7 @@ class StatesGenerator(object):
         self.num_critical_copies = config.number_of_copies
         self.min_num_comms = config.min_num_comms
         self.max_num_comms = config.max_num_comms
+        self.max_comm_chain = config.max_comm_chain
         self.ci_groups = []
 
     def generate_critical_tasks(self, tasks_seqs_batch, tasks_len_mask, tasks_seq_lens):
@@ -69,7 +71,95 @@ class StatesGenerator(object):
             critical_copy_mask.append(critical_mask)
             batch_ci_groups.append(ci_groups)
         return (tasks_with_critical, critical_copy_mask, batch_ci_groups)
+    
+    def valid_senders(self, valid_tasks, comm_tree):
+        """
+        Get valid senders from communication tree i.e. 
+        """
+        valid_senders_depths = {}
+        for task in valid_tasks:
+            depth = comm_tree.get_node_depth(task)
+            if depth is None:
+                valid_senders_depths[task] = 0
+            elif depth < self.max_comm_chain:
+                valid_senders_depths[task] = depth
+        return valid_senders_depths
 
+    def valid_receivers(self, comm_tree, valid_senders_depths, sender, mask, cost):
+        """
+        Get valid receivers for a sender
+        """
+        valid_receivers = list(valid_senders_depths.keys())
+        # exclude sender from possible receivers
+        valid_receivers.remove(sender)
+        # get ancestors of sender
+        sender_ancestors = comm_tree.get_all_ancestors(sender)
+        # get sender's depth, cost and critical mask value
+        sender_depth = valid_senders_depths[sender]
+        sender_cost = cost[sender]
+        sender_critical_mask = mask[sender]
+        # loop through all valid receivers and check if they satisfy all conditions
+        final_receivers = []
+        for receiver in valid_receivers:
+            # 1. Is not ancestor of sender
+            if receiver in sender_ancestors:
+                continue
+            # 2. Longest depth of sender + Longest depth of receiver ≤ max_comm_length
+            receiver_depth = valid_senders_depths[receiver]
+            if sender_depth + receiver_depth > self.max_comm_chain:
+                continue
+            # 3. Cost of ancestors of sender + sender cost + Cost of ancestors of receiver + Cost of receiver ≤ avg_node_bin_size
+            receiver_ancestors = comm_tree.get_all_ancestors(receiver)
+            receiver_cost = cost[receiver]
+            sender_ancestors_cost = sum([cost[ancestor] for ancestor in sender_ancestors])
+            receiver_ancestors_cost = sum([cost[ancestor] for ancestor in receiver_ancestors])
+            if sender_cost + sender_ancestors_cost + receiver_cost + receiver_ancestors_cost > self.max_node_size:
+                continue
+            # 4. Intersection of critical mask values of (sender + its ancestors) and (receiver + its ancestors) should be None
+            receiver_critical_mask = mask[receiver]
+            sender_ancestors_critical_mask = [mask[ancestor] for ancestor in sender_ancestors]
+            receiver_ancestors_critical_mask = [mask[ancestor] for ancestor in receiver_ancestors]
+            combined_sender_masks = np.concatenate(([sender_critical_mask], sender_ancestors_critical_mask))
+            combined_receiver_masks = np.concatenate(([receiver_critical_mask], receiver_ancestors_critical_mask))
+            # Find intersection between the combined masks of sender and receiver
+            intersection = np.intersect1d(combined_sender_masks, combined_receiver_masks)
+            intersection = np.setdiff1d(intersection, np.array([0, 1]))
+            if len(intersection) > 0:
+                continue
+            # if all conditions are satisfied, add receiver to final_receivers
+            final_receivers.append(receiver)
+        return final_receivers
+    
+    def generate_chained_communications(self, states, critical_mask, states_lens):
+        """
+        Generate communication matrix for each batch
+        """
+        batch_comms = []
+        batch_comms_count = []
+        for state, mask, seq_len in zip(states, critical_mask, states_lens):
+            # comms = np.zeros((seq_len, seq_len), dtype="uint8")
+            num_comms = np.random.randint(self.min_num_comms, self.max_num_comms + 1)
+            valid_tasks = np.where(state != 0)[0] # valid tasks indices
+            comm_tree = CommunicationTree(max_depth=self.max_num_tasks)
+            for _ in range(num_comms):
+                # get valid senders
+                valid_senders_depths = self.valid_senders(valid_tasks, comm_tree)
+                valid_senders = list(valid_senders_depths.keys())
+                # select random sender
+                sender = random.choice(valid_senders)
+                # get valid receivers for sender
+                valid_receivers = self.valid_receivers(comm_tree, valid_senders_depths, sender, mask, state)
+                # if there are no valid receivers, continue
+                if len(valid_receivers) == 0:
+                    continue
+                # select random receiver among valid receivers
+                receiver = random.choice(valid_receivers)
+                # update comms matrix
+                comm_tree.add_edge(sender, receiver)
+            batch_comms.append(comm_tree.to_matrix())
+            batch_comms_count.append(num_comms)
+        return batch_comms, batch_comms_count
+    
     def generate_communications(self, states, critical_mask, states_lens):
         """
         Generate communication matrix for each batch

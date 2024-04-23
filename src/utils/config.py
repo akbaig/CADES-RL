@@ -36,6 +36,11 @@ parameters_definition = {
         "type": int,
         "desc": "Max number of communications",
     },
+    "max_comm_chain": {
+         "value": 3,
+        "type": int,
+        "desc": "Max length of chained communication",
+    },
     # TRAINING PARAMETERS #
     "seed": {"value": 3, "type": int, "desc": "Random seed"},
     "epochs": {"value": 150, "type": int, "desc": "Number of episodes"},
