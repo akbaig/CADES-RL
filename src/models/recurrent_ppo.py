@@ -5,8 +5,8 @@ import numpy as np
 
 class RecurrentPPOModel(Sb3Model):
 
-    def __init__(self, env, config):
-        super().__init__(env, config)
+    def __init__(self, env, config, model=None):
+        super().__init__(env, config, model)
 
     def model_name(self):
         return "Recurrent_PPO"
@@ -43,14 +43,13 @@ class RecurrentPPOModel(Sb3Model):
         model_instance = cls(env, config, model=model)
         return model_instance
 
-    def evaluate(self, obs=None):
+    def evaluate(self, states=None):
 
         lstm_states = None
         episode_starts = np.array([True], dtype=bool)
         episode_reward = 0
         done = False
-        if obs is None:
-            obs = self.env.reset()
+        obs = self.env.reset(states)
         info = {}
         actions = []
 
