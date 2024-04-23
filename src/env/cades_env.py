@@ -280,26 +280,11 @@ class CadesEnv(gym.Env):
 
         observation = self.current_state
         return observation, reward, done, self.info # observation, reward, done, extra_info
-
-    def reset(self):
+    
+    def generate_states(self):
         """
-        Initializes new states for the start of a new episode.
+        Generates states for the environment
         """
-        # assignment status is an variable-sized 2D Array, having dimensions total_nodes x (size of node)
-        # it stores the indices of task assignment on the nodes
-        self.assignment_status = []
-        self.communication_status = set()
-        for i in range(self.config.total_nodes):
-            self.assignment_status.append([])
-
-        self.info = {"is_success": False, "episode_len": 0, "termination_cause": None}
-        self.done = False
-        self.total_reward = 0
-        # states_batch_generator gives the following variables
-        # states - 2D Array (Batch Size x num of tasks) - elements contain size of task
-        # states_lens - 1D Array (Batch Size) - elements contain num of valid tasks in each row of states variable
-        # states_mask - 2D Array (Batch Size x num of tasks) - elements represent a mask of states variable having all 1 values
-        # nodes_available - 2D Array (Batch Size x num of nodes) - elements contain size of nodes (imp: all batches contain same values of node sizes)
         (
             states,
             states_lens,
@@ -314,19 +299,44 @@ class CadesEnv(gym.Env):
                 states, critical_mask, states_lens
             )
         )
-        # norm factor is the largest node size of first batch in nodes_available
-        self.norm_factor = max(list(nodes_available[0]))
+        generated_states = {
+            "tasks": states,
+            "tasks_lens": states_lens,
+            "tasks_mask": states_mask,
+            "critical_mask": critical_mask,
+            "nodes": nodes_available,
+            "communications": communications,
+            "communications_lens": communications_lens,
+        }
+        return generated_states
 
+    def reset(self, states=None):
+        """
+        Initializes new states for the start of a new episode.
+        """
+        # assignment status is an variable-sized 2D Array, having dimensions total_nodes x (size of node)
+        # it stores the indices of task assignment on the nodes
+        self.assignment_status = []
+        self.communication_status = set()
+        for i in range(self.config.total_nodes):
+            self.assignment_status.append([])
+
+        self.info = {"is_success": False, "episode_len": 0, "termination_cause": None}
+        self.done = False
+        if states is None:
+            states = self.generate_states()
+        # norm factor is the largest node size of first batch in nodes
+        self.norm_factor = max(list(states["nodes"][0]))
         # use first batch of states and nodes_available and normalize the values, this is our observation now
         observation = {
-            "tasks": np.array(list(states[0]) / self.norm_factor),
-            "critical_mask": np.array(critical_mask[0]),
-            "nodes": np.array(list(nodes_available[0]) / self.norm_factor),
-            "communications": np.array(communications[0]),
+            "tasks": np.array(list(states["tasks"][0]) / self.norm_factor),
+            "critical_mask": np.array(states["critical_mask"][0]),
+            "nodes": np.array(list(states["nodes"][0]) / self.norm_factor),
+            "communications": np.array(states["communications"][0]),
         }
         self.initial_state = copy.deepcopy(observation)
         self.current_state = observation
-        self.env_stats["comms_len"] = communications_lens[0]
+        self.env_stats["comms_len"] = states["communications_lens"][0]
         self.env_stats["tasks_total_cost"] = sum(
             observation["tasks"] * self.norm_factor
         )
