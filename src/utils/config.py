@@ -56,7 +56,7 @@ parameters_definition = {
         "desc": "Experiment Name for mlflow",
     },
     "run_name": {
-        "value": "Message Communication Channel 2D Matrix - Run 1",
+        "value": "3x_tasksize_12_tasks_8_nodes_10_comms_2_copies_3_critical_tasks",
         "type": str,
         "desc": "Run Name for mlflow",
     },

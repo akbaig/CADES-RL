@@ -1,42 +1,57 @@
 from abc import ABC, abstractmethod
 from collections import defaultdict
 import numpy as np
-from stable_baselines3.common.callbacks import EvalCallback
+from stable_baselines3.common.callbacks import CallbackList
+from utils.metrics_callback import MetricsCallback
+from env.cades_env import TerminationCause
 
 class Sb3Model(ABC):
 
-    def __init__(self, env, config):
+    def __init__(self, env, config, model = None):
         self.metrics_to_eval = ["avg_node_occupancy", "message_channel_occupancy", "empty_nodes"]
         self.env = env
         self.config = config
-        self.model = self.initialize_model()
+        if model is not None:
+            self.model = model
+        else:
+            self.model = self.initialize()
 
     @abstractmethod
-    def initialize_model(self):
+    def initialize(self):
+        pass
+
+    @classmethod 
+    def load(self):
+        """
+        Load a model from a specified path and return a new instance of the class.
+        Must be implemented by all subclasses.
+        """
         pass
 
     @abstractmethod
-    def load_model(self):
-        pass
-
-    @abstractmethod
-    def evaluate(self):
+    def evaluate(self, obs=None):
         pass
 
     @abstractmethod
     def model_name(self):
         pass
 
-    def train(self):
-        models_dir = f"../models/{self.config.experiment_name}/{self.config.run_name}/"
-        eval_callback = EvalCallback(
+    def set_logger(self, logger):
+        self.model.set_logger(logger)
+
+    # This method can be overridden by subclasses to implement the training logic
+    def train(self, save_dir):
+
+        metrics_callback = MetricsCallback(
             self.env,
-            best_model_save_path=models_dir,
-            log_path=f"../logs/{self.config.experiment_name}/{self.config.run_name}/",
+            best_model_save_path=f"{save_dir}/models",
+            log_path=f"{save_dir}/logs",
             eval_freq=10000,
             deterministic=True,
             render=False,
         )
+        
+        callback_list = CallbackList([metrics_callback])
 
         EPOCHS = self.config.epochs
         TIMESTEPS = 10000
@@ -50,11 +65,13 @@ class Sb3Model(ABC):
                 log_interval=10000,
                 reset_num_timesteps=False,
                 tb_log_name=self.model_name(),
-                callback=eval_callback,
+                callback=callback_list,
             )
-            self.model.save(f"{models_dir}/{iters}")
+            self.model.save(f"{save_dir}/models/epoch_{iters}")
 
     def evaluate_multiple(self, num_episodes=100):
+        
+        all_inference_times = []
         all_episode_rewards = []
         all_episodes_len = []
         termination_cause = defaultdict(int)
@@ -66,11 +83,15 @@ class Sb3Model(ABC):
             results = self.evaluate()
             all_episode_rewards.append(results["episode_reward"])
             all_episodes_len.append(results["episode_length"])
+            all_inference_times.append(results["inference_time"])
             termination_cause[results["termination_cause"]] += 1
 
-            # Accumulate each metric's results
+            # Accumulate each metric's results only if the episode was successful
             for metric, value in results["metrics"].items():
-                metrics_accumulator[metric].append(value)
+                    # Skip empty_nodes metric if the episode was not successful
+                    if metric == "empty_nodes" and results["termination_cause"] != TerminationCause.SUCCESS.name:
+                        continue
+                    metrics_accumulator[metric].append(value)
 
         # Calculate the mean for each metric
         metrics_means = {metric: np.mean(values) if values else 0 for metric, values in metrics_accumulator.items()}
@@ -78,6 +99,7 @@ class Sb3Model(ABC):
         return {
             "mean_episode_reward": np.mean(all_episode_rewards),
             "mean_episode_length": np.mean(all_episodes_len) if all_episodes_len else 0,
+            "mean_inference_time": np.mean(all_inference_times),
             "termination_cause": dict(termination_cause),
             "mean_metrics": metrics_means
         }
