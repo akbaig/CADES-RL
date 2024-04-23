@@ -107,7 +107,14 @@ class StatesGenerator(object):
         return batch_comms, batch_comms_count
 
     def generate_states_batch(self, batch_size=None):
-        """Generate new batch of initial states"""
+        """
+            Generate new batch of initial states
+            Returns:
+            states - 2D Array (Batch Size x num of tasks) - elements contain size of task
+            states_lens - 1D Array (Batch Size) - elements contain num of valid tasks in each row of states variable
+            states_mask - 2D Array (Batch Size x num of tasks) - elements represent a mask of states variable having all 1 values
+            nodes_available - 2D Array (Batch Size x num of nodes) - elements contain size of nodes (imp: all batches contain same values of node sizes)
+        """
         if batch_size is None:
             batch_size = self.batch_size
         tasks_seqs_batch = np.random.randint(
