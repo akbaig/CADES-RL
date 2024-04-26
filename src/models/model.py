@@ -74,7 +74,7 @@ class Sb3Model(ABC):
         all_inference_times = []
         all_episode_rewards = []
         all_episodes_len = []
-        termination_cause = defaultdict(int)
+        termination_cause = {str(cause): 0 for cause in TerminationCause}
 
         # Initialize dictionary to store lists of results for each metric
         metrics_accumulator = {metric: [] for metric in self.metrics_to_eval}
@@ -86,20 +86,22 @@ class Sb3Model(ABC):
             all_inference_times.append(results["inference_time"])
             termination_cause[results["termination_cause"]] += 1
 
-            # Accumulate each metric's results only if the episode was successful
+            # Accumulate each metric's results
             for metric, value in results["metrics"].items():
                     # Skip empty_nodes metric if the episode was not successful
-                    if metric == "empty_nodes" and results["termination_cause"] != TerminationCause.SUCCESS.name:
+                    if metric == "empty_nodes" and results["termination_cause"] != str(TerminationCause.SUCCESS):
                         continue
                     metrics_accumulator[metric].append(value)
 
         # Calculate the mean for each metric
         metrics_means = {metric: np.mean(values) if values else 0 for metric, values in metrics_accumulator.items()}
+        # Calculate the percentage of each termination cause
+        termination_cause = {cause: count / num_episodes * 100 for cause, count in termination_cause.items()}
 
         return {
             "mean_episode_reward": np.mean(all_episode_rewards),
             "mean_episode_length": np.mean(all_episodes_len) if all_episodes_len else 0,
             "mean_inference_time": np.mean(all_inference_times),
-            "termination_cause": dict(termination_cause),
+            "termination_cause": termination_cause,
             "mean_metrics": metrics_means
         }

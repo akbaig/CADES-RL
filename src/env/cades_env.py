@@ -9,11 +9,17 @@ import copy
 
 
 class TerminationCause(Enum):
-    SUCCESS = 1
-    DUBLICATE_PICK = 2
-    NODE_OVERFLOW = 3
-    DUPLICATE_CRITICAL_PICK = 4
+    SUCCESS = (1, "success")
+    DUPLICATE_PICK = (2, "duplicate_pick")
+    NODE_OVERFLOW = (3, "node_overflow")
+    DUPLICATE_CRITICAL_PICK = (4, "duplicate_critical_pick")
 
+    def __init__(self, id, description):
+        self.id = id
+        self.description = description
+
+    def __str__(self):
+        return self.description
 
 class CadesEnv(gym.Env):
     """Custom Environment that follows gym interface."""
@@ -154,7 +160,7 @@ class CadesEnv(gym.Env):
             reward = self.config.NODE_OVERFLOW_reward * self.info["episode_len"] * 0.25
             reward_type = f"Node Overflow Reward: {reward}"
             done = True
-            self.info["termination_cause"] = TerminationCause.NODE_OVERFLOW.name
+            self.info["termination_cause"] = str(TerminationCause.NODE_OVERFLOW)
 
         # Agent picked the node which already had critical task
         elif self._is_task_critical(
@@ -168,7 +174,7 @@ class CadesEnv(gym.Env):
             reward_type = f"Duplicate Critical Pick Reward: {reward}"
             done = True
             self.info["termination_cause"] = (
-                TerminationCause.DUPLICATE_CRITICAL_PICK.name
+                str(TerminationCause.DUPLICATE_CRITICAL_PICK)
             )
 
         # Agent picked the correct task and node
@@ -222,7 +228,7 @@ class CadesEnv(gym.Env):
             if sum(self.current_state["tasks"]) == 0:
                 reward += self.config.SUCCESS_reward
                 reward_type += f"\n Success Reward: {reward}"
-                self.info["termination_cause"] = TerminationCause.SUCCESS.name
+                self.info["termination_cause"] = str(TerminationCause.SUCCESS)
                 self.info["is_success"] = True
                 done = True
 
@@ -275,7 +281,7 @@ class CadesEnv(gym.Env):
             self.assignment_status
         )
         # If verbose is toggled, print info about timestep
-        if done is True and self.config.verbose is True and self.info["termination_cause"] is TerminationCause.SUCCESS.name:
+        if done is True and self.config.verbose is True and self.info["is_success"] is True:
             self._verbose(action, reward)
 
         observation = self.current_state
