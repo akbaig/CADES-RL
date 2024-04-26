@@ -147,7 +147,7 @@ class CadesEnv(gym.Env):
         # Agent picked the task which is already used
         if selected_task_cost == 0:
             step = self.info["episode_len"]
-            max_steps = self.config.max_num_tasks
+            max_steps = self.env_stats["tasks_len"]
             max_reward = self.config.DUPLICATE_PICK_reward
             reward = self._exponential_decay_reward(step, max_steps, max_reward)
             reward_type = f"Duplicate Pick Reward on Step {step}: {reward}"
@@ -342,6 +342,7 @@ class CadesEnv(gym.Env):
         }
         self.initial_state = copy.deepcopy(observation)
         self.current_state = observation
+        self.env_stats["tasks_len"] = states["tasks_lens"][0]
         self.env_stats["comms_len"] = states["communications_lens"][0]
         self.env_stats["tasks_total_cost"] = sum(
             observation["tasks"] * self.norm_factor
