@@ -15,7 +15,6 @@ class StatesGenerator(object):
     """
 
     def __init__(self, config):
-        self.batch_size = config.batch_size
         self.min_num_tasks = config.min_num_tasks
         self.max_num_tasks = config.max_num_tasks
         self.min_task_size = config.min_task_size
@@ -196,7 +195,7 @@ class StatesGenerator(object):
             batch_comms_count.append(num_comms)
         return batch_comms, batch_comms_count
 
-    def generate_states_batch(self, batch_size=None):
+    def generate_states_batch(self, batch_size=1):
         """
             Generate new batch of initial states
             Returns:
@@ -205,8 +204,6 @@ class StatesGenerator(object):
             states_mask - 2D Array (Batch Size x num of tasks) - elements represent a mask of states variable having all 1 values
             nodes_available - 2D Array (Batch Size x num of nodes) - elements contain size of nodes (imp: all batches contain same values of node sizes)
         """
-        if batch_size is None:
-            batch_size = self.batch_size
         tasks_seqs_batch = np.random.randint(
             low=self.min_task_size,
             high=self.max_task_size + 1,
