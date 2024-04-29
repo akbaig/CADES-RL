@@ -58,7 +58,7 @@ class RecurrentPPOModel(Sb3Model):
             inference_times.append(time.time())
             action, lstm_states = self.model.predict(obs, state=lstm_states, episode_start=episode_starts)
             inference_times[-1] = time.time() - inference_times[-1]
-            obs, reward, done, info = self.env.step(action)
+            obs, reward, done, info = self.env.step(action, training=False)
             episode_starts = done
             episode_reward += reward
             actions.append(action)

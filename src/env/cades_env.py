@@ -133,7 +133,7 @@ class CadesEnv(gym.Env):
         reward = max_reward * (1 - (step / max_steps) ** k)
         return reward
 
-    def _reward(self, action):
+    def _reward(self, action, training=True):
         """
         Reward function for the environment, returns the episode termination signal and reward for the timestep
         """
@@ -151,10 +151,15 @@ class CadesEnv(gym.Env):
             max_reward = self.config.DUPLICATE_PICK_reward
             reward = self._exponential_decay_reward(step, max_steps, max_reward)
             reward_type = f"Duplicate Pick Reward on Step {step}: {reward}"
-            # Select any other valid action
-            new_action = self._get_valid_action(action)
-            _, done = self._reward(new_action)
-
+            if training:
+                # If training, select any other valid action
+                new_action = self._get_valid_action(action)
+                _, done = self._reward(new_action, training)
+            else:
+                # If not, terminate the episode
+                done = True
+                self.info["termination_cause"] = str(TerminationCause.DUPLICATE_PICK)
+        
         # Agent picked the node which is already full
         elif selected_task_cost > self.current_state["nodes"][selected_node_idx]:
             reward = self.config.NODE_OVERFLOW_reward * self.info["episode_len"] * 0.25
@@ -255,12 +260,12 @@ class CadesEnv(gym.Env):
             f"Termination Cause: {self.info['termination_cause']}\n"
         )
 
-    def step(self, action):
+    def step(self, action, training=True):
         """
         Advances the episode by one timestep using the given action. 
         """
         # Calc Rewards
-        reward, done = self._reward(action)
+        reward, done = self._reward(action, training)
         
         # Save Info about Episode
         self.info["commnication_status"] = self.communication_status
