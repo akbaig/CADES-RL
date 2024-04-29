@@ -49,7 +49,7 @@ class RecurrentPPOModel(Sb3Model):
         episode_starts = np.array([True], dtype=bool)
         episode_reward = 0
         done = False
-        obs = self.env.reset(states)
+        obs = self.env.reset(states, training=False)
         info = {}
         actions = []
 

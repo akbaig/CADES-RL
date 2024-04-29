@@ -292,7 +292,7 @@ class CadesEnv(gym.Env):
         observation = self.current_state
         return observation, reward, done, self.info # observation, reward, done, extra_info
     
-    def generate_states(self):
+    def generate_states(self, training=True):
         """
         Generates states for the environment
         """
@@ -305,11 +305,18 @@ class CadesEnv(gym.Env):
         (states, critical_mask, _) = self.states_generator.generate_critical_tasks(
             states, states_mask, states_lens
         )
-        (communications, communications_lens) = (
-            self.states_generator.generate_communications(
-                states, critical_mask, states_lens
+        if training:
+            (communications, communications_lens) = (
+                self.states_generator.generate_communications(
+                    states, critical_mask, states_lens
+                )
             )
-        )
+        else:
+            (communications, communications_lens) = (
+                self.states_generator.generate_chained_communications(
+                    states, critical_mask, states_lens
+                )
+            )
         generated_states = {
             "tasks": states,
             "tasks_lens": states_lens,
@@ -321,7 +328,7 @@ class CadesEnv(gym.Env):
         }
         return generated_states
 
-    def reset(self, states=None):
+    def reset(self, states=None, training=True):
         """
         Initializes new states for the start of a new episode.
         """
@@ -335,7 +342,7 @@ class CadesEnv(gym.Env):
         self.info = {"is_success": False, "episode_len": 0, "termination_cause": None}
         self.done = False
         if states is None:
-            states = self.generate_states()
+            states = self.generate_states(training)
         # norm factor is the largest node size of first batch in nodes
         self.norm_factor = max(list(states["nodes"][0]))
         # use first batch of states and nodes_available and normalize the values, this is our observation now
