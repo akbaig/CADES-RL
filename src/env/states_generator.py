@@ -188,6 +188,9 @@ class StatesGenerator(object):
                     valid_receivers = [
                         task for task in valid_receivers if mask[task] != sender_mask
                     ]
+                # if there are no valid receivers, continue
+                if len(valid_receivers) == 0:
+                    continue
                 # select random receiver
                 receiver = random.choice(valid_receivers)
                 comms[sender, receiver] = 1
