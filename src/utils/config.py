@@ -53,8 +53,8 @@ parameters_definition = {
         "type": str,
         "desc": "Device to use (if no GPU available, value should be 'cpu')",
     },
-    "inference": {"value": True, "type": bool, "desc": "Do not train the model"},
-    "verbose": {"value": False, "type": bool, "desc": "Do not train the model"},
+    "inference": {"value": True, "type": bool, "desc": "Evaluate the model"},
+    "verbose": {"value": False, "type": bool, "desc": "Debugging mode"},
     "experiment_name": {
         "value": "message_communication_channel_2d_matrix",
         "type": str,
