@@ -70,7 +70,7 @@ class RecurrentPPOModel(Sb3Model):
             "actions": actions,
             "episode_reward": episode_reward,
             "episode_length": info.get("episode_len", 0),
-            "inference_time": np.mean(inference_times),
+            "inference_time": np.sum(inference_times),
             "termination_cause": info.get("termination_cause", "unknown"),
             "metrics": metrics_results
         }
