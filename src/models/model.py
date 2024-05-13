@@ -4,6 +4,7 @@ import numpy as np
 from stable_baselines3.common.callbacks import CallbackList
 from utils.metrics_callback import MetricsCallback
 from env.cades_env import TerminationCause
+from utils.seed_update_callback import SeedUpdateCallback
 
 class Sb3Model(ABC):
 
@@ -50,8 +51,8 @@ class Sb3Model(ABC):
             deterministic=True,
             render=False,
         )
-        
-        callback_list = CallbackList([metrics_callback])
+        seed_update_callback = SeedUpdateCallback(train=True)
+        callback_list = CallbackList([metrics_callback, seed_update_callback])
 
         EPOCHS = self.config.epochs
         TIMESTEPS = 10000
@@ -78,8 +79,12 @@ class Sb3Model(ABC):
 
         # Initialize dictionary to store lists of results for each metric
         metrics_accumulator = {metric: [] for metric in self.metrics_to_eval}
+        # Initialize the seed update callback
+        seed_update_callback = SeedUpdateCallback(train=False)
 
         for _ in range(num_episodes):
+            # Generate a new seed for the episode
+            seed_update_callback.on_episode_start()
             results = self.evaluate()
             all_episode_rewards.append(results["episode_reward"])
             all_episodes_len.append(results["episode_length"])
