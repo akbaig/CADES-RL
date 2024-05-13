@@ -1,10 +1,10 @@
 import numpy as np
-from stable_baselines3.common.callbacks import EvalCallback
+from sb3_contrib.common.maskable.callbacks import MaskableEvalCallback
 from env.cades_env import TerminationCause
 
-class MetricsCallback(EvalCallback):
-    def __init__(self, eval_env, **kwargs):
-        super().__init__(eval_env, **kwargs)
+class MetricsCallback(MaskableEvalCallback):
+    def __init__(self, *args, use_masking: bool = False, **kwargs):
+        super().__init__(*args, use_masking=use_masking, **kwargs)
         # Initialize episode count for evaluation cycle
         self.episode_count = 0
         # Initialize counters and storage for metrics

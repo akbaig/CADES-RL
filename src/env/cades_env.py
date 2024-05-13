@@ -239,6 +239,42 @@ class CadesEnv(gym.Env):
 
         self.info["reward_type"] += f'{reward_type}\n'
         return reward, done
+    
+    def _get_lowest_cost_task(self):
+        """
+        Returns the index of the task with the lowest cost
+        """
+        return np.argmin(self.current_state["tasks"])
+
+    def _is_task_valid(self, task_index):
+        """
+        Checks if the task is valid i.e. has a cost greater than zero
+        """
+        return self.current_state["tasks"][task_index] > 0
+    
+    def _is_node_valid_for_task(self, task_index, node_index):
+        """
+        Check if the selected node has enough space for the selected task
+        """
+        cost = self.current_state["tasks"][task_index]
+        return self.current_state["nodes"][node_index] >= cost
+    
+    def action_masks(self):
+        action_dim1 = self.config.max_num_tasks
+        action_dim2 = self.config.total_nodes
+        mask_dim1 = np.zeros(action_dim1, dtype=bool)
+        mask_dim2 = np.zeros(action_dim2, dtype=bool)
+        # Generate masks for the tasks
+        for i in range(action_dim1):
+            mask_dim1[i] = self._is_task_valid(i)
+        # Get the lowest cost task and keep only the nodes that can accommodate it
+        lowest_cost_task_idx = self._get_lowest_cost_task()
+        # Generate masks for the nodes
+        for i in range(action_dim2):
+            mask_dim2[i] = self._is_node_valid_for_task(lowest_cost_task_idx, i)
+        # Concatenate these masks
+        masks_np = np.concatenate([mask_dim1, mask_dim2])
+        return masks_np
 
     def _verbose(self, action, reward):
         """

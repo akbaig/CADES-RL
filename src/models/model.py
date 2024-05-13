@@ -40,9 +40,8 @@ class Sb3Model(ABC):
     def set_logger(self, logger):
         self.model.set_logger(logger)
 
-    # This method can be overridden by subclasses to implement the training logic
-    def train(self, save_dir):
-
+    # This method can be overridden by subclasses to implement the evaluation logic
+    def _eval_callbacks(self, save_dir):
         metrics_callback = MetricsCallback(
             self.env,
             best_model_save_path=f"{save_dir}/models",
@@ -53,7 +52,12 @@ class Sb3Model(ABC):
         )
         seed_update_callback = SeedUpdateCallback(train=True)
         callback_list = CallbackList([metrics_callback, seed_update_callback])
+        return callback_list
 
+    # This method can be overridden by subclasses to implement the training logic
+    def train(self, save_dir):
+
+        callback_list = self._eval_callbacks(save_dir)
         EPOCHS = self.config.epochs
         TIMESTEPS = 10000
         iters = 0
