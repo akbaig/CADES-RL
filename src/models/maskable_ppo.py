@@ -52,7 +52,7 @@ class MaskablePPOModel(Sb3Model):
             self.env,
             best_model_save_path=f"{save_dir}/models",
             log_path=f"{save_dir}/logs",
-            eval_freq=10000,
+            eval_freq=self.config.eval_timesteps,
             deterministic=True,
             render=False,
             use_masking=True

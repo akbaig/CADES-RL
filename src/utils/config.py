@@ -44,6 +44,7 @@ parameters_definition = {
     # TRAINING PARAMETERS #
     "seed": {"value": 3, "type": int, "desc": "Random seed"},
     "epochs": {"value": 150, "type": int, "desc": "Number of episodes"},
+    "eval_timesteps": {"value": 10000, "type": int, "desc": "Number of timesteps after which model is evaluated"},
     "batch_size": {"value": 64, "type": int, "desc": "Batch size"},
     "lr": {"value": 0.0003, "type": float, "desc": "Initial learning rate"},
     "alpha": {"value": 0.3, "type": float, "desc": "Alpha Value to compute reward"},

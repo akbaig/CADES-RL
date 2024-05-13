@@ -46,7 +46,7 @@ class Sb3Model(ABC):
             self.env,
             best_model_save_path=f"{save_dir}/models",
             log_path=f"{save_dir}/logs",
-            eval_freq=10000,
+            eval_freq=self.config.eval_timesteps,
             deterministic=True,
             render=False,
         )
@@ -59,7 +59,7 @@ class Sb3Model(ABC):
 
         callback_list = self._eval_callbacks(save_dir)
         EPOCHS = self.config.epochs
-        TIMESTEPS = 10000
+        TIMESTEPS = self.config.eval_timesteps
         iters = 0
 
         while iters < EPOCHS:
@@ -67,7 +67,7 @@ class Sb3Model(ABC):
             print("Epoch #", iters)
             self.model.learn(
                 total_timesteps=TIMESTEPS,
-                log_interval=10000,
+                log_interval=self.config.eval_timesteps,
                 reset_num_timesteps=False,
                 tb_log_name=self.model_name(),
                 callback=callback_list,
