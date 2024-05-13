@@ -237,6 +237,7 @@ class CadesEnv(gym.Env):
                 self.info["is_success"] = True
                 done = True
 
+        self.info["reward_type"] += f'{reward_type}\n'
         return reward, done
 
     def _verbose(self, action, reward):
@@ -271,7 +272,7 @@ class CadesEnv(gym.Env):
         self.info["commnication_status"] = self.communication_status
         self.info["assignment_status"] = self.assignment_status
         self.env_stats["intranode_comms_len"] = len(self.communication_status)
-        self.total_reward = self.total_reward + reward
+        self.info["total_reward"] += reward
 
         # Calculate Evaluation Metrics
         self.info["avg_node_occupancy"] = get_avg_node_occupancy(
@@ -339,7 +340,7 @@ class CadesEnv(gym.Env):
         for i in range(self.config.total_nodes):
             self.assignment_status.append([])
 
-        self.info = {"is_success": False, "episode_len": 0, "termination_cause": None}
+        self.info = {"is_success": False, "episode_len": 0, "termination_cause": None, "reward_type": "", "total_reward": 0}
         self.done = False
         if states is None:
             states = self.generate_states(training)
