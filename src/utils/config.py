@@ -56,6 +56,7 @@ parameters_definition = {
     },
     "inference": {"value": True, "type": bool, "desc": "Evaluate the model"},
     "verbose": {"value": False, "type": bool, "desc": "Debugging mode"},
+    "invalid_action_replacement": {"value": True, "type": bool, "desc": "Replace invalid actions"},
     "experiment_name": {
         "value": "message_communication_channel_2d_matrix",
         "type": str,

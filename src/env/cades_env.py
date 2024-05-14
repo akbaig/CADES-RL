@@ -107,23 +107,19 @@ class CadesEnv(gym.Env):
         """
         return np.intersect1d(list_of_tasks, self.assignment_status[node_index])
 
-    def _get_valid_action(self, action):
+    def _get_random_valid_task(self):
         """
-        Prevents the agent from selecting previously chosen indices by masking invalid choices,
-        ensuring the agent selects only valid actions.
+        Returns a valid task index from the available tasks
         """
-        task_idx, node_idx = action
-        if self.current_state["tasks"][task_idx] > 0:
-            return action  # The action is already valid
         valid_task_indices = [
             idx for idx, task in enumerate(self.current_state["tasks"]) if task > 0
         ]
         if not valid_task_indices:  # No valid task left
-            raise ValueError("No valid action found")
+            raise ValueError("No valid task found")
         else:  # Choose a new task from the valid tasks
             new_task_idx = random.choice(valid_task_indices)
-        return [new_task_idx, node_idx]
-    
+        return new_task_idx
+
     def _exponential_decay_reward(self, step, max_steps, max_reward, k=2):
         """
         An adjusted exponential decay formula to reach exactly 0 at the final step
@@ -151,12 +147,12 @@ class CadesEnv(gym.Env):
             max_reward = self.config.DUPLICATE_PICK_reward
             reward = self._exponential_decay_reward(step, max_steps, max_reward)
             reward_type = f"Duplicate Pick Reward on Step {step}: {reward}"
-            if training:
-                # If training, select any other valid action
-                new_action = self._get_valid_action(action)
-                _, done = self._reward(new_action, training)
+            if training and self.config.invalid_action_replacement is True:
+                # Select any other valid action
+                    valid_task_idx = self._get_random_valid_task()
+                    _, done = self._reward([valid_task_idx, selected_node_idx], training)
             else:
-                # If not, terminate the episode
+                # If not, terminate the episode (No replacement in evaluation mode)
                 done = True
                 self.info["termination_cause"] = str(TerminationCause.DUPLICATE_PICK)
         
