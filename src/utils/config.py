@@ -15,16 +15,17 @@ parameters_definition = {
     "max_num_tasks": {"value": 12, "type": int, "desc": "Maximum number of tasks"},
     "min_node_size": {"value": 12, "type": int, "desc": "Minimum node size"},
     "max_node_size": {"value": 12, "type": int, "desc": "Maximum node size"},
-    "total_nodes": {"value": 8, "type": int, "desc": "Total number of nodes"},
-    "number_of_copies": {
-        "value": 2,
-        "type": int,
-        "desc": "Number of critical task copies",
-    },
+    "min_num_nodes": {"value": 8, "type": int, "desc": "Minimum number of nodes"},
+    "max_num_nodes": {"value": 8, "type": int, "desc": "Maximum number of nodes"},
     "number_of_critical_tasks": {
         "value": 3,
         "type": int,
         "desc": "Number of critical task",
+    },
+    "number_of_replicas": {
+        "value": 2,
+        "type": int,
+        "desc": "Number of replicas of critical task",
     },
     "min_num_comms": {
         "value": 10,
@@ -40,6 +41,21 @@ parameters_definition = {
          "value": 3,
         "type": int,
         "desc": "Max length of chained communication",
+    },
+    "non_critical_comm": {
+        "value": False,
+        "type": bool,
+        "desc": "Non-critical tasks communication",
+    },
+    "critical_comm": {
+        "value": True,
+        "type": bool,
+        "desc": "Critical tasks and replicas communication",
+    },
+    "use_comm_graph_in_train": {
+        "value": False,
+        "type": bool,
+        "desc": "Communication graph in training",
     },
     # TRAINING PARAMETERS #
     "seed": {"value": 3, "type": int, "desc": "Random seed"},
@@ -85,7 +101,6 @@ parameters_definition = {
     },
     "COMM_reward": {"value": 10, "type": int, "desc": "Total Communication Reward"},
 }
-
 
 def get_config():
     parser = argparse.ArgumentParser()

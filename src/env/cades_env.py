@@ -4,7 +4,7 @@ import numpy as np
 from gym import spaces
 from enum import Enum
 from utils.eval_metrics import get_avg_node_occupancy, get_empty_nodes_percentage, get_evaluate_message_channel_occupancy
-from env.states_generator import StatesGenerator
+from env.extended_states_generator import ExtendedStatesGenerator
 import copy
 
 
@@ -33,11 +33,11 @@ class CadesEnv(gym.Env):
         super().__init__()
 
         self.config = config
-        self.states_generator = StatesGenerator(config)
+        self.states_generator = ExtendedStatesGenerator(config)
         self.norm_factor = None
 
         self.action_space = spaces.MultiDiscrete(
-            [config.max_num_tasks, config.total_nodes]
+            [config.max_num_tasks, config.max_num_nodes]
         )
 
         self.observation_space = spaces.Dict(
@@ -45,12 +45,11 @@ class CadesEnv(gym.Env):
                 "tasks": spaces.Box(
                     low=0, high=1, shape=(config.max_num_tasks,), dtype=np.float
                 ),
-                "critical_mask": spaces.MultiDiscrete(
-                    [2 + config.number_of_critical_tasks]
-                    * np.prod((config.max_num_tasks,))
+                "critical_mask": spaces.Box(
+                    low=0, high=1, shape=(config.max_num_tasks,), dtype=np.float
                 ),
                 "nodes": spaces.Box(
-                    low=0, high=1, shape=(config.total_nodes,), dtype=np.float
+                    low=0, high=1, shape=(config.max_num_nodes,), dtype=np.float
                 ),
                 "communications": spaces.Box(
                     low=0,
@@ -61,19 +60,14 @@ class CadesEnv(gym.Env):
             }
         )
 
-        self.env_stats = {}
-        self.assignment_status = []
-        for i in range(config.total_nodes):
-            self.assignment_status.append([])
+        self.env_stats = {}        
         self.current_state = {}
-        self.total_reward = 0
-        self.done = False
 
     def _is_task_critical(self, task_index):
         """
         Checks if a task is critical or not i.e. has mask value greater than one
         """
-        return self.current_state["critical_mask"][task_index] > 1
+        return self.current_state["critical_mask"][task_index] > 0
 
     def _is_critical_task_duplicated(self, task_index, node_index):
         """
@@ -330,34 +324,27 @@ class CadesEnv(gym.Env):
         Generates states for the environment
         """
         (
-            states,
-            states_lens,
-            states_mask,
-            nodes_available,
-        ) = self.states_generator.generate_states_batch()
-        (states, critical_mask, _) = self.states_generator.generate_critical_tasks(
-            states, states_mask, states_lens
+            tasks,
+            num_tasks,
+            nodes,
+            num_nodes
+        ) = self.states_generator.generate_tasks_and_nodes()
+        critical_mask = self.states_generator.generate_critical_tasks_and_replicas(
+            tasks, num_tasks
         )
-        if training:
-            (communications, communications_lens) = (
-                self.states_generator.generate_communications(
-                    states, critical_mask, states_lens
-                )
-            )
-        else:
-            (communications, communications_lens) = (
-                self.states_generator.generate_chained_communications(
-                    states, critical_mask, states_lens
-                )
-            )
+        # Use graph during evaluation and also in training if specified
+        use_graph = (not training) or self.config.use_comm_graph_in_train
+        comms, num_comms = self.states_generator.generate_communications(
+            tasks, num_tasks, critical_mask, graph=use_graph
+        )
         generated_states = {
-            "tasks": states,
-            "tasks_lens": states_lens,
-            "tasks_mask": states_mask,
+            "tasks": tasks,
+            "num_tasks": num_tasks,
             "critical_mask": critical_mask,
-            "nodes": nodes_available,
-            "communications": communications,
-            "communications_lens": communications_lens,
+            "nodes": nodes,
+            "num_nodes": num_nodes,
+            "communications": comms,
+            "num_communications": num_comms,
         }
         return generated_states
 
@@ -369,26 +356,25 @@ class CadesEnv(gym.Env):
         # it stores the indices of task assignment on the nodes
         self.assignment_status = []
         self.communication_status = set()
-        for i in range(self.config.total_nodes):
-            self.assignment_status.append([])
-
         self.info = {"is_success": False, "episode_len": 0, "termination_cause": None, "reward_type": "", "total_reward": 0}
-        self.done = False
         if states is None:
             states = self.generate_states(training)
-        # norm factor is the largest node size of first batch in nodes
-        self.norm_factor = max(list(states["nodes"][0]))
-        # use first batch of states and nodes_available and normalize the values, this is our observation now
+        for _ in range(states["num_nodes"]):
+            self.assignment_status.append([])
+        # norm factor is the largest node size
+        self.norm_factor = np.max(states["nodes"])
+        # critical norm factor is the largest mask value in critical mask
+        self.critical_norm_factor = np.max(states["critical_mask"]) or 1 # to avoid division by zero if no critical task
         observation = {
-            "tasks": np.array(list(states["tasks"][0]) / self.norm_factor),
-            "critical_mask": np.array(states["critical_mask"][0]),
-            "nodes": np.array(list(states["nodes"][0]) / self.norm_factor),
-            "communications": np.array(states["communications"][0]),
+            "tasks": np.array(states["tasks"] / self.norm_factor),
+            "critical_mask": np.array(states["critical_mask"] / self.critical_norm_factor),
+            "nodes": np.array(states["nodes"] / self.norm_factor),
+            "communications": np.array(states["communications"]),
         }
         self.initial_state = copy.deepcopy(observation)
         self.current_state = observation
-        self.env_stats["tasks_len"] = states["tasks_lens"][0]
-        self.env_stats["comms_len"] = states["communications_lens"][0]
+        self.env_stats["tasks_len"] = states["num_tasks"]
+        self.env_stats["comms_len"] = states["num_communications"]
         self.env_stats["tasks_total_cost"] = sum(
             observation["tasks"] * self.norm_factor
         )
