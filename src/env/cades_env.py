@@ -118,6 +118,19 @@ class CadesEnv(gym.Env):
         else:  # Choose a new task from the valid tasks
             new_task_idx = random.choice(valid_task_indices)
         return new_task_idx
+    
+    def _get_random_valid_node_for_task(self, task_idx):
+        """
+        Returns a valid node index from the available nodes for the given task
+        """
+        valid_node_indices = [
+            idx for idx, node in enumerate(self.current_state["nodes"]) if node >= self.current_state["tasks"][task_idx]
+        ]
+        if not valid_node_indices:  # No valid node left
+            raise ValueError("No valid node found")
+        else:  # Choose a new node from the valid node
+            new_node_idx = random.choice(valid_node_indices)
+        return new_node_idx
 
     def _exponential_decay_reward(self, step, max_steps, max_reward, k=2):
         """
@@ -159,8 +172,14 @@ class CadesEnv(gym.Env):
         elif selected_task_cost > self.current_state["nodes"][selected_node_idx]:
             reward = self.config.NODE_OVERFLOW_reward * self.info["episode_len"] * 0.25
             reward_type = f"Node Overflow Reward: {reward}"
-            done = True
-            self.info["termination_cause"] = str(TerminationCause.NODE_OVERFLOW)
+            if training and self.config.invalid_action_replacement is True:
+                # Select any other valid action
+                valid_node_idx = self._get_random_valid_node_for_task(selected_task_idx)
+                _, done = self._reward([selected_task_idx, valid_node_idx], training)
+            else:
+                # If not, terminate the episode (No replacement in evaluation mode)
+                done = True
+                self.info["termination_cause"] = str(TerminationCause.NODE_OVERFLOW)
 
         # Agent picked the node which already had critical task
         elif self._is_task_critical(
