@@ -97,8 +97,8 @@ class Sb3Model(ABC):
 
             # Accumulate each metric's results
             for metric, value in results["metrics"].items():
-                    # Skip empty_nodes metric if the episode was not successful
-                    if metric == "empty_nodes" and results["termination_cause"] != str(TerminationCause.SUCCESS):
+                    # Skip metrics if the episode was not successful
+                    if results["termination_cause"] != str(TerminationCause.SUCCESS):
                         continue
                     metrics_accumulator[metric].append(value)
 
