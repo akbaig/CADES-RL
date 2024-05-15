@@ -3,7 +3,12 @@ import random
 import numpy as np
 from gym import spaces
 from enum import Enum
-from utils.eval_metrics import get_avg_node_occupancy, get_empty_nodes_percentage, get_evaluate_message_channel_occupancy
+from utils.eval_metrics import (
+    get_avg_node_occupancy,
+    get_avg_active_node_occupancy,
+    get_empty_nodes_percentage,
+    get_evaluate_message_channel_occupancy
+)
 from env.extended_states_generator import ExtendedStatesGenerator
 import copy
 
@@ -302,6 +307,10 @@ class CadesEnv(gym.Env):
 
         # Calculate Evaluation Metrics
         self.info["avg_node_occupancy"] = get_avg_node_occupancy(
+            self.initial_state["nodes"] * self.norm_factor, # nodes total capacities
+            self.current_state["nodes"] * self.norm_factor # nodes remaining capacities
+        )
+        self.info["avg_active_node_occupancy"] = get_avg_active_node_occupancy(
             self.initial_state["nodes"] * self.norm_factor, # nodes total capacities
             self.current_state["nodes"] * self.norm_factor # nodes remaining capacities
         )

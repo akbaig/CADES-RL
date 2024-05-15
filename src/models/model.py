@@ -9,7 +9,7 @@ from utils.seed_update_callback import SeedUpdateCallback
 class Sb3Model(ABC):
 
     def __init__(self, env, config, model = None):
-        self.metrics_to_eval = ["avg_node_occupancy", "message_channel_occupancy", "empty_nodes"]
+        self.metrics_to_eval = ["avg_node_occupancy", "avg_active_node_occupancy", "message_channel_occupancy", "empty_nodes"]
         self.env = env
         self.config = config
         if model is not None:
