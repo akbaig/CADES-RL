@@ -19,12 +19,12 @@ class MetricsCallback(MaskableEvalCallback):
         if locals_["done"]:
             self.episode_count += 1
             info = locals_['info']
-            # Store the metrics for the episode
-            self.avg_node_occupancy.append(info.get("avg_node_occupancy"))
-            self.message_channel_occupancy.append(info.get("message_channel_occupancy"))
             # Store the termination cause
             self.termination_cause[info.get("termination_cause")] += 1
             if info.get("is_success", False):
+                # Store the metrics for the episode
+                self.avg_node_occupancy.append(info.get("avg_node_occupancy"))
+                self.message_channel_occupancy.append(info.get("message_channel_occupancy"))
                 self.empty_nodes.append(info.get("empty_nodes", 0))
 
     def _store_metrics(self):
