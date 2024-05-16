@@ -275,7 +275,7 @@ class CadesEnv(gym.Env):
     
     def action_masks(self):
         action_dim1 = self.config.max_num_tasks
-        action_dim2 = self.config.total_nodes
+        action_dim2 = self.config.max_num_nodes
         mask_dim1 = np.zeros(action_dim1, dtype=bool)
         mask_dim2 = np.zeros(action_dim2, dtype=bool)
         # Generate masks for the tasks
