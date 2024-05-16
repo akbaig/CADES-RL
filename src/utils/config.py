@@ -43,7 +43,7 @@ parameters_definition = {
         "desc": "Max length of chained communication",
     },
     "non_critical_comm": {
-        "value": False,
+        "value": True,
         "type": bool,
         "desc": "Non-critical tasks communication",
     },
