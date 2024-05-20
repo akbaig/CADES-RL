@@ -251,6 +251,11 @@ class CadesEnv(gym.Env):
                 self.info["is_success"] = True
                 done = True
 
+        # if(done is True):
+        #     # Add reward based on avg active node occupancy
+        #     reward += self.config.NODE_OCCUPANCY_reward * (self.info["avg_active_node_occupancy"] / 100)
+        #     # Add reward based on message channel occupancy in reverse
+        #     reward += self.config.MESSAGE_CHANNEL_OCCUPANCY_reward * (1 - (self.info["message_channel_occupancy"] / 100))
         self.info["reward_type"] += f'{reward_type}\n'
         return reward, done
     

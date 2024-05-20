@@ -94,6 +94,8 @@ parameters_definition = {
     "STEP_reward": {"value": 1, "type": int, "desc": "Step Reward"},
     "BONUS_reward": {"value": 0.25, "type": int, "desc": "Step Reward"},
     "CRITICAL_reward": {"value": 1, "type": int, "desc": "Critical Task Reward"},
+    # "NODE_OCCUPANCY_reward": { "value": 0, "type": int, "desc": "Node Occupancy Reward"},
+    # "MESSAGE_CHANNEL_OCCUPANCY_reward": { "value": 0, "type": int, "desc": "Message Channel Occupancy Reward"},
     "DUPLICATE_CRITICAL_PICK_reward": {
         "value": -1,
         "type": int,
