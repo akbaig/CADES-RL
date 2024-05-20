@@ -140,6 +140,20 @@ class CadesEnv(gym.Env):
         """
         reward = max_reward * (1 - (step / max_steps) ** k)
         return reward
+    
+    def _reward_unit(self):
+        # reward can be multiplied with this unit to balance out the effect of different episode lengths
+        return self.config.max_num_tasks / self.env_stats["tasks_len"]
+    
+    def _episode_length_norm_factor(self):
+        # Lmax = max_steps_in_all_episodes
+        Lmax = self.config.max_num_tasks
+        # Lcurrent = max_steps_in_current_episode
+        Lcurrent = self.env_stats["tasks_len"]
+        # factor = Lmax(Lmax + 1) / Lcurrent(Lcurrent + 1)
+        factor = (Lmax * (Lmax + 1)) / (Lcurrent * (Lcurrent + 1))
+        # return factor
+        return factor
 
     def _reward(self, action, training=True):
         """
@@ -170,7 +184,11 @@ class CadesEnv(gym.Env):
         
         # Agent picked the node which is already full
         elif selected_task_cost > self.current_state["nodes"][selected_node_idx]:
-            reward = self.config.NODE_OVERFLOW_reward * self.info["episode_len"] * 0.25
+            reward = (
+                self.config.NODE_OVERFLOW_reward 
+                * (self.info["episode_len"] * self.ep_len_norm_factor) 
+                * 0.25
+            )
             reward_type = f"Node Overflow Reward: {reward}"
             if training and self.config.invalid_action_replacement is True:
                 # Select any other valid action
@@ -187,7 +205,7 @@ class CadesEnv(gym.Env):
         ) and self._is_critical_task_duplicated(selected_task_idx, selected_node_idx):
             reward = (
                 self.config.DUPLICATE_CRITICAL_PICK_reward
-                * self.info["episode_len"]
+                * (self.info["episode_len"] * self.ep_len_norm_factor)
                 * 0.15
             )
             reward_type = f"Duplicate Critical Pick Reward: {reward}"
@@ -199,8 +217,11 @@ class CadesEnv(gym.Env):
         # Agent picked the correct task and node
         else:
             # Assign Rewards
-            reward = self.config.STEP_reward
-            reward += self.config.BONUS_reward * self.info["episode_len"]
+            reward = (self.config.STEP_reward * self.reward_unit)
+            reward += (
+                (self.config.BONUS_reward * self.reward_unit) 
+                * (self.info["episode_len"] * self.ep_len_norm_factor)
+            )
             reward_type = f"Step and Bonus Reward: {reward}"
             if self._is_task_critical(selected_task_idx):
                 reward += self.config.CRITICAL_reward
@@ -425,6 +446,8 @@ class CadesEnv(gym.Env):
             )
             * 100
         )
+        self.reward_unit = self._reward_unit()
+        self.ep_len_norm_factor = self._episode_length_norm_factor()
 
         return observation
 
