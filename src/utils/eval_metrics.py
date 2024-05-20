@@ -12,7 +12,7 @@ def get_avg_node_occupancy(total_capacities, current_capacities):
     # Calculate the used capacities
     used_capacities = (total_capacities - current_capacities) / total_capacities
     # Calculate mean used capacity as percentage
-    mean_capacity = np.mean(used_capacities) * 100
+    mean_capacity = np.mean(used_capacities) * 100 if len(used_capacities) > 0 else 0
     # Return the percentage, rounded to two decimal places
     return round(mean_capacity, 2)
 
