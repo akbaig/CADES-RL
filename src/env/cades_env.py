@@ -190,14 +190,14 @@ class CadesEnv(gym.Env):
                 * 0.25
             )
             reward_type = f"Node Overflow Reward: {reward}"
-            if training and self.config.invalid_action_replacement is True:
-                # Select any other valid action
-                valid_node_idx = self._get_random_valid_node_for_task(selected_task_idx)
-                _, done = self._reward([selected_task_idx, valid_node_idx], training)
-            else:
-                # If not, terminate the episode (No replacement in evaluation mode)
-                done = True
-                self.info["termination_cause"] = str(TerminationCause.NODE_OVERFLOW)
+            # if training and self.config.invalid_action_replacement is True:
+            #     # Select any other valid action
+            #     valid_node_idx = self._get_random_valid_node_for_task(selected_task_idx)
+            #     _, done = self._reward([selected_task_idx, valid_node_idx], training)
+            # else:
+            # If not, terminate the episode (No replacement in evaluation mode)
+            done = True
+            self.info["termination_cause"] = str(TerminationCause.NODE_OVERFLOW)
 
         # Agent picked the node which already had critical task
         elif self._is_task_critical(
