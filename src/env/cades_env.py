@@ -272,11 +272,6 @@ class CadesEnv(gym.Env):
                 self.info["is_success"] = True
                 done = True
 
-        # if(done is True):
-        #     # Add reward based on avg active node occupancy
-        #     reward += self.config.NODE_OCCUPANCY_reward * (self.info["avg_active_node_occupancy"] / 100)
-        #     # Add reward based on message channel occupancy in reverse
-        #     reward += self.config.MESSAGE_CHANNEL_OCCUPANCY_reward * (1 - (self.info["message_channel_occupancy"] / 100))
         self.info["reward_type"] += f'{reward_type}\n'
         return reward, done
     
@@ -341,7 +336,8 @@ class CadesEnv(gym.Env):
         """
         Advances the episode by one timestep using the given action. 
         """
-        
+         # Calc Rewards
+        reward, done = self._reward(action, training)
         # Save Info about Episode
         self.info["commnication_status"] = self.communication_status
         self.info["assignment_status"] = self.assignment_status
@@ -363,9 +359,15 @@ class CadesEnv(gym.Env):
         self.info["empty_nodes"] = get_empty_nodes_percentage(
             self.assignment_status
         )
-        # Calc Rewards
-        reward, done = self._reward(action, training)
+        # if done is True:
+            # Add reward based on avg active node occupancy
+            # reward += self.config.NODE_OCCUPANCY_reward * (self.info["avg_active_node_occupancy"] / 100)
+            # Add reward based on message channel occupancy in reverse
+            # reward += self.config.MESSAGE_CHANNEL_OCCUPANCY_reward * (1 - (self.info["message_channel_occupancy"] / 100))
+
+        # Update total reward
         self.info["total_reward"] += reward
+
         # If verbose is toggled, print info about timestep
         if done is True and self.config.verbose is True and self.info["is_success"] is True:
             self._verbose(action, reward)
