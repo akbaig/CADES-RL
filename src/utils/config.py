@@ -1,117 +1,68 @@
+import os
 import argparse
+import yaml
+from types import SimpleNamespace
 
-parser = argparse.ArgumentParser()
-arg_lists = []
+def load_yaml_config(config_file):
+    if not os.path.isfile(config_file):
+        raise FileNotFoundError(f"Configuration file '{config_file}' not found.")
+    with open(config_file, 'r') as file:
+        config = yaml.safe_load(file)
+    return config
 
+def merge_configs(*configs):
+    merged_config = {}
+    for config in configs:
+        merged_config.update(config)
+    return merged_config
 
-def str2bool(v):
-    return v.lower() in ("true", "1")
-
-
-parameters_definition = {
-    "min_task_size": {"value": 4, "type": int, "desc": "Minimum task size"},
-    "max_task_size": {"value": 4, "type": int, "desc": "Maximum task size"},
-    "min_num_tasks": {"value": 12, "type": int, "desc": "Minimum number of tasks"},
-    "max_num_tasks": {"value": 12, "type": int, "desc": "Maximum number of tasks"},
-    "min_node_size": {"value": 12, "type": int, "desc": "Minimum node size"},
-    "max_node_size": {"value": 12, "type": int, "desc": "Maximum node size"},
-    "min_num_nodes": {"value": 8, "type": int, "desc": "Minimum number of nodes"},
-    "max_num_nodes": {"value": 8, "type": int, "desc": "Maximum number of nodes"},
-    "number_of_critical_tasks": {
-        "value": 3,
-        "type": int,
-        "desc": "Number of critical task",
-    },
-    "number_of_replicas": {
-        "value": 2,
-        "type": int,
-        "desc": "Number of replicas of critical task",
-    },
-    "min_num_comms": {
-        "value": 10,
-        "type": int,
-        "desc": "Min number of communications",
-    },
-    "max_num_comms": {
-        "value": 10,
-        "type": int,
-        "desc": "Max number of communications",
-    },
-    "max_comm_chain": {
-         "value": 3,
-        "type": int,
-        "desc": "Max length of chained communication",
-    },
-    "non_critical_comm": {
-        "value": True,
-        "type": bool,
-        "desc": "Non-critical tasks communication",
-    },
-    "critical_comm": {
-        "value": True,
-        "type": bool,
-        "desc": "Critical tasks and replicas communication",
-    },
-    "use_comm_graph_in_train": {
-        "value": False,
-        "type": bool,
-        "desc": "Communication graph in training",
-    },
-    # TRAINING PARAMETERS #
-    "seed": {"value": 3, "type": int, "desc": "Random seed"},
-    "epochs": {"value": 150, "type": int, "desc": "Number of episodes"},
-    "eval_timesteps": {"value": 10000, "type": int, "desc": "Number of timesteps after which model is evaluated"},
-    "batch_size": {"value": 64, "type": int, "desc": "Batch size"},
-    "lr": {"value": 0.0003, "type": float, "desc": "Initial learning rate"},
-    "alpha": {"value": 0.3, "type": float, "desc": "Alpha Value to compute reward"},
-    # RUN OPTIONS #
-    "device": {
-        "value": "cuda",
-        "type": str,
-        "desc": "Device to use (if no GPU available, value should be 'cpu')",
-    },
-    "inference": {"value": True, "type": bool, "desc": "Evaluate the model"},
-    "verbose": {"value": False, "type": bool, "desc": "Debugging mode"},
-    "invalid_action_replacement": {"value": True, "type": bool, "desc": "Replace invalid actions"},
-    "experiment_name": {
-        "value": "message_communication_channel_2d_matrix",
-        "type": str,
-        "desc": "Experiment Name for mlflow",
-    },
-    "run_name": {
-        "value": "3x_tasksize_12_tasks_8_nodes_10_comms_2_copies_3_critical_tasks",
-        "type": str,
-        "desc": "Run Name for mlflow",
-    },
-    # REWARD SHAPING
-    "SUCCESS_reward": {"value": 10, "type": int, "desc": "Success Reward"},
-    "DUPLICATE_PICK_reward": {
-        "value": -1,
-        "type": int,
-        "desc": "DUPLICATE_PICK Reward",
-    },
-    "NODE_OVERFLOW_reward": {"value": -2, "type": int, "desc": "NODE_OVERFLOW Reward"},
-    "STEP_reward": {"value": 1, "type": int, "desc": "Step Reward"},
-    "BONUS_reward": {"value": 0.25, "type": int, "desc": "Step Reward"},
-    "CRITICAL_reward": {"value": 1, "type": int, "desc": "Critical Task Reward"},
-    # "NODE_OCCUPANCY_reward": { "value": 0, "type": int, "desc": "Node Occupancy Reward"},
-    # "MESSAGE_CHANNEL_OCCUPANCY_reward": { "value": 0, "type": int, "desc": "Message Channel Occupancy Reward"},
-    "DUPLICATE_CRITICAL_PICK_reward": {
-        "value": -1,
-        "type": int,
-        "desc": "Duplicate Critical Task Reward",
-    },
-    "COMM_reward": {"value": 10, "type": int, "desc": "Total Communication Reward"},
-}
+def dict_to_namespace(config_dict):
+    return SimpleNamespace(**config_dict)
 
 def get_config():
     parser = argparse.ArgumentParser()
-    for arg, arg_def in parameters_definition.items():
+    parser.add_argument('--config', type=str, nargs='+', help='Paths to the config files')
+
+    # Determine the directory of the current script
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    
+    # Define paths to the descriptions and default config files in the 'configs' subdirectory
+    base_config_path = os.path.join(script_dir, 'configs')
+    descriptions_path = os.path.join(base_config_path, 'description.yaml')
+    default_config_path = os.path.join(base_config_path, 'default.yaml')
+    
+    # Load descriptions from descriptions.yaml
+    descriptions = load_yaml_config(descriptions_path)
+    
+    # Add arguments for each configuration parameter based on descriptions
+    for arg, desc in descriptions.items():
         parser.add_argument(
             f"--{arg}",
-            type=arg_def["type"],
-            default=arg_def["value"],
-            help=arg_def["desc"],
+            type=str,  # We'll parse and convert these to the correct types later
+            help=desc,
         )
-    config, unparsed = parser.parse_known_args()
-    return config, unparsed
+
+    args = parser.parse_args()
+
+    # Load the default YAML config file
+    default_config = load_yaml_config(default_config_path)
+
+    # If additional config files are provided
+    if args.config:
+        # Load and merge user-specified YAML config files in the order they are provided
+        user_configs = [load_yaml_config(config_file) for config_file in args.config]
+        merged_config = merge_configs(default_config, *user_configs)
+    else:
+        merged_config = default_config
+    
+    # Convert argparse Namespace to dict and remove None values
+    cli_args = {k: v for k, v in vars(args).items() if v is not None and k != 'config'}
+
+    # Update merged config with CLI args, converting types as necessary
+    final_config = merged_config.copy()
+    for key, value in cli_args.items():
+        if key in merged_config:
+            final_config[key] = type(merged_config[key])(value)
+
+    # Convert final_config to an object
+    return dict_to_namespace(final_config)

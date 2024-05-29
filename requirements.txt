@@ -21,3 +21,5 @@ fastapi
 uvicorn[standard]
 mlflow
 gym
+networkx
+pyyaml

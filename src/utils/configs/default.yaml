@@ -1,0 +1,40 @@
+# Experiment parameters
+experiment_name: "config_test"
+run_name: "3x_tasksize_12_tasks_8_nodes_10_comms_2_copies_3_critical_tasks"
+# Environment parameters
+min_task_size: 4
+max_task_size: 4
+min_num_tasks: 12
+max_num_tasks: 12
+min_node_size: 12
+max_node_size: 12
+min_num_nodes: 8
+max_num_nodes: 8
+number_of_critical_tasks: 3
+number_of_replicas: 2
+min_num_comms: 10
+max_num_comms: 10
+max_comm_chain: 3
+non_critical_comm: true
+critical_comm: true
+use_comm_graph_in_train: false
+invalid_action_replacement: true
+# Reward parameters
+SUCCESS_reward: 10
+DUPLICATE_PICK_reward: -1
+NODE_OVERFLOW_reward: -2
+STEP_reward: 1
+BONUS_reward: 0.25
+CRITICAL_reward: 1
+DUPLICATE_CRITICAL_PICK_reward: -1
+COMM_reward: 10
+# Model parameters
+seed: 3
+epochs: 1
+eval_timesteps: 10000
+batch_size: 64
+lr: 0.0003
+alpha: 0.3
+device: "cuda:3"
+inference: true
+verbose: false

@@ -7,7 +7,7 @@ from stable_baselines3.common.env_checker import check_env
 
 def initialize_environment():
     # Load configuration
-    config, _ = get_config()
+    config = get_config()
 
     # Set random seeds for reproducibility
     random.seed(config.seed)
