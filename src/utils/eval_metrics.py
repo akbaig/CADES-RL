@@ -9,6 +9,10 @@ def get_evaluate_message_channel_occupancy(total_comms, intranode_comms):
     return round(occupancy, 2)
 
 def get_avg_node_occupancy(total_capacities, current_capacities):
+    # Exclude nodes which are invalid i.e. have zero capacity
+    valid_nodes = total_capacities != 0
+    total_capacities = total_capacities[valid_nodes]
+    current_capacities = current_capacities[valid_nodes]
     # Calculate the used capacities
     used_capacities = (total_capacities - current_capacities) / total_capacities
     # Calculate mean used capacity as percentage
@@ -17,8 +21,8 @@ def get_avg_node_occupancy(total_capacities, current_capacities):
     return round(mean_capacity, 2)
 
 def get_avg_active_node_occupancy(total_capacities, current_capacities):
-    # Exclude nodes which are inactive i.e. have zero capacity or full capacity
-    used_nodes = total_capacities != current_capacities
+    # Exclude nodes which are inactive i.e. have zero or full capacity (current capacity = total capacity)
+    used_nodes = current_capacities != total_capacities
     total_capacities = total_capacities[used_nodes]
     current_capacities = current_capacities[used_nodes]
     return get_avg_node_occupancy(total_capacities, current_capacities)
