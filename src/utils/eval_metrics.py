@@ -4,7 +4,7 @@ def get_evaluate_message_channel_occupancy(total_comms, intranode_comms):
     # Calculate the internode communications
     internode_comms = (total_comms - intranode_comms)
     # Calculate occupancy as a percentage of the total communications
-    occupancy = (internode_comms / total_comms) * 100
+    occupancy = (internode_comms / total_comms) * 100 if total_comms > 0 else 0
     # Return the percentage, rounded to two decimal places
     return round(occupancy, 2)
 
