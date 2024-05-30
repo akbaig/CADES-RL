@@ -40,7 +40,7 @@ class StatesGenerator():
         valid_tasks = np.where(tasks > 0)[0]
         critical_tasks = np.random.choice(valid_tasks, size=self.num_critical_tasks, replace=False)
         remaining_tasks = np.setdiff1d(valid_tasks, critical_tasks)
-        critical_mask = np.zeros(num_tasks)
+        critical_mask = np.zeros(self.max_num_tasks)
         # For each critical task, add replicas
         for critical_idx, idx in enumerate(critical_tasks):
             # choose candidates for replicas from remaining
