@@ -1,0 +1,7 @@
+number_of_critical_tasks: 0
+number_of_replicas: 0
+min_num_comms: 0
+max_num_comms: 0
+max_comm_chain: 0
+non_critical_comm: false
+critical_comm: false
