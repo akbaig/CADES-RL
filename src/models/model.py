@@ -72,7 +72,9 @@ class Sb3Model(ABC):
                 tb_log_name=self.model_name(),
                 callback=callback_list,
             )
-            self.model.save(f"{save_dir}/models/epoch_{iters}")
+            # save per 1000 iterations
+            if iters % 1000 == 0:
+                self.model.save(f"{save_dir}/models/epoch_{iters}")
 
     def evaluate_multiple(self, num_episodes=100):
         
