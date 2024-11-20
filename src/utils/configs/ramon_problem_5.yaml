@@ -1,0 +1,8 @@
+min_task_size: 1
+max_task_size: 50
+min_num_tasks: 1
+max_num_tasks: 280
+min_node_size: 50
+max_node_size: 50
+min_num_nodes: 280
+max_num_nodes: 280
