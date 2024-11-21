@@ -41,3 +41,4 @@ device: "cuda:3"
 train: true
 inference: true
 verbose: false
+model_path: ""
