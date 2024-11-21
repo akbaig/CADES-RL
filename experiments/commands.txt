@@ -1,0 +1,53 @@
+## PPO Early-Term
+
+1. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_tn.yaml --experiment_name p1_tn --run_name ppo_early_term_p1_tn
+2. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trn.yaml --experiment_name p1_trn --run_name ppo_early_term_p1_trn
+3. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trnc_a.yaml --experiment_name p1_trnc_a --run_name ppo_early_term_p1_tnrc_a
+4. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trnc_b.yaml --experiment_name p1_trnc_b --run_name ppo_early_term_p1_tnrc_b
+5. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trnc_c.yaml --experiment_name p1_trnc_c --run_name ppo_early_term_p1_tnrc_c
+6. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_tn.yaml --experiment_name p2_tn --run_name ppo_early_term_p2_tn
+7. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_trn.yaml --experiment_name p2_trn --run_name ppo_early_term_p2_trn
+8. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_trnc_a.yaml --experiment_name p2_trnc_a --run_name ppo_early_term_p2_tnrc_a
+9. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_trnc_b.yaml --experiment_name p2_trnc_b --run_name ppo_early_term_p2_tnrc_b
+10. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_trnc_c.yaml --experiment_name p2_trnc_c --run_name ppo_early_term_p2_tnrc_c
+11. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_tn.yaml --experiment_name p3_tn --run_name ppo_early_term_p3_tn
+12. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_trn.yaml --experiment_name p3_trn --run_name ppo_early_term_p3_trn
+13. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_trnc_a.yaml --experiment_name p3_trnc_a --run_name ppo_early_term_p3_tnrc_a
+14. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_trnc_b.yaml --experiment_name p3_trnc_b --run_name ppo_early_term_p3_tnrc_b
+15. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_trnc_c.yaml --experiment_name p3_trnc_c --run_name ppo_early_term_p3_tnrc_c
+
+## PPO Act-Replace
+
+16. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_tn.yaml --experiment_name p1_tn --run_name ppo_invalid_replace_p1_tn
+17. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trn.yaml --experiment_name p1_trn --run_name ppo_invalid_replace_p1_trn
+18. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trnc_a.yaml --experiment_name p1_trnc_a --run_name ppo_invalid_replace_p1_tnrc_a
+19. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trnc_b.yaml --experiment_name p1_trnc_b --run_name ppo_invalid_replace_p1_tnrc_b
+20. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trnc_c.yaml --experiment_name p1_trnc_c --run_name ppo_invalid_replace_p1_tnrc_c
+21. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_tn.yaml --experiment_name p2_tn --run_name ppo_invalid_replace_p2_tn
+22. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_trn.yaml --experiment_name p2_trn --run_name ppo_invalid_replace_p2_trn
+23. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_trnc_a.yaml --experiment_name p2_trnc_a --run_name ppo_invalid_replace_p2_tnrc_a
+24. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_trnc_b.yaml --experiment_name p2_trnc_b --run_name ppo_invalid_replace_p2_tnrc_b
+25. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_trnc_c.yaml --experiment_name p2_trnc_c --run_name ppo_invalid_replace_p2_tnrc_c
+26. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_tn.yaml --experiment_name p3_tn --run_name ppo_invalid_replace_p3_tn
+27. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_trn.yaml --experiment_name p3_trn --run_name ppo_invalid_replace_p3_trn
+28. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_trnc_a.yaml --experiment_name p3_trnc_a --run_name ppo_invalid_replace_p3_tnrc_a
+29. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_trnc_b.yaml --experiment_name p3_trnc_b --run_name ppo_invalid_replace_p3_tnrc_b
+30. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_trnc_c.yaml --experiment_name p3_trnc_c --run_name ppo_invalid_replace_p3_tnrc_c
+
+## PPO Act-Mask
+
+31. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_tn.yaml --experiment_name p1_tn --run_name ppo_logits_mask_p1_tn
+32. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trn.yaml --experiment_name p1_trn --run_name ppo_logits_mask_p1_trn
+33. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trnc_a.yaml --experiment_name p1_trnc_a --run_name ppo_logits_mask_p1_tnrc_a
+34. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trnc_b.yaml --experiment_name p1_trnc_b --run_name ppo_logits_mask_p1_tnrc_b
+35. python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trnc_c.yaml --experiment_name p1_trnc_c --run_name ppo_logits_mask_p1_tnrc_c
+36. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_tn.yaml --experiment_name p2_tn --run_name ppo_logits_mask_p2_tn
+37. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_trn.yaml --experiment_name p2_trn --run_name ppo_logits_mask_p2_trn
+38. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_trnc_a.yaml --experiment_name p2_trnc_a --run_name ppo_logits_mask_p2_tnrc_a
+39. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_trnc_b.yaml --experiment_name p2_trnc_b --run_name ppo_logits_mask_p2_tnrc_b
+40. python main.py --config utils/configs/problem_2.yaml utils/configs/experiment_trnc_c.yaml --experiment_name p2_trnc_c --run_name ppo_logits_mask_p2_tnrc_c
+41. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_tn.yaml --experiment_name p3_tn --run_name ppo_logits_mask_p3_tn
+42. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_trn.yaml --experiment_name p3_trn --run_name ppo_logits_mask_p3_trn
+43. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_trnc_a.yaml --experiment_name p3_trnc_a --run_name ppo_logits_mask_p3_tnrc_a
+44. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_trnc_b.yaml --experiment_name p3_trnc_b --run_name ppo_logits_mask_p3_tnrc_b
+45. python main.py --config utils/configs/problem_3.yaml utils/configs/experiment_trnc_c.yaml --experiment_name p3_trnc_c --run_name ppo_logits_mask_p3_tnrc_c

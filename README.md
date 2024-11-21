@@ -1,123 +1,108 @@
-# Overview
+# Introduction
 
-Solve the [1D Bin Packing Problem](https://en.wikipedia.org/wiki/Bin_packing_problem) 
-using Deep Reinforcement Learning and Pointer Networks.
+Collaborative industrial project which uses Deep Reinforcemnt Learning Agent to efficiently allocate tasks in nodes in an adaptive distributed embedded system. Additionally the agent handles critical tasks ensuring fail-safety compliance and optimizes message passing among tasks, solving a NP Hard combinatorial problem in linear time.
 
-This PyTorch implementation solves the version of the problem where a set of items of varying sizes
-must be packed into the minimum number of bins possible. The bins have all the same size.
+# Installation
 
-The DRL algorithm is based on the approach from [Bello et al](https://arxiv.org/pdf/1611.09940.pdf) 
-to solve the Travelling Salesman Problem. With some adaptations to make it work for the 
-bin packing problem.
+Make sure you have latest version of **Python 3.9** installed
 
-In my approach, the sequence that is output by the model is interpreted as the order in 
-which the items must be packed in the bins. The packing is then performed either 
-following a FF or a NF heuristic (whatever is set in the config). The reward is the 
-average occupancy of the bins in %. The agent learns to not only pack items of varying 
-size in the best possible way, but also it can learn to deal with a variable number of 
-items (i.e. the same DNN can be used ot allocate a set of 10 items than a set of 30 items, 
-as long as both sizes are considered during training).
-
-This implementation was used in my master's thesis to decide which tasks allocate to which nodes 
-in a Distributed Embedded System, in a way that minimizes the number of active nodes 
-(it is essentially the same problem).
-
-<img align="center" src="imgs/nodemanager.png" width="400">
-
-
-This implementation also compares the results of using the DRL approach 
-with those that would have been obtained by following a Next-Fit, First-Fit and 
-First-Fit-Decreasing heuristic. 
-
-<img align="center" src="imgs/heuristics.png" width="400">
-
-# Experiments
-
-The model has been tested under multiple problem conditions. The "hardest" conditions I've tried
-were sets of up to 300 items, with an item size between 200 to 600, to bins of size 1000.
-An Agent using a FF heuristic reached the same performance as the FFD heuristic in <2000 
-steps. An Agent using a NF heuristic beat the FF heuristic and got close to the FFD 
-heuristic in ~10k steps. This is perhaps more interesting since the NF heuristic is 
-quite cheap in terms of memory and speed.   
-
-Average Occupancy Ratio when the agent uses a NF heuristic to pack the items in the order 
-given by the pointer DNN: 
-
-<img align="center" src="experiments/300itemsNF.png" width="600">
-
-Average Occupancy Ratio when the agent uses a FF heuristic to pack the items in the order 
-given by the pointer DNN:
-
-<img align="center" src="experiments/300itemsFF.png" width="600">
-
-
-# Usage
-
-## Install Latest Verson of Python 3.9
-```
-conda create -n cades python==3.9.*
-conda activate cades
-```
-## Install required libraries
 ```
 pip install -r requirements.txt
 ```
 
-## Train the agent
+# Inference
 
-Problem conditions can be set via the default values in [config.py](src/config.py) or as 
-arguments at runtime. This impact the sets of items that the agent sees during training.
-
-The maximum number of items (`max_num_items`) must match the maximum number that the 
-agent will see during inference, since it impacts the architecture.
-
-The rest of parameters (e.g. `max_item_size`) is not mandatory that they match those seen
-in inference but the results will be much better if it does. 
-
-So for example, the two models saved in `./experiments/models` has been trained with the below 
-conditions (plus all the defaults in the `config.py`) 
-
-Using a **Next-Fit** heuristic to pack the items in the order given by the pointer network:
+**Format**
 
 ```
-python src/main.py --min_item_size 100 --max_item_size 800 --min_num_items 5 --max_num_items 10 --bin_size 1000 --agent_heuristic NF --model_path ./experiments/models/policy_dnn_100_800_5_10_1000_NF.pkl
+python main.py --config [PATH_CONFIG_1] [PATH_CONFIG_2] [--Param_Header1] [Param_Value1] .. so on
 ```
 
-Results:
+**Example**
 
-<img align="center" src="experiments/DRL_Agent_NF.png" width="600">
+`python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trnc_c.yaml --model_path experiments/models/p1/trnc_c/early_term_1000`
 
+**Note:** Each and every parameter in existing configuration files is modifable. It can be changed and treated as a command line argument by putting double dash (--) as prefix.
 
-Using a **First-Fit** heuristic to pack the items in the order given by the pointer network:
+# Training
 
-```
-python src/main.py --min_item_size 100 --max_item_size 800 --min_num_items 5 --max_num_items 10 --bin_size 1000 --agent_heuristic FF --model_path ./experiments/models/policy_dnn_100_800_5_10_1000_FF.pkl
-```
+`python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_tn.yaml --experiment_name custom_experiments --run_name my_run`
 
-Results:
+**Note:** You may also provide your own custom configuration file
 
-<img align="center" src="experiments/DRL_Agent_FF.png" width="600">
+# Experiments
 
+## Problem Sets and Configuration Variants
 
+The study defines three problem sets and multiple configuration variants to evaluate the performance of RL agents in a CADES (Configurable Adaptive Distributed Execution System). These scenarios aim to emulate the dynamic and unpredictable conditions of real-world systems.
 
-## Run inference on sets of items
+### Problem Sets
 
-The models from the examples above could then be used to pack the sets of items given by 
-`inference_data\input_states.txt`. For example:
+1. **Problem 1**: A static system configuration with fixed tasks and nodes. This serves as a baseline to evaluate basic performance.
+2. **Problem 2**: Introduces variability in task numbers and costs while keeping nodes constant. It reflects fluctuating task demands with stable hardware resources.
+3. **Problem 3**: Adds complexity by varying tasks, their costs, and the number of nodes. This scenario includes potential node downtimes, representing real-life challenges with dynamic task demands and resource failures.
 
-```
-python src/main.py --inference=True --model_path ./experiments/models/policy_dnn_100_800_5_10_1000_FF.pkl --inference_data_path ./experiments/inference_data/input_states.txt --agent_heuristic FF --max_num_items=10
-```
+| Problem No. | Tasks (#)    | Task Cost   | Nodes (#)    | Node Capacity |
+|-------------|--------------|-------------|--------------|---------------|
+| 1           | 12           | 4           | 6            | 12            |
+| 2           | 8 to 10      | 4 to 6      | 6            | 12            |
+| 3           | 8 to 10      | 4 to 6      | 6 to 8       | 10 to 12      |
 
-# Further work
+### Configuration Variants
 
-The current approach follows the approach in the references which is to output a sequence
-"pointing" to positions in the input. Hence the need to follow an allocation heuristic
-(either NF or FF) to then pack that sequence. The optimality of the solution might be limited
-by the heuristic itself. Hence, it would be interesting to try a different architecture that
-directly outputs the bin to which each item is packed, and see if it gets better results. 
+To capture different scenarios that may arise during the reconfiguration of a CADES, we propose several distinct configuration variants:
 
-# References
-* *Neural Combinatorial Optimization with Reinforcement Learning*; Irwan Bello, Hieu Pham, Quoc V. Le, Mohammad Norouzi, Samy Bengio; ICLR 2017 [link](https://arxiv.org/abs/1611.09940)
+1. **TN**: Tasks and nodes are available, but no replicas or communication are required. Represents non-critical, independent task execution scenarios.
+2. **TRN**: Adds replicas for critical tasks but no communication. Focuses on fault tolerance for critical tasks.
+3. **TRNC**: Includes tasks, nodes, replicas, and communication, divided into:
+   - **TRNC A**: Communication among non-critical tasks.
+   - **TRNC B**: Communication among critical tasks.
+   - **TRNC C**: Combines communication for both critical and non-critical tasks.
 
-* *Pointer Networks*; Oriol Vinyals, Meire Fortunato, Navdeep Jaitly; [link](https://arxiv.org/pdf/1506.03134.pdf)
+Each of these variants captures different levels of complexity, reflecting the diverse operational conditions that a CADES may encounter during reconfiguration.
+
+| Category  | Tasks (T) | Nodes (N) | Replicas (R) | Communication (C)                  |
+|-----------|-----------|-----------|--------------|-------------------------------------|
+| TN        | ✔         | ✔         | ✘            | ✘                                   |
+| TRN       | ✔         | ✔         | ✔            | ✘                                   |
+| TRNC A    | ✔         | ✔         | ✔            | Non-critical tasks only            |
+| TRNC B    | ✔         | ✔         | ✔            | Critical tasks only                |
+| TRNC C    | ✔         | ✔         | ✔            | Both non-critical and critical tasks |
+
+### Invalid Action Strategies
+
+Different invalid action handling strategies are employed to conduct a comparative study of their effects on different configuration problems. These techniques are referenced in the results section and are summarized as follows:
+
+1. **Early-Term**: This technique stands for **Early Termination** and applies termination for invalid actions.
+2. **Act-Replace**: This technique stands for **Action Replacement** and applies replacement mechanism for invalid actions.
+3. **Act-Mask**: This technique stands for **Action Masking** and applies logits masking for invalid actions.
+
+These strategies are evaluated to understand their impact on solving different configuration problems effectively.
+
+### Summary
+
+The combination of problem sets and configuration variants provides a comprehensive framework for evaluating the RL agent's ability to handle dynamic, real-world challenges in a CADES. These scenarios test the agent's fault tolerance, adaptability, and task allocation efficiency under varying levels of complexity.
+
+# Results
+
+### Success Rate (%)
+
+| Problem No. | Strategy      | TN   | TRN  | TRNC A | TRNC B | TRNC C |
+|-------------|---------------|------|------|--------|--------|--------|
+| **1**       | Early-Term    | 93   | 95   | 65     | **100**| **95** |
+|             | Act-Replace   | **100** | **98** | **87** | 93     | 88     |
+|             | Act-Mask      | **100** | 97   | 69     | 52     | 49     |
+| **2**       | Early-Term    | **100** | 98   | **98** | **99** | 96     |
+|             | Act-Replace   | 98   | **99** | **98** | **99** | **98** |
+|             | Act-Mask      | 98   | 98   | 93     | 96     | 96     |
+| **3**       | Early-Term    | 94   | **97** | 84     | **88** | 89     |
+|             | Act-Replace   | **97** | 95   | 84     | **88** | **90** |
+|             | Act-Mask      | 95   | 96   | 84     | 85     | 79     |
+
+**Note**: Bolded values indicate the highest performance in each category.
+
+Detailed results can be found in the paper.
+
+# Future Work
+
+Optimize deep learning agent to fulfill message passing among tasks more efficiently

@@ -3,6 +3,7 @@ numpy==1.19.5
 setuptools==66
 wheel==0.38.4
 stable-baselines3[extra]==1.7.0
+sb3-contrib==1.7.0
 contourpy
 cycler
 fonttools
@@ -20,3 +21,5 @@ fastapi
 uvicorn[standard]
 mlflow
 gym
+networkx
+pyyaml
