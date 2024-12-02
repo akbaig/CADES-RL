@@ -4,13 +4,16 @@ from .heuristic import Heuristic
 class FirstFitDecreasingHeuristic(Heuristic):
     def __init__(self, env):
         super().__init__(env)
-        self.sorted_tasks = self._get_sorted_tasks(env.current_state["tasks"])
+        self.set_state(env.current_state)
 
     def _get_sorted_tasks(self, tasks):
         task_indices = np.where(tasks > 0)[0]
         task_costs = tasks[task_indices]
         sorted_indices = task_indices[np.argsort(-task_costs)]  # Sort in decreasing order
         return sorted_indices.tolist()
+    
+    def set_state(self, state):
+        self.sorted_tasks = self._get_sorted_tasks(state["tasks"])
 
     def predict(self, observation):
         # Update sorted tasks if any tasks have been assigned

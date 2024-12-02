@@ -4,7 +4,10 @@ from .heuristic import Heuristic
 class NextFitHeuristic(Heuristic):
     def __init__(self, env):
         super().__init__(env)
-        self.unassigned_tasks = set(range(len(env.current_state["tasks"])))
+        self.set_state(env.current_state)
+    
+    def set_state(self, state):
+        self.unassigned_tasks = set(range(len(state["tasks"])))
         self.current_node_idx = 0  # Start with the first node
 
     def predict(self, observation):

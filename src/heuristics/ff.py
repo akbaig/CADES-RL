@@ -4,7 +4,10 @@ from .heuristic import Heuristic
 class FirstFitHeuristic(Heuristic):
     def __init__(self, env):
         super().__init__(env)
-        self.unassigned_tasks = set(range(len(env.current_state["tasks"])))
+        self.set_state(env.current_state)
+
+    def set_state(self, state):
+        self.unassigned_tasks = set(range(len(state["tasks"])))
 
     def predict(self, observation):
         # Update unassigned tasks
