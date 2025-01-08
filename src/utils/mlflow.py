@@ -54,11 +54,11 @@ class MLFlowManager:
             logger = setup_logger()
             self.model.set_logger(logger)
             # Train Model
-            if self.config.train:
+            if self.config.train is True:
                 save_path = self.get_run_artifact_uri()
                 self.model.train(save_path)
             # Evaluate Model
-            if self.config.inference:
+            if self.config.inference is True:
                 result = self.model.evaluate_multiple()
                 expanded_result = expand_result_dict(result)
                 self.log_metrics(expanded_result)

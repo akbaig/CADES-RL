@@ -3,6 +3,17 @@ import argparse
 import yaml
 from types import SimpleNamespace
 
+def strtobool(value: str) -> bool:
+    """
+    Convert a string representation of truth to True or False.
+    """
+    value = value.lower()
+    if value in ('y', 'yes', 't', 'true', 'on', '1'):
+        return True
+    if value in ('n', 'no', 'f', 'false', 'off', '0'):
+        return False
+    raise ValueError(f"Invalid truth value '{value}'")
+
 def load_yaml_config(config_file):
     if not os.path.isfile(config_file):
         raise FileNotFoundError(f"Configuration file '{config_file}' not found.")
@@ -62,7 +73,10 @@ def get_config():
     final_config = merged_config.copy()
     for key, value in cli_args.items():
         if key in merged_config:
-            final_config[key] = type(merged_config[key])(value)
+            if type(merged_config[key]) == bool: # Special case for bools
+                final_config[key] = strtobool(value)
+            else:
+                final_config[key] = type(merged_config[key])(value)
 
     # Convert final_config to an object
     return dict_to_namespace(final_config)

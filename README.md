@@ -12,6 +12,8 @@ pip install -r requirements.txt
 
 # Inference
 
+Navigate to the `src` folder and run:
+
 **Format**
 
 ```
@@ -20,13 +22,13 @@ python main.py --config [PATH_CONFIG_1] [PATH_CONFIG_2] [--Param_Header1] [Param
 
 **Example**
 
-`python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_trnc_c.yaml --model_path experiments/models/p1/trnc_c/early_term_1000`
+`python main.py --train false --model_path ../experiments/models/p1/trnc_c/early_term_1000 --config utils/configs/problem_1.yaml utils/configs/experiment_trnc_c.yaml --experiment_name custom_experiments --run_name first_inference`
 
 **Note:** Each and every parameter in existing configuration files is modifable. It can be changed and treated as a command line argument by putting double dash (--) as prefix.
 
 # Training
 
-`python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_tn.yaml --experiment_name custom_experiments --run_name my_run`
+`python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_tn.yaml --experiment_name custom_experiments --run_name first_train`
 
 **Note:** You may also provide your own custom configuration file
 
