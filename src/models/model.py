@@ -16,6 +16,8 @@ class Sb3Model(ABC):
             self.model = model
         else:
             self.model = self.initialize()
+        self.warmup()
+
 
     @abstractmethod
     def initialize(self):
@@ -28,6 +30,13 @@ class Sb3Model(ABC):
         Must be implemented by all subclasses.
         """
         pass
+
+    def warmup(self):
+        """
+        Remove the initial inference overhead of the model by running a dummy  (to get accurate inference times)
+        """
+        dummy_obs = self.env.observation_space.sample()
+        self.model.predict(dummy_obs, deterministic=True)
 
     @abstractmethod
     def evaluate(self, obs=None):
