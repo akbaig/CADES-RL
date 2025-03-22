@@ -104,7 +104,7 @@ class ExtendedStatesGenerator(StatesGenerator):
     
     def _generate_simple_comm_matrix(self, tasks, num_tasks, critical_mask, valid_tasks):
         # Initialize communication matrix
-        comms = np.zeros((self.max_num_tasks, self.max_num_tasks), dtype="uint8")
+        comms = np.zeros((self.max_num_tasks, self.max_num_tasks), dtype="int8")
         # Get number of communications
         required_num_comms = self._get_random_comm_count()
         num_comms = 0

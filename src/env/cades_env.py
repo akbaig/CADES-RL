@@ -1,7 +1,7 @@
-import gym
+import gymnasium as gym
 import random
 import numpy as np
-from gym import spaces
+from gymnasium import spaces
 from enum import Enum
 from utils.eval_metrics import (
     get_avg_node_occupancy,
@@ -48,19 +48,16 @@ class CadesEnv(gym.Env):
         self.observation_space = spaces.Dict(
             {
                 "tasks": spaces.Box(
-                    low=0, high=1, shape=(config.max_num_tasks,), dtype=np.float
+                    low=0, high=1, shape=(config.max_num_tasks,), dtype=float
                 ),
                 "critical_mask": spaces.Box(
-                    low=0, high=1, shape=(config.max_num_tasks,), dtype=np.float
+                    low=0, high=1, shape=(config.max_num_tasks,), dtype=float
                 ),
                 "nodes": spaces.Box(
-                    low=0, high=1, shape=(config.max_num_nodes,), dtype=np.float
+                    low=0, high=1, shape=(config.max_num_nodes,), dtype=float
                 ),
-                "communications": spaces.Box(
-                    low=0,
-                    high=1,
-                    shape=(config.max_num_tasks, config.max_num_tasks),
-                    dtype=np.uint8,
+                "communications": spaces.MultiBinary(
+                   (config.max_num_tasks, config.max_num_tasks)
                 ),
             }
         )
@@ -373,7 +370,7 @@ class CadesEnv(gym.Env):
             self._verbose(action, reward)
 
         observation = self.current_state
-        return observation, reward, done, self.info # observation, reward, done, extra_info
+        return observation, reward, done, False, self.info # observation, reward, done, truncated, extra_info
     
     def generate_states(self, training=True):
         """
@@ -404,7 +401,7 @@ class CadesEnv(gym.Env):
         }
         return generated_states
 
-    def reset(self, states=None, training=True):
+    def reset(self, states=None, training=True, seed=None):
         """
         Initializes new states for the start of a new episode.
         """
@@ -451,7 +448,7 @@ class CadesEnv(gym.Env):
         self.reward_unit = self._reward_unit()
         self.ep_len_norm_factor = self._episode_length_norm_factor()
 
-        return observation
+        return observation, self.info
 
     def render(self, mode="human"):
         pass
