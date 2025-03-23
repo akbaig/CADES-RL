@@ -1,4 +1,4 @@
-sb3-contrib==2.6.0
+sb3-contrib==2.6.0a2
 gymnasium
 pyyaml
 mlflow
