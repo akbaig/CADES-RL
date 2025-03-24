@@ -6,7 +6,8 @@ class StatesGenerator():
     of problem conditions, which are provided via the `config` object.
     """
 
-    def __init__(self, config):
+    def __init__(self, config, env):
+        self.env = env
         self.min_num_tasks = config.min_num_tasks
         self.max_num_tasks = config.max_num_tasks
         self.min_task_size = config.min_task_size
@@ -21,13 +22,13 @@ class StatesGenerator():
 
     def generate_tasks_and_nodes(self):
         # Tasks
-        num_tasks = np.random.randint(self.min_num_tasks, self.max_num_tasks + 1)
-        tasks = np.random.randint(self.min_task_size, self.max_task_size + 1, size=self.max_num_tasks)
+        num_tasks = self.env.np_random.integers(self.min_num_tasks, self.max_num_tasks + 1)
+        tasks = self.env.np_random.integers(self.min_task_size, self.max_task_size + 1, size=self.max_num_tasks)
         tasks[num_tasks:] = 0  # Zero-padding for invalid tasks
         
         # Nodes
-        num_nodes = np.random.randint(self.min_num_nodes, self.max_num_nodes + 1)
-        nodes = np.random.randint(self.min_node_size, self.max_node_size + 1, size=self.max_num_nodes)
+        num_nodes = self.env.np_random.integers(self.min_num_nodes, self.max_num_nodes + 1)
+        nodes = self.env.np_random.integers(self.min_node_size, self.max_node_size + 1, size=self.max_num_nodes)
         nodes[num_nodes:] = 0  # Zero-padding for invalid nodes
 
         return tasks, num_tasks, nodes, num_nodes
@@ -38,7 +39,7 @@ class StatesGenerator():
     def generate_critical_tasks_and_replicas(self, tasks, num_tasks):
         # Get valid tasks where tasks has value > 0
         valid_tasks = np.where(tasks > 0)[0]
-        critical_tasks = np.random.choice(valid_tasks, size=self.num_critical_tasks, replace=False)
+        critical_tasks = self.env.np_random.choice(valid_tasks, size=self.num_critical_tasks, replace=False)
         remaining_tasks = np.setdiff1d(valid_tasks, critical_tasks)
         critical_mask = np.zeros(self.max_num_tasks)
         # For each critical task, add replicas
@@ -46,7 +47,7 @@ class StatesGenerator():
             # choose candidates for replicas from remaining
             if(len(remaining_tasks) < self.num_replicas):
                 assert("Insufficient candidates for replicas")
-            replicas = np.random.choice(remaining_tasks, size=self.num_replicas, replace=False)
+            replicas = self.env.np_random.choice(remaining_tasks, size=self.num_replicas, replace=False)
             # subtract chosen candidates from remaining tasks
             remaining_tasks = np.setdiff1d(remaining_tasks, replicas)
             # assign unique_id in mask to task and its replicas

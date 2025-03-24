@@ -59,8 +59,7 @@ class Sb3Model(ABC):
             deterministic=True,
             render=False,
         )
-        seed_update_callback = SeedUpdateCallback(train=True)
-        callback_list = CallbackList([metrics_callback, seed_update_callback])
+        callback_list = CallbackList([metrics_callback])
         return callback_list
 
     # This method can be overridden by subclasses to implement the training logic
@@ -69,6 +68,7 @@ class Sb3Model(ABC):
         callback_list = self._eval_callbacks(save_dir)
         EPOCHS = self.config.epochs
         TIMESTEPS = self.config.eval_timesteps
+        self.env.set_states_random_seed()
         iters = 0
 
         while iters < EPOCHS:
@@ -95,11 +95,10 @@ class Sb3Model(ABC):
         # Initialize dictionary to store lists of results for each metric
         metrics_accumulator = {metric: [] for metric in self.metrics_to_eval}
         # Initialize the seed update callback
-        seed_update_callback = SeedUpdateCallback(train=False)
+        self.env.set_states_random_seed()
 
         for _ in range(num_episodes):
             # Generate a new seed for the episode
-            seed_update_callback.on_episode_start()
             results = self.evaluate()
             all_episode_rewards.append(results["episode_reward"])
             all_episodes_len.append(results["episode_length"])

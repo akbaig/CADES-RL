@@ -8,8 +8,8 @@ class ExtendedStatesGenerator(StatesGenerator):
     Adds the capability to generate communication masks
     """
 
-    def __init__(self, config):
-        super().__init__(config)
+    def __init__(self, config, env):
+        super().__init__(config, env)
         self.min_num_comms = config.min_num_comms
         self.max_num_comms = config.max_num_comms
         self.max_comm_chain = config.max_comm_chain
@@ -18,7 +18,7 @@ class ExtendedStatesGenerator(StatesGenerator):
 
     def _get_random_comm_count(self):
         # Generate random number of communications
-        return np.random.randint(self.min_num_comms, self.max_num_comms + 1)
+        return self.env.np_random.integers(self.min_num_comms, self.max_num_comms + 1)
     
     def _graph_valid_senders(self, comm_graph: CommunicationGraph, valid_tasks):
         """

@@ -58,8 +58,7 @@ class MaskableRecurrentPPOModel(Sb3Model):
             render=False,
             use_masking=True
         )
-        seed_update_callback = SeedUpdateCallback(train=True)
-        callback_list = CallbackList([metrics_callback, seed_update_callback])
+        callback_list = CallbackList([metrics_callback])
         return callback_list
 
     def evaluate(self, states=None):
@@ -68,7 +67,7 @@ class MaskableRecurrentPPOModel(Sb3Model):
         episode_starts = np.array([True], dtype=bool)
         episode_reward = 0
         done = False
-        obs, _ = self.env.reset(states, training=False, seed=self.config.seed)
+        obs, _ = self.env.reset(states, training=False)
         info = {}
         actions = []
 

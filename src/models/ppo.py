@@ -47,7 +47,7 @@ class PPOModel(Sb3Model):
 
         episode_reward = 0
         done = False
-        obs, _ = self.env.reset(states, training=False, seed=self.config.seed)
+        obs, _ = self.env.reset(states, training=False)
         info = {}
         actions = []
 

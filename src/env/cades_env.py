@@ -38,7 +38,7 @@ class CadesEnv(gym.Env):
         super().__init__()
 
         self.config = config
-        self.states_generator = ExtendedStatesGenerator(config)
+        self.states_generator = ExtendedStatesGenerator(config, self)
         self.norm_factor = None
 
         self.action_space = spaces.MultiDiscrete(
@@ -400,6 +400,15 @@ class CadesEnv(gym.Env):
             "num_communications": num_comms,
         }
         return generated_states
+    
+    def set_states_random_seed(self, seed=None):
+        """
+        Sets the seed for base class's random number generator
+        """
+        if seed is not None:
+            super().reset(seed=seed)
+        else:
+            super().reset(seed=self.config.seed)
 
     def reset(self, states=None, training=True, seed=None):
         """
@@ -407,6 +416,8 @@ class CadesEnv(gym.Env):
         """
         # assignment status is an variable-sized 2D Array, having dimensions total_nodes x (size of node)
         # it stores the indices of task assignment on the nodes
+        if seed is not None:
+            self.set_states_random_seed(seed)
         self.assignment_status = []
         self.communication_status = set()
         self.info = {"is_success": False, "episode_len": 0, "termination_cause": None, "reward_type": "", "total_reward": 0}
