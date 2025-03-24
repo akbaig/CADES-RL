@@ -401,14 +401,11 @@ class CadesEnv(gym.Env):
         }
         return generated_states
     
-    def set_states_random_seed(self, seed=None):
+    def set_states_random_seed(self, seed):
         """
         Sets the seed for base class's random number generator
         """
-        if seed is not None:
-            super().reset(seed=seed)
-        else:
-            super().reset(seed=self.config.seed)
+        super().reset(seed=seed)
 
     def reset(self, states=None, training=True, seed=None):
         """

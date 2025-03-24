@@ -32,6 +32,7 @@ COMM_reward: 10
 # MESSAGE_CHANNEL_OCCUPANCY_reward: 0
 # Model parameters
 seed: 3
+eval_seed: 42
 epochs: 1000
 eval_timesteps: 10000
 batch_size: 64

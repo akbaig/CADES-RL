@@ -95,7 +95,7 @@ class Sb3Model(ABC):
         # Initialize dictionary to store lists of results for each metric
         metrics_accumulator = {metric: [] for metric in self.metrics_to_eval}
         # Initialize the seed update callback
-        self.env.set_states_random_seed()
+        self.env.set_states_random_seed(self.config.eval_seed)
 
         for _ in range(num_episodes):
             # Generate a new seed for the episode
