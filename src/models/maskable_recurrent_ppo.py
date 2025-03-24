@@ -58,8 +58,8 @@ class MaskableRecurrentPPOModel(Sb3Model):
             render=False,
             use_masking=True
         )
-        # seed_update_callback = SeedUpdateCallback(train=True)
-        callback_list = CallbackList([metrics_callback])
+        seed_update_callback = SeedUpdateCallback(train=True)
+        callback_list = CallbackList([metrics_callback, seed_update_callback])
         return callback_list
 
     def evaluate(self, states=None):

@@ -4,15 +4,13 @@ import torch
 from utils.config import get_config
 from env.cades_env import CadesEnv
 from stable_baselines3.common.env_checker import check_env
+from stable_baselines3.common.utils import set_random_seed
 
 def initialize_environment():
     # Load configuration
     config = get_config()
 
-    # Set random seeds for reproducibility
-    random.seed(config.seed)
-    np.random.seed(config.seed)
-    torch.manual_seed(config.seed)
+    set_random_seed(config.seed)
 
     # Initialize and check the environment
     env = CadesEnv(config)
