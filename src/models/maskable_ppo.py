@@ -74,7 +74,7 @@ class MaskablePPOModel(Sb3Model):
             action_masks = get_action_masks(self.env)
             action, _states = self.model.predict(obs, action_masks=action_masks)
             inference_times[-1] = time.time() - inference_times[-1]
-            obs, reward, done, info = self.env.step(action, training=False)
+            obs, reward, done, _, info = self.env.step(action, training=False)
             episode_reward += reward
             actions.append(action)
 

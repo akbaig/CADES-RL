@@ -56,7 +56,7 @@ class PPOModel(Sb3Model):
             inference_times.append(time.time())
             action, _states = self.model.predict(obs)
             inference_times[-1] = time.time() - inference_times[-1]
-            obs, reward, done, info = self.env.step(action, training=False)
+            obs, reward, done, _, info = self.env.step(action, training=False)
             episode_reward += reward
             actions.append(action)
 
