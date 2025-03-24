@@ -10,8 +10,6 @@ def initialize_environment():
     # Load configuration
     config = get_config()
 
-    set_random_seed(config.seed)
-
     # Initialize and check the environment
     env = CadesEnv(config)
     check_env(env)

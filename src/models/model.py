@@ -5,6 +5,7 @@ from stable_baselines3.common.callbacks import CallbackList
 from utils.metrics_callback import MetricsCallback
 from env.cades_env import TerminationCause
 from utils.seed_update_callback import SeedUpdateCallback
+from stable_baselines3.common.utils import set_random_seed
 
 class Sb3Model(ABC):
 
@@ -61,16 +62,19 @@ class Sb3Model(ABC):
         )
         callback_list = CallbackList([metrics_callback])
         return callback_list
+    
+    def set_seed(self, seed):
+        set_random_seed(seed) # for model and everything else
+        self.env.set_states_random_seed(seed) # for environment
 
     # This method can be overridden by subclasses to implement the training logic
     def train(self, save_dir):
-
         callback_list = self._eval_callbacks(save_dir)
         EPOCHS = self.config.epochs
         TIMESTEPS = self.config.eval_timesteps
-        self.env.set_states_random_seed()
-        iters = 0
+        self.set_seed(self.config.seed)
 
+        iters = 0
         while iters < EPOCHS:
             iters += 1
             print("Epoch #", iters)
@@ -94,8 +98,7 @@ class Sb3Model(ABC):
 
         # Initialize dictionary to store lists of results for each metric
         metrics_accumulator = {metric: [] for metric in self.metrics_to_eval}
-        # Initialize the seed update callback
-        self.env.set_states_random_seed(self.config.eval_seed)
+        self.set_seed(self.config.eval_seed)
 
         for _ in range(num_episodes):
             # Generate a new seed for the episode
