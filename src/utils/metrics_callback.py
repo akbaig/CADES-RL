@@ -30,10 +30,10 @@ class MetricsCallback(MaskableEvalCallback):
                 self.empty_nodes.append(info.get("empty_nodes", 0))
 
     def _store_metrics(self):
-        mean_avg_node_occupancy = np.mean(self.avg_node_occupancy) if self.avg_node_occupancy else 0
-        mean_avg_active_node_occupancy = np.mean(self.avg_active_node_occupancy) if self.avg_active_node_occupancy else 0
-        mean_message_channel_occupancy = np.mean(self.message_channel_occupancy) if self.message_channel_occupancy else 0
-        mean_empty_nodes = np.mean(self.empty_nodes) if self.empty_nodes else 0
+        mean_avg_node_occupancy = float(np.mean(self.avg_node_occupancy)) if self.avg_node_occupancy else 0
+        mean_avg_active_node_occupancy = float(np.mean(self.avg_active_node_occupancy)) if self.avg_active_node_occupancy else 0
+        mean_message_channel_occupancy = float(np.mean(self.message_channel_occupancy)) if self.message_channel_occupancy else 0
+        mean_empty_nodes = float(np.mean(self.empty_nodes)) if self.empty_nodes else 0
         termination_cause_means = {cause: count / self.episode_count * 100 for cause, count in self.termination_cause.items()}
         # Log the other metrics
         self.logger.record("eval/avg_node_occupancy", mean_avg_node_occupancy)

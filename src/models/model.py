@@ -116,14 +116,14 @@ class Sb3Model(ABC):
                     metrics_accumulator[metric].append(value)
 
         # Calculate the mean for each metric
-        metrics_means = {metric: np.mean(values) if values else 0 for metric, values in metrics_accumulator.items()}
+        metrics_means = {metric: float(np.mean(values)) if values else 0 for metric, values in metrics_accumulator.items()}
         # Calculate the percentage of each termination cause
         termination_cause = {cause: count / num_episodes * 100 for cause, count in termination_cause.items()}
 
         return {
-            "mean_episode_reward": np.mean(all_episode_rewards),
-            "mean_episode_length": np.mean(all_episodes_len) if all_episodes_len else 0,
-            "mean_inference_time": np.mean(all_inference_times),
+            "mean_episode_reward": float(np.mean(all_episode_rewards)),
+            "mean_episode_length": float(np.mean(all_episodes_len)) if all_episodes_len else 0,
+            "mean_inference_time": float(np.mean(all_inference_times)),
             "termination_cause": termination_cause,
             "mean_metrics": metrics_means
         }
