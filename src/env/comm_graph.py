@@ -42,4 +42,4 @@ class CommunicationGraph:
         # Convert to a dense format for easy handling or printing
         dense_matrix = adj_matrix.todense()
         # Convert the dense matrix to a numpy array of dtype uint8
-        return np.array(dense_matrix, dtype=np.uint8)
+        return np.array(dense_matrix, dtype=np.int8)
