@@ -1,6 +1,6 @@
 # Experiment parameters
-experiment_name: "config_test"
-run_name: "3x_tasksize_12_tasks_8_nodes_10_comms_2_copies_3_critical_tasks"
+experiment_name: "test_experiment"
+run_name: "test_run"
 # Environment parameters
 min_task_size: 4
 max_task_size: 4
