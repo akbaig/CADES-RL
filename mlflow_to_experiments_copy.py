@@ -9,7 +9,7 @@ def get_yaml_value(file_path, key):
 
 def main():
     mlruns_path = 'src/mlruns'
-    experiments_path = 'experiments copy/models'
+    experiments_path = 'experiments/models'
 
     # Traverse each subfolder in mlruns directory
     for subfolder in os.listdir(mlruns_path):
@@ -17,10 +17,6 @@ def main():
 
         # Skip subfolders starting with "0" or ".trash"
         if subfolder.startswith("0") or subfolder.startswith(".trash"):
-            continue
-
-        # Skip subfolders which have more than 3 folders within them
-        if len([name for name in os.listdir(subfolder_path) if os.path.isdir(os.path.join(subfolder_path, name))]) > 3:
             continue
 
         # Ensure it's a directory
@@ -60,7 +56,8 @@ def main():
                 continue
 
             run_name = get_yaml_value(run_meta_file_path, 'run_name')
-            if not run_name:
+            deleted_time = get_yaml_value(run_meta_file_path, 'deleted_time')
+            if not run_name or deleted_time:
                 continue
 
             # Determine file names and paths based on run_name
