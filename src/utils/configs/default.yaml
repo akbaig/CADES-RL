@@ -17,7 +17,7 @@ max_num_comms: 10
 max_comm_chain: 3
 non_critical_comm: true
 critical_comm: true
-use_comm_graph_in_train: false
+use_comm_graph_in_train: true
 invalid_action_replacement: false
 # Reward parameters
 SUCCESS_reward: 10
