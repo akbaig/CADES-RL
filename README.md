@@ -26,6 +26,10 @@ python main.py --config [PATH_CONFIG_1] [PATH_CONFIG_2] [--Param_Header1] [Param
 
 **Note:** Each and every parameter in existing configuration files is modifable. It can be changed and treated as a command line argument by putting double dash (--) as prefix.
 
+**Note 2:** For Act-Replace category (either inference or training), set parameter `invalid_action_replacement` as `true` in [default.yaml](/src/utils/configs/default.yaml)
+
+**Note 3:** For Act-Mask category (either inference or training), replace `PPOModel` with `MaskablePPOModel` in [main.py](/src/main.py) by importing from [Maskable PPO Implementation](/src/models/maskable_ppo.py) using `from models.maskable_ppo import MaskablePPOModel`
+
 # Training
 
 `python main.py --config utils/configs/problem_1.yaml utils/configs/experiment_tn.yaml --experiment_name custom_experiments --run_name first_train`
@@ -89,22 +93,24 @@ The combination of problem sets and configuration variants provides a comprehens
 
 ### Success Rate (%)
 
-| Problem No. | Strategy      | TN   | TRN  | TRNC A | TRNC B | TRNC C |
-|-------------|---------------|------|------|--------|--------|--------|
-| **1**       | Early-Term    | 93   | 95   | 65     | **100**| **95** |
-|             | Act-Replace   | **100** | **98** | **87** | 93     | 88     |
-|             | Act-Mask      | **100** | 97   | 69     | 52     | 49     |
-| **2**       | Early-Term    | **100** | 98   | **98** | **99** | 96     |
-|             | Act-Replace   | 98   | **99** | **98** | **99** | **98** |
-|             | Act-Mask      | 98   | 98   | 93     | 96     | 96     |
-| **3**       | Early-Term    | 94   | **97** | 84     | **88** | 89     |
-|             | Act-Replace   | **97** | 95   | 84     | **88** | **90** |
-|             | Act-Mask      | 95   | 96   | 84     | 85     | 79     |
+| Problem No. | Strategy      | TN              | TRN             | TRNC A          | TRNC B          | TRNC C          |
+| :---------- | :------------ | :-------------- | :-------------- | :-------------- | :-------------- | :-------------- |
+| **1** | Early-Term    | **100** | 98              | 93              | **97** | **88** |
+|             | Act-Replace   | 99              | 97              | **94** | 95              | **88** |
+|             | Act-Mask      | **100** | **100** | 59              | 60              | 57              |
+| **2** | Early-Term    | **100** | 96              | **97** | **99** | 91              |
+|             | Act-Replace   | 97              | **99** | 96              | 92              | 90              |
+|             | Act-Mask      | **100** | **99** | 91              | 95              | **96** |
+| **3** | Early-Term    | 94              | 93              | 88              | 86              | 83              |
+|             | Act-Replace   | **96** | **98** | **90** | **88** | **88** |
+|             | Act-Mask      | 91              | 93              | 80              | 86              | 84              |
 
-**Note**: Bolded values indicate the highest performance in each category.
+**Note**: Bolded values indicate the highest performance in each category (TN, TRN, TRNC A, TRNC B, TRNC C) for that specific Problem Number.
 
 Detailed results can be found in the paper.
 
 # Future Work
 
-Optimize deep learning agent to fulfill message passing among tasks more efficiently
+* Optimizing deep learning agent to fulfill message passing among tasks more efficiently
+* Trying other RL frameworks i.e, Q-learning
+* Applying efficient reward shaping strategies
