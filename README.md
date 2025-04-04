@@ -2,6 +2,8 @@
 
 Collaborative industrial project which uses Deep Reinforcemnt Learning Agent to efficiently allocate tasks in nodes in an adaptive distributed embedded system. Additionally the agent handles critical tasks ensuring fail-safety compliance and optimizes message passing among tasks, solving a NP Hard combinatorial problem in linear time.
 
+![RL Flow Diagram](/imgs/RL_Flow_Diagram.png)
+
 # Installation
 
 Make sure you have latest version of **Python 3.9** installed
