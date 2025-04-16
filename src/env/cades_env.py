@@ -18,6 +18,7 @@ class TerminationCause(Enum):
     DUPLICATE_PICK = (2, "duplicate_pick")
     NODE_OVERFLOW = (3, "node_overflow")
     DUPLICATE_CRITICAL_PICK = (4, "duplicate_critical_pick")
+    # COMMUNICATION_ABSENCE = (5, "communication_absence")
 
     def __init__(self, id, description):
         self.id = id
@@ -165,11 +166,6 @@ class CadesEnv(gym.Env):
 
         # Agent picked the task which is already used
         if selected_task_cost == 0:
-            step = self.info["episode_len"]
-            max_steps = self.env_stats["tasks_len"]
-            max_reward = self.config.DUPLICATE_PICK_reward
-            reward = self._exponential_decay_reward(step, max_steps, max_reward)
-            reward_type = f"Duplicate Pick Reward on Step {step}: {reward}"
             if training and self.config.invalid_action_replacement is True:
                 # Select any other valid action
                     valid_task_idx = self._get_random_valid_task()
@@ -181,11 +177,6 @@ class CadesEnv(gym.Env):
         
         # Agent picked the node which is already full
         elif selected_task_cost > self.current_state["nodes"][selected_node_idx]:
-            reward = (
-                self.config.NODE_OVERFLOW_reward 
-                * (self.info["episode_len"] * self.ep_len_norm_factor) 
-                * 0.25
-            )
             reward_type = f"Node Overflow Reward: {reward}"
             # if training and self.config.invalid_action_replacement is True:
             #     # Select any other valid action
@@ -200,29 +191,22 @@ class CadesEnv(gym.Env):
         elif self._is_task_critical(
             selected_task_idx
         ) and self._is_critical_task_duplicated(selected_task_idx, selected_node_idx):
-            reward = (
-                self.config.DUPLICATE_CRITICAL_PICK_reward
-                * (self.info["episode_len"] * self.ep_len_norm_factor)
-                * 0.15
-            )
-            reward_type = f"Duplicate Critical Pick Reward: {reward}"
             done = True
             self.info["termination_cause"] = (
                 str(TerminationCause.DUPLICATE_CRITICAL_PICK)
-            )
-
+            )    
         # Agent picked the correct task and node
         else:
-            # Assign Rewards
-            reward = (self.config.STEP_reward * self.reward_unit)
-            reward += (
-                (self.config.BONUS_reward * self.reward_unit) 
-                * (self.info["episode_len"] * self.ep_len_norm_factor)
-            )
-            reward_type = f"Step and Bonus Reward: {reward}"
             if self._is_task_critical(selected_task_idx):
                 reward += self.config.CRITICAL_reward
                 reward_type += f' \nCritical Reward: {reward}'
+                self.critical_status += 1
+            self.current_state["critical_mask"][selected_task_idx] = 0
+            # Mark the selected task as zero
+            self.current_state["tasks"][selected_task_idx] = 0
+            # Consume the space in selected bin
+            self.current_state["nodes"][selected_node_idx] -= selected_task_cost
+
             # Check if the task is communicating
             task_receivers = self._get_task_receivers(selected_task_idx)
             task_senders = self._get_task_senders(selected_task_idx)
@@ -231,43 +215,44 @@ class CadesEnv(gym.Env):
                 # narrow down the receivers to the ones that are already placed in the node
                 allocated_receivers = self._get_tasks_placed_in_node(task_receivers, selected_node_idx)
                 if(len(allocated_receivers) > 0):
-                    # assign reward
-                    reward += (self.config.COMM_reward/self.env_stats["comms_len"]) * len(allocated_receivers)
-                    reward_type += f' \nCommunication Reward for {selected_task_idx} communicating with {allocated_receivers}: {reward}'
                     # set the communication mask to zero
                     self.current_state["communications"][selected_task_idx, allocated_receivers] = 0
                     # add pair to communication status
                     for receiver in allocated_receivers:
                         self.communication_status.add((selected_task_idx, receiver))
+                # for receivers allocated elsewhere, assign a penalty
+                rest_receivers = np.setdiff1d(task_receivers, allocated_receivers)
+                elsewhere_allocated_receivers = np.where(self.current_state["tasks"][rest_receivers] == 0)[0]
+                if len(elsewhere_allocated_receivers) > 0:
+                    # done = True
+                    # self.info["termination_cause"] = str(TerminationCause.COMMUNICATION_ABSENCE)
+                    self.comm_absense = True
             # if the task is a receiver i.e has senders
             if(len(task_senders) > 0):
                 # narrow down the senders to the ones that are already placed in the node
                 allocated_senders = self._get_tasks_placed_in_node(task_senders, selected_node_idx)
                 if(len(allocated_senders) > 0):
-                    # assign reward
-                    reward += (self.config.COMM_reward/self.env_stats["comms_len"]) * len(allocated_senders)
-                    reward_type += f' \nCommunication Reward for {allocated_senders} communicating with {selected_task_idx}: {reward}'
                     # set the communication mask to zero
                     self.current_state["communications"][allocated_senders, selected_task_idx] = 0
                     # add pair to communication status
                     for sender in allocated_senders:
                         self.communication_status.add((sender, selected_task_idx))
-            # Set the selected task mask value as zero
-            self.current_state["critical_mask"][selected_task_idx] = 0
-            # Mark the selected task as zero
-            self.current_state["tasks"][selected_task_idx] = 0
-            # Consume the space in selected bin
-            self.current_state["nodes"][selected_node_idx] -= selected_task_cost
-            # Update Assignment status
-            self.assignment_status[selected_node_idx].append(selected_task_idx)
-            self.info["episode_len"] = self.info["episode_len"] + 1
-            # Check if no task is remaining
-            if sum(self.current_state["tasks"]) == 0:
-                reward += self.config.SUCCESS_reward
-                reward_type += f"\n Success Reward: {reward}"
-                self.info["termination_cause"] = str(TerminationCause.SUCCESS)
-                self.info["is_success"] = True
-                done = True
+                # for senders allocated elsewhere, assign a penalty
+                rest_senders = np.setdiff1d(task_senders, allocated_senders)
+                elsewhere_allocated_senders = np.where(self.current_state["tasks"][rest_senders] == 0)[0]
+                if len(elsewhere_allocated_senders) > 0:
+                    # done = True
+                    # self.info["termination_cause"] = str(TerminationCause.COMMUNICATION_ABSENCE)
+                    self.comm_absense = True
+            if done is not True:
+                # Update Assignment status
+                self.assignment_status[selected_node_idx].append(selected_task_idx)
+                self.info["episode_len"] = self.info["episode_len"] + 1
+                # Check if no task is remaining
+                if sum(self.current_state["tasks"]) == 0:
+                    self.info["termination_cause"] = str(TerminationCause.SUCCESS)
+                    self.info["is_success"] = True
+                    done = True
 
         self.info["reward_type"] += f'{reward_type}\n'
         return reward, done
@@ -333,6 +318,8 @@ class CadesEnv(gym.Env):
         """
         Advances the episode by one timestep using the given action. 
         """
+        self.previous_communication_status = copy.deepcopy(self.communication_status)
+        self.previous_critical_status = self.critical_status
          # Calc Rewards
         reward, done = self._reward(action, training)
         # Save Info about Episode
@@ -356,12 +343,28 @@ class CadesEnv(gym.Env):
         self.info["empty_nodes"] = get_empty_nodes_percentage(
             self.assignment_status
         )
-        # if done is True:
+        if done is False or self.info["is_success"] is True:
             # Add reward based on avg active node occupancy
-            # reward += self.config.NODE_OCCUPANCY_reward * (self.info["avg_active_node_occupancy"] / 100)
+            reward += self.config.NODE_OCCUPANCY_reward * (self.info["avg_active_node_occupancy"] / 100)
+            # Add reward based on critical task occupancy
+            if self.critical_status > self.previous_critical_status:
+                self.previous_critical_status = self.critical_status
+                reward += self.config.CRITICAL_TASK_OCCUPANCY_reward * (self.critical_status / self.env_stats["critical_len"]) 
             # Add reward based on message channel occupancy in reverse
-            # reward += self.config.MESSAGE_CHANNEL_OCCUPANCY_reward * (1 - (self.info["message_channel_occupancy"] / 100))
-
+            if len(self.communication_status) > len(self.previous_communication_status):
+                reward += self.config.MESSAGE_CHANNEL_OCCUPANCY_reward * (1 - (self.info["message_channel_occupancy"] / 100))
+            if self.comm_absense is True:
+                reward -= self.config.MESSAGE_CHANNEL_OCCUPANCY_reward * (1 - (self.info["message_channel_occupancy"] / 100))
+                self.comm_absense = False
+        elif done is True and self.info["termination_cause"] == str(TerminationCause.NODE_OVERFLOW):
+            # Add penalty based on avg node occupancy
+            reward -= self.config.NODE_OCCUPANCY_reward * (self.info["avg_node_occupancy"] / 100)
+        elif done is True and self.info["termination_cause"] == str(TerminationCause.DUPLICATE_PICK):
+            # Add penalty based on avg node occupancy
+            reward -= self.config.NODE_OCCUPANCY_reward * (self.info["avg_node_occupancy"] / 100)
+        elif done is True and self.info["termination_cause"] == str(TerminationCause.DUPLICATE_CRITICAL_PICK):
+            # Add penalty based on critical task occupancy
+            reward -= self.config.CRITICAL_TASK_OCCUPANCY_reward * (self.previous_critical_status / self.env_stats["critical_len"])
         # Update total reward
         self.info["total_reward"] += reward
 
@@ -417,7 +420,11 @@ class CadesEnv(gym.Env):
             self.set_states_random_seed(seed)
         self.assignment_status = []
         self.communication_status = set()
+        self.previous_communication_status = set()
+        self.critical_status = 0
+        self.previous_critical_status = 0
         self.info = {"is_success": False, "episode_len": 0, "termination_cause": None, "reward_type": "", "total_reward": 0}
+        self.comm_absense = False
         if states is None:
             states = self.generate_states(training)
         for _ in range(states["num_nodes"]):
@@ -436,6 +443,7 @@ class CadesEnv(gym.Env):
         self.current_state = observation
         self.env_stats["tasks_len"] = states["num_tasks"]
         self.env_stats["comms_len"] = states["num_communications"]
+        self.env_stats["critical_len"] = np.count_nonzero(states["critical_mask"])
         self.env_stats["tasks_total_cost"] = sum(
             observation["tasks"] * self.norm_factor
         )

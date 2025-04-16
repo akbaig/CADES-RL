@@ -20,16 +20,17 @@ critical_comm: true
 use_comm_graph_in_train: true
 invalid_action_replacement: false
 # Reward parameters
-SUCCESS_reward: 10
-DUPLICATE_PICK_reward: -1
-NODE_OVERFLOW_reward: -2
-STEP_reward: 1
-BONUS_reward: 0.25
-CRITICAL_reward: 1
-DUPLICATE_CRITICAL_PICK_reward: -1
-COMM_reward: 10
-# NODE_OCCUPANCY_reward: 0
-# MESSAGE_CHANNEL_OCCUPANCY_reward: 0
+SUCCESS_reward: 0
+DUPLICATE_PICK_reward: 0
+NODE_OVERFLOW_reward: 0
+STEP_reward: 0
+BONUS_reward: 0
+CRITICAL_reward: 0
+DUPLICATE_CRITICAL_PICK_reward: 0
+COMM_reward: 0
+NODE_OCCUPANCY_reward: 1
+CRITICAL_TASK_OCCUPANCY_reward: 1
+MESSAGE_CHANNEL_OCCUPANCY_reward: 1
 # Model parameters
 seed: 3
 eval_seed: 42
