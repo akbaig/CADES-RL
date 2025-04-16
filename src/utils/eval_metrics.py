@@ -4,7 +4,7 @@ def get_evaluate_message_channel_occupancy(total_comms, intranode_comms):
     # Calculate the internode communications
     internode_comms = (total_comms - intranode_comms)
     # Calculate occupancy as a percentage of the total communications
-    occupancy = (internode_comms / total_comms) * 100 if total_comms > 0 else 0
+    occupancy = np.float64((internode_comms / total_comms) * 100 if total_comms > 0 else 0)
     # Return the percentage, rounded to two decimal places
     return round(occupancy, 2)
 
@@ -31,6 +31,6 @@ def get_empty_nodes_percentage(assignment_status):
     # Count the number of empty nodes
     empty_nodes = assignment_status.count([])
     # Calculate the percentage of empty nodes
-    empty_nodes_percentage = (empty_nodes / len(assignment_status)) * 100
+    empty_nodes_percentage = np.float64((empty_nodes / len(assignment_status)) * 100)
     # Return the percentage, rounded to two decimal places
     return round(empty_nodes_percentage, 2)
