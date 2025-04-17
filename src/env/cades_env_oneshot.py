@@ -154,15 +154,21 @@ class CadesOneShotEnv(gym.Env):
 
             # Check for assignment of communications
             comms = self.current_observation["communications"]
-            receiver_indices = np.where(comms[task_idx] > 0)[0] # task_idx is the sender
-            sender_indices = np.where(comms[:, task_idx] > 0)[0] # task_idx is the receiver
-            comms[task_idx, receiver_indices] -= 1 # Mark sender as assigned
-            comms[sender_indices, task_idx] -= 1 # Mark receiver as assigneds
+            unallocated_receiver_indices = np.where(comms[task_idx] == 2)[0] # task_idx is the sender
+            unallocated_sender_indices = np.where(comms[:, task_idx] == 2)[0] # task_idx is the receiver
+            allocated_receiver_indices = np.where(comms[task_idx] == 1)[0] # task_idx is the sender
+            allocated_sender_indices = np.where(comms[:, task_idx] == 1)[0] # task_idx is the receiver
+            completed_receivers = np.where(action[allocated_receiver_indices] == node_idx)[0]
+            completed_senders = np.where(action[allocated_sender_indices] == node_idx)[0]
+
+            comms[task_idx, unallocated_receiver_indices] = 1 # Mark sender as assigned
+            comms[unallocated_sender_indices, task_idx] = 1 # Mark receiver as assigned
+            comms[task_idx, completed_receivers] = 0 # Mark sender as assigned
+            comms[completed_senders, task_idx] = 0 # Mark receiver as assigned
+
             # Count incomplete intranode communications (for reward calculation)
-            self.env_stats["incomplete_intranode_comms_len"] += len(sender_indices) + len(receiver_indices)
+            self.env_stats["incomplete_intranode_comms_len"] += len(unallocated_sender_indices) + len(unallocated_receiver_indices)
             # Count completed intranode communications (for metrics)
-            completed_receivers = np.where(comms[task_idx, receiver_indices] == 0)[0]
-            completed_senders = np.where(comms[sender_indices, task_idx] == 0)[0]
             self.env_stats["intranode_comms_len"] += len(completed_receivers) + len(completed_senders)
 
         # If all checks passed
@@ -195,11 +201,12 @@ class CadesOneShotEnv(gym.Env):
         """
 
         reward = 0
-        reward += self.config.NODE_OCCUPANCY_reward * (metrics["avg_active_node_occupancy"] / 100.0)
-        reward += self.config.MESSAGE_CHANNEL_OCCUPANCY_reward * \
+        node_reward = self.config.NODE_OCCUPANCY_reward * (metrics["avg_active_node_occupancy"] / 100.0)
+        message_reward = self.config.MESSAGE_CHANNEL_OCCUPANCY_reward * \
             (self.env_stats["incomplete_intranode_comms_len"] / (self.env_stats["comms_len"] * 2))
-        reward += self.config.CRITICAL_TASK_OCCUPANCY_reward * \
+        critical_reward = self.config.CRITICAL_TASK_OCCUPANCY_reward * \
             (np.count_nonzero(self.current_observation["critical_mask"][:self.env_stats["tasks_len"]]) / self.env_stats["critical_len"])
+        reward += node_reward + message_reward + critical_reward
         return reward
 
     def step(self, action, training = True):
