@@ -28,8 +28,9 @@ BONUS_reward: 0.25
 CRITICAL_reward: 1
 DUPLICATE_CRITICAL_PICK_reward: -1
 COMM_reward: 10
-# NODE_OCCUPANCY_reward: 0
-# MESSAGE_CHANNEL_OCCUPANCY_reward: 0
+NODE_OCCUPANCY_reward: 1
+MESSAGE_CHANNEL_OCCUPANCY_reward: 1
+CRITICAL_TASK_OCCUPANCY_reward: 0
 # Model parameters
 seed: 3
 eval_seed: 42
