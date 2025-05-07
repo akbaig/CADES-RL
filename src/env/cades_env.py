@@ -137,6 +137,15 @@ class CadesEnv(gym.Env):
         """
         reward = max_reward * (1 - (step / max_steps) ** k)
         return reward
+
+    def _exponential_growth_reward(self, step, max_steps, max_reward, k=2):
+        """
+        An exponential growth penalty formula that starts with minimal penalty and grows towards max_penalty.
+        Where k is an exponent that determines how quickly the penalty grows. 
+        Higher values of k will make the growth steeper towards the end.
+        """
+        penalty = max_reward * ((step / max_steps) ** k)
+        return penalty
     
     def _reward_unit(self):
         # reward can be multiplied with this unit to balance out the effect of different episode lengths
