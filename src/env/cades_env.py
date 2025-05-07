@@ -221,9 +221,12 @@ class CadesEnv(gym.Env):
         # Agent picked the correct task and node
         else:
             # Assign Rewards
-            reward = (self.config.STEP_reward * self.reward_unit)
+            reward = (
+                self.config.STEP_reward 
+                * self.reward_unit
+            )
             reward += (
-                (self.config.BONUS_reward * self.reward_unit) 
+                self.config.BONUS_reward 
                 * (self.info["episode_len"] * self.ep_len_norm_factor)
             )
             reward_type = f"Step and Bonus Reward: {reward}"
