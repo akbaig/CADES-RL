@@ -22,7 +22,7 @@ invalid_action_replacement: false
 # Reward parameters
 SUCCESS_reward: 10
 DUPLICATE_PICK_reward: -1
-NODE_OVERFLOW_reward: -2
+NODE_OVERFLOW_reward: -1
 STEP_reward: 1
 BONUS_reward: 0.25
 CRITICAL_reward: 1

@@ -177,7 +177,7 @@ class CadesEnv(gym.Env):
             step = self.info["episode_len"]
             max_steps = self.env_stats["tasks_len"]
             max_reward = self.config.DUPLICATE_PICK_reward
-            reward = self._exponential_decay_reward(step, max_steps, max_reward)
+            reward = self._exponential_growth_reward(step, max_steps, max_reward)
             reward_type = f"Duplicate Pick Reward on Step {step}: {reward}"
             if training and self.config.invalid_action_replacement is True:
                 # Select any other valid action
@@ -190,11 +190,10 @@ class CadesEnv(gym.Env):
         
         # Agent picked the node which is already full
         elif selected_task_cost > self.current_state["nodes"][selected_node_idx]:
-            reward = (
-                self.config.NODE_OVERFLOW_reward 
-                * (self.info["episode_len"] * self.ep_len_norm_factor) 
-                * 0.25
-            )
+            step = self.info["episode_len"]
+            max_steps = self.env_stats["tasks_len"]
+            max_reward = self.config.NODE_OVERFLOW_reward
+            reward = self._exponential_growth_reward(step, max_steps, max_reward)
             reward_type = f"Node Overflow Reward: {reward}"
             # if training and self.config.invalid_action_replacement is True:
             #     # Select any other valid action
@@ -209,11 +208,10 @@ class CadesEnv(gym.Env):
         elif self._is_task_critical(
             selected_task_idx
         ) and self._is_critical_task_duplicated(selected_task_idx, selected_node_idx):
-            reward = (
-                self.config.DUPLICATE_CRITICAL_PICK_reward
-                * (self.info["episode_len"] * self.ep_len_norm_factor)
-                * 0.15
-            )
+            step = self.info["episode_len"]
+            max_steps = self.env_stats["tasks_len"]
+            max_reward = self.config.DUPLICATE_CRITICAL_PICK_reward
+            reward = self._exponential_growth_reward(step, max_steps, max_reward)
             reward_type = f"Duplicate Critical Pick Reward: {reward}"
             done = True
             self.info["termination_cause"] = (
