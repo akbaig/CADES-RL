@@ -38,7 +38,7 @@ eval_timesteps: 10000
 batch_size: 64
 lr: 0.0003
 alpha: 0.3
-device: "cuda:3"
+device: "cuda:0"
 train: true
 inference: true
 verbose: false
