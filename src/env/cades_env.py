@@ -362,8 +362,9 @@ class CadesEnv(gym.Env):
             self.initial_state["nodes"] * self.norm_factor, # nodes total capacities
             self.current_state["nodes"] * self.norm_factor # nodes remaining capacities
         )
+        replicas_comms = self.critical_norm_factor if self.critical_norm_factor > 1 else 0 # required comms between replicas if any
         self.info["message_channel_occupancy"] = get_evaluate_message_channel_occupancy(
-            self.env_stats["comms_len"], # total comms
+            self.env_stats["comms_len"] + replicas_comms, # total comms
             self.env_stats["intranode_comms_len"] # intranode comms
         )
         self.info["empty_nodes"] = get_empty_nodes_percentage(
